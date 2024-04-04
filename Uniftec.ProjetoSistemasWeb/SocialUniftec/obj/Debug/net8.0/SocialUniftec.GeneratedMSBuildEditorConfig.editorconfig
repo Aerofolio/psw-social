@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\projects\psw-social\Uniftec.ProjetoSistemasWeb\SocialUniftec
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/projects/psw-social/Uniftec.ProjetoSistemasWeb/SocialUniftec/Views/Postagem/Feed.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9zdGFnZW1cRmVlZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/projects/psw-social/Uniftec.ProjetoSistemasWeb/SocialUniftec/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

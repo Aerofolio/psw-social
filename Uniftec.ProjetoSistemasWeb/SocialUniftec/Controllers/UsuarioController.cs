@@ -20,8 +20,9 @@ namespace SocialUniftec.Controllers
             
             if (ModelState.IsValid)
             {
-				return View("publicacoes/feed");
-			} else
+                return Redirect("Postagem/Feed");
+			} 
+            else
             {
 				return this.Index();
 			}
@@ -44,7 +45,7 @@ namespace SocialUniftec.Controllers
 
 			if (ModelState.IsValid)
 			{
-				return View("publicacoes/feed");
+				return Redirect("Postagem/Feed");
 			}
 			else
 			{

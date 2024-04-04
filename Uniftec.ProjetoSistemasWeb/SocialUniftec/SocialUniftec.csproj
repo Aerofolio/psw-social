@@ -16,4 +16,8 @@
     <Content Remove="wwwroot\css\StyleSheet.css" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\fontawesome\" />
+  </ItemGroup>
+
 </Project>

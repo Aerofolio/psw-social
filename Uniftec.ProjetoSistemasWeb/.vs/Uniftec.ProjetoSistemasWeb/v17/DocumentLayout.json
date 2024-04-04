@@ -3,36 +3,32 @@
   "WorkspaceRootPath": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|c:\\projects\\psw-social\\uniftec.projetosistemasweb\\socialuniftec\\controllers\\postagemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|solutionrelative:socialuniftec\\controllers\\postagemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|c:\\projects\\psw-social\\uniftec.projetosistemasweb\\socialuniftec\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|solutionrelative:socialuniftec\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|c:\\projects\\psw-social\\uniftec.projetosistemasweb\\socialuniftec\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|solutionrelative:socialuniftec\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|c:\\projects\\psw-social\\uniftec.projetosistemasweb\\socialuniftec\\controllers\\notificacaocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|solutionrelative:socialuniftec\\controllers\\notificacaocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|c:\\projects\\psw-social\\uniftec.projetosistemasweb\\socialuniftec\\controllers\\amizadecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|solutionrelative:socialuniftec\\controllers\\amizadecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|c:\\projects\\psw-social\\uniftec.projetosistemasweb\\socialuniftec\\views\\usuario\\cadastrar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|solutionrelative:socialuniftec\\views\\usuario\\cadastrar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|c:\\projects\\psw-social\\uniftec.projetosistemasweb\\socialuniftec\\models\\usuariocadastromodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|solutionrelative:socialuniftec\\models\\usuariocadastromodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|c:\\projects\\psw-social\\uniftec.projetosistemasweb\\socialuniftec\\models\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|solutionrelative:socialuniftec\\models\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|c:\\projects\\psw-social\\uniftec.projetosistemasweb\\socialuniftec\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-icons.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|solutionrelative:socialuniftec\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-icons.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|c:\\projects\\psw-social\\uniftec.projetosistemasweb\\socialuniftec\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|solutionrelative:socialuniftec\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|c:\\projects\\psw-social\\uniftec.projetosistemasweb\\socialuniftec\\views\\postagem\\feed.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|solutionrelative:socialuniftec\\views\\postagem\\feed.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|c:\\projects\\psw-social\\uniftec.projetosistemasweb\\socialuniftec\\controllers\\postagemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|solutionrelative:socialuniftec\\controllers\\postagemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|c:\\projects\\psw-social\\uniftec.projetosistemasweb\\socialuniftec\\views\\usuario\\cadastrar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{346D6813-9433-4C7C-B0E7-68FBB1597F4C}|SocialUniftec\\SocialUniftec.csproj|solutionrelative:socialuniftec\\views\\usuario\\cadastrar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,46 +38,44 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "NotificacaoController.cs",
-              "DocumentMoniker": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Controllers\\NotificacaoController.cs",
-              "RelativeDocumentMoniker": "SocialUniftec\\Controllers\\NotificacaoController.cs",
-              "ToolTip": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Controllers\\NotificacaoController.cs",
-              "RelativeToolTip": "SocialUniftec\\Controllers\\NotificacaoController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T21:55:07.069Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "AmizadeController.cs",
-              "DocumentMoniker": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Controllers\\AmizadeController.cs",
-              "RelativeDocumentMoniker": "SocialUniftec\\Controllers\\AmizadeController.cs",
-              "ToolTip": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Controllers\\AmizadeController.cs",
-              "RelativeToolTip": "SocialUniftec\\Controllers\\AmizadeController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T21:54:24.06Z",
-              "EditorCaption": ""
+              "Title": "bootstrap-icons.css",
+              "DocumentMoniker": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-icons.css",
+              "RelativeDocumentMoniker": "SocialUniftec\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-icons.css",
+              "ToolTip": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-icons.css",
+              "RelativeToolTip": "SocialUniftec\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-icons.css",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-04-04T22:27:10.2Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PostagemController.cs",
-              "DocumentMoniker": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Controllers\\PostagemController.cs",
-              "RelativeDocumentMoniker": "SocialUniftec\\Controllers\\PostagemController.cs",
-              "ToolTip": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Controllers\\PostagemController.cs",
-              "RelativeToolTip": "SocialUniftec\\Controllers\\PostagemController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T21:54:00.35Z",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "SocialUniftec\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "SocialUniftec\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAACwAAABOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-04T22:07:18.769Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UsuarioCadastroModel.cs",
+              "DocumentMoniker": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Models\\UsuarioCadastroModel.cs",
+              "RelativeDocumentMoniker": "SocialUniftec\\Models\\UsuarioCadastroModel.cs",
+              "ToolTip": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Models\\UsuarioCadastroModel.cs",
+              "RelativeToolTip": "SocialUniftec\\Models\\UsuarioCadastroModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T22:04:48.926Z"
             },
             {
               "$type": "Document",
@@ -91,58 +85,45 @@
               "RelativeDocumentMoniker": "SocialUniftec\\Controllers\\UsuarioController.cs",
               "ToolTip": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Controllers\\UsuarioController.cs",
               "RelativeToolTip": "SocialUniftec\\Controllers\\UsuarioController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAkAAAA",
+              "ViewState": "AQIAAB8AAAAAAAAAAAA5wCoAAABWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T00:37:09.086Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ErrorViewModel.cs",
-              "DocumentMoniker": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Models\\ErrorViewModel.cs",
-              "RelativeDocumentMoniker": "SocialUniftec\\Models\\ErrorViewModel.cs",
-              "ToolTip": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Models\\ErrorViewModel.cs",
-              "RelativeToolTip": "SocialUniftec\\Models\\ErrorViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T00:34:16.313Z"
+              "WhenOpened": "2024-04-04T21:58:22.648Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "LoginModel.cs",
-              "DocumentMoniker": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Models\\LoginModel.cs",
-              "RelativeDocumentMoniker": "SocialUniftec\\Models\\LoginModel.cs",
-              "ToolTip": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Models\\LoginModel.cs",
-              "RelativeToolTip": "SocialUniftec\\Models\\LoginModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAABQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T00:33:45.505Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UsuarioCadastroModel.cs",
-              "DocumentMoniker": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Models\\UsuarioCadastroModel.cs",
-              "RelativeDocumentMoniker": "SocialUniftec\\Models\\UsuarioCadastroModel.cs",
-              "ToolTip": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Models\\UsuarioCadastroModel.cs",
-              "RelativeToolTip": "SocialUniftec\\Models\\UsuarioCadastroModel.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAAwBUAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T00:34:06.757Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "Cadastrar.cshtml",
               "DocumentMoniker": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Views\\Usuario\\Cadastrar.cshtml",
               "RelativeDocumentMoniker": "SocialUniftec\\Views\\Usuario\\Cadastrar.cshtml",
               "ToolTip": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Views\\Usuario\\Cadastrar.cshtml",
               "RelativeToolTip": "SocialUniftec\\Views\\Usuario\\Cadastrar.cshtml",
-              "ViewState": "AQIAABIAAAAAAAAAAAAuwBkAAABHAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-04T00:23:10.408Z"
+              "WhenOpened": "2024-04-04T21:57:33.238Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Feed.cshtml",
+              "DocumentMoniker": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Views\\Postagem\\Feed.cshtml",
+              "RelativeDocumentMoniker": "SocialUniftec\\Views\\Postagem\\Feed.cshtml",
+              "ToolTip": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Views\\Postagem\\Feed.cshtml",
+              "RelativeToolTip": "SocialUniftec\\Views\\Postagem\\Feed.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-04-04T21:57:26.041Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PostagemController.cs",
+              "DocumentMoniker": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Controllers\\PostagemController.cs",
+              "RelativeDocumentMoniker": "SocialUniftec\\Controllers\\PostagemController.cs",
+              "ToolTip": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\Controllers\\PostagemController.cs",
+              "RelativeToolTip": "SocialUniftec\\Controllers\\PostagemController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T21:54:00.35Z"
             }
           ]
         }

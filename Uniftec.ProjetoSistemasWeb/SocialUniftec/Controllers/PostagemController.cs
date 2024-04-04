@@ -8,5 +8,11 @@ namespace SocialUniftec.Controllers
 		{
 			return View();
 		}
+
+		public IActionResult Feed()
+		{
+			return View();
+		}
+		
 	}
 }
