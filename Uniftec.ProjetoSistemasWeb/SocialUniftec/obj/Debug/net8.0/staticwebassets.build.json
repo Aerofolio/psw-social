@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "d9CceR+QThy3lvkoWjrtvgi59eMKR6A6UAgJq8v8k5E=",
+  "Hash": "eh/HQfJ5BpqbeIEr0vIP2WuCCe2JWSpI9tUirUhiXk0=",
   "Source": "SocialUniftec",
   "BasePath": "_content/SocialUniftec",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SocialUniftec.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\wwwroot\\css\\login.css",
+      "SourceId": "SocialUniftec",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\wwwroot\\",
+      "BasePath": "_content/SocialUniftec",
+      "RelativePath": "css/login.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\login.css"
     },
     {
       "Identity": "C:\\projects\\psw-social\\Uniftec.ProjetoSistemasWeb\\SocialUniftec\\wwwroot\\css\\site.css",

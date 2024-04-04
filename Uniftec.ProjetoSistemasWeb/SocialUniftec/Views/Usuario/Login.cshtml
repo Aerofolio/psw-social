@@ -1,0 +1,61 @@
+﻿@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - SocialUniftec</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/SocialUniftec.styles.css" asp-append-version="true" />
+</head>
+<body>
+
+	<main class="h-100vh">
+		<div class="bg-primary d-flex align-items-center justify-content-center position-relative h-100">
+			<div class="container d-flex justify-content-center">
+				<div class="col-sm-10 col-md-8 col-lg-6 position-relative z-index-1">
+					<h1 class="display-4 text-white mb-4 pb-5 position-relative text-center">Social Uniftec</h1>
+					<div class="card card-body p-4 p-sm-5 mt-sm-n5 mb-n5">
+						<h2 class="h1 mb-2 text-center">Entre na sua Conta!</h2>
+						
+						<form class="mt-4" asp-controller="Usuario" asp-action="Login" method="post">
+							
+							@Html.ValidationSummary()
+
+							<!-- Email -->
+							<div class="mb-3 position-relative input-group-lg">
+								<input type="email" class="form-control" id="login.email" name="login.email" placeholder="Informe seu email">
+							</div>
+
+							<!-- New password -->
+							<div class="mb-3">
+								<!-- Input group -->
+								<div class="input-group input-group-lg">
+									<input class="form-control fakepassword"  id="login.senha" name="login.senha"  type="password" id="psw-input" placeholder="Informe sua senha">
+								</div>
+							</div>
+
+							<!-- Button -->
+							<div class="d-grid">
+								<button type="submit" class="btn btn-lg btn-primary-soft">Login</button>
+							</div>
+
+							<p class="mt-3 text-center">Não possui uma conta?<a href="sign-up.html"> @Html.ActionLink("Clique aqui para criar", "Cadastrar", "Usuario") </a></p>
+						
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

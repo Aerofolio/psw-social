@@ -18,20 +18,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\projects\psw-social\Uniftec.ProjetoSistemasWeb\SocialUniftec
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/projects/psw-social/Uniftec.ProjetoSistemasWeb/SocialUniftec/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/projects/psw-social/Uniftec.ProjetoSistemasWeb/SocialUniftec/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/projects/psw-social/Uniftec.ProjetoSistemasWeb/SocialUniftec/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/projects/psw-social/Uniftec.ProjetoSistemasWeb/SocialUniftec/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/psw-social/Uniftec.ProjetoSistemasWeb/SocialUniftec/Views/Usuario/Cadastrar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDYWRhc3RyYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/projects/psw-social/Uniftec.ProjetoSistemasWeb/SocialUniftec/Views/Usuario/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/projects/psw-social/Uniftec.ProjetoSistemasWeb/SocialUniftec/Views/_ViewImports.cshtml]
