@@ -1,50 +1,308 @@
-﻿<div style="margin-top: 100px; margin-bottom: 100px;">
-    <div id="stories" style="display: flex;">
-        <a asp-controller="Postagem" asp-action="NovoStory">
-            <div style="width: 150px; aspect-ratio: 9/16; margin-right: 10px; border-radius: 5px; border: solid 2px black">
-                <span>Adicionar Novo Story</span>
-            </div>
-        </a>
+﻿
+<div id="stories" class="d-flex gap-2 mb-n3">
+	
+	<div class="position-relative">
+			<div class="card border border-2 border-dashed h-150px px-4 px-sm-5 shadow-none d-flex align-items-center justify-content-center text-center">
+				<div>
+					<a class="stretched-link btn btn-light rounded-circle icon-md" asp-controller="Postagem" asp-action="NovoStory"><i class="fa-solid fa-plus"></i></a>
+					<h6 class="mt-2 mb-0 small">Adicionar um Story</h6>
+				</div>
+			</div>
+	</div>
+
+	   
+    <div class="storiesWrapper stories-square stories user-icon carousel scroll-enable stories user-icon carousel snapgram ">
+	   
         @foreach (var storyGroup in ViewBag.StoriesAgrupados)
-        {
-            <a asp-controller="Postagem" asp-action="Story">
-                <div style="width: 150px; aspect-ratio: 9/16;  margin-right: 10px; position:relative; border-radius: 5px; border: solid 2px black">
-                    <img style="position:absolute; object-fit:cover; width: 100%; height: 100%; " src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/cavalo.jpg" />
-                    <span style="color: black; font-weight:bold; position:absolute; top:0; padding: 2px">@storyGroup.UserName</span>
-                    <span style="color: black; font-weight:bold; position:absolute; bottom:0; right: 0; padding: 2px">@storyGroup.LatestStoryDate</span>
-                </div>
-            </a>
-        }
-    </div>
-    <div id="feed" style="margin-top:20px">
-        <div id="createPost">
-            <textarea placeholder="Como você esta se sentindo?" style="width: 100%"></textarea>
-            <button class="btn btn-lg btn-primary-soft">Enviar</button>
-        </div>
-        <div style="margin-top:20px">
-            @foreach (var feedPost in ViewBag.Posts)
-            {
-                <div style="border: solid 2px black; border-radius: 5px;background-color: white">
-                    <div style="padding: 10px">
-                        <span style="color: black; font-weight:bold;">@feedPost.UserName</span>
-                        <p>@feedPost.PostText</p>
-                        <button class="btn btn-primary"  style="margin-right: 5px"><span style="font-weight:bold">@feedPost.Likes</span> Likes</button>
-                        <span>@feedPost.Date</span>
-                    </div>
-                    <div style="padding: 10px">
-                        @foreach (var comment in feedPost.Comentarios)
-                        {
-                            <div style="border: solid 2px black; border-radius: 5px; margin-top:10px; padding: 5px">
-                                <span style="color: black; font-weight:bold;">@comment.UserName</span>
-                                <p>@comment.Text</p>
-                                <button class="btn btn-primary" style="margin-right: 5px"><span style="font-weight:bold">@comment.Likes</span> Likes</button>
-                                <span>@comment.Date</span>
-                            </div>
-                        }
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
+	    {
+		    <div class="story " data-id="user-1" data-photo="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/cavalo.jpg" data-last-updated="1712421528.864">
+			    <a class="item-link" asp-controller="Postagem" asp-action="Story">
+				    <span class="item-preview">
+					    <img lazy="eager" src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/cavalo.jpg">
+				    </span>
+				    <span class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+					    <strong class="name" itemprop="name">@storyGroup.UserName</strong>
+					    <span class="time">@storyGroup.LatestStoryDate</span>
+				    </span>
+			    </a>
+		    </div>
+
+		}
+	</div>
 </div>
+<div id="feed" style="margin-top:20px">
+	
+	<div class="card card-body">
+		<div class="d-flex mb-3">
+			<!-- Avatar -->
+			<div class="avatar avatar-xs me-2">
+				<a href="#"> <img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/07.jpg" alt=""> </a>
+			</div>
+			<!-- Post input -->
+			<form class="w-100">
+				<input class="form-control pe-4 border-0" placeholder="No que você está pensando?" data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
+			</form>
+		</div>
+		<!-- Share feed toolbar START -->
+		<ul class="nav nav-pills nav-stack small fw-normal">
+			<li class="nav-item">
+				<a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPhoto"> <i class="bi bi-image-fill text-success pe-2"></i>Foto</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionVideo"> <i class="bi bi-camera-reels-fill text-info pe-2"></i>Vídeo</a>
+			</li>
+			<li class="nav-item dropdown ms-sm-auto">
+				<a class="nav-link bg-light py-1 px-2 mb-0" href="#" id="feedActionShare">
+					<i class="bi bi-send"></i>
+				</a>
+
+			</li>
+		</ul>
+		<!-- Share feed toolbar END -->
+	</div>
+
+	<div style="margin-top:20px">
+		@foreach (var feedPost in ViewBag.Posts)
+		{
+			/*
+			<div style="border: solid 2px black; border-radius: 5px;background-color: white">
+				<div style="padding: 10px">
+					<span style="color: black; font-weight:bold;">@feedPost.UserName</span>
+					<p>@feedPost.PostText</p>
+					<button class="btn btn-primary" style="margin-right: 5px"><span style="font-weight:bold">@feedPost.Likes</span> Likes</button>
+					<span>@feedPost.Date</span>
+				</div>
+				<div style="padding: 10px">
+					@foreach (var comment in feedPost.Comentarios)
+					{
+						<div style="border: solid 2px black; border-radius: 5px; margin-top:10px; padding: 5px">
+							<span style="color: black; font-weight:bold;">@comment.UserName</span>
+							<p>@comment.Text</p>
+							<button class="btn btn-primary" style="margin-right: 5px"><span style="font-weight:bold">@comment.Likes</span> Likes</button>
+							<span>@comment.Date</span>
+						</div>
+					}
+				</div>
+			</div>*/
+
+            <div class="card mt-3">
+                <!-- Card header START -->
+                <div class="card-header border-0 pb-0">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <!-- Avatar -->
+                            <div class="avatar  me-2">
+                                <a href="#!"> <img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/04.jpg" alt=""> </a>
+                            </div>
+                            <!-- Info -->
+                            <div>
+                                <div class="nav nav-divider">
+                                    <h6 class="nav-item card-title mb-0"> <a href="#!"> Lori Ferguson </a></h6>
+                                    <span class="nav-item small">2hr</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card feed action dropdown START -->
+                        <div class="dropdown">
+                            <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots"></i>
+                            </a>
+                            <!-- Card feed action dropdown menu -->
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction1">
+                                <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Excluir post</a></li>
+
+                            </ul>
+                        </div>
+                        <!-- Card feed action dropdown END -->
+                    </div>
+                </div>
+                <!-- Card header END -->
+                <!-- Card body START -->
+                <div class="card-body">
+                    <p>Decrição do post.</p>
+                    <!-- Card img -->
+                    <img class="card-img" src="	https://social.webestica.com/assets/images/post/3by2/01.jpg" alt="Post">
+                    <!-- Feed react START -->
+                    <ul class="nav nav-stack py-3 small">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#!"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Curtiu (56)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comentários (12)</a>
+                        </li>
+                    </ul>
+                    <!-- Feed react END -->
+                    <!-- Add comment -->
+                    <div class="d-flex mb-3">
+                        <!-- Avatar -->
+                        <div class="avatar avatar-xs me-2">
+                            <a href="#!"> <img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/12.jpg" alt=""> </a>
+                        </div>
+                        <!-- Comment box  -->
+                        <form class="position-relative w-100">
+                            <textarea class="form-control pe-4 bg-light" rows="1" placeholder="Escreva um Comentário..."></textarea>
+                        </form>
+                    </div>
+                    <!-- Comment wrap START -->
+                    <ul class="comment-wrap list-unstyled">
+                        <!-- Comment item START -->
+                        <li class="comment-item">
+                            <div class="d-flex position-relative">
+                                <!-- Avatar -->
+                                <div class="avatar avatar-xs">
+                                    <a href="#!"><img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/05.jpg" alt=""></a>
+                                </div>
+                                <div class="ms-2">
+                                    <!-- Comment by -->
+                                    <div class="bg-light rounded-start-top-0 p-3 rounded">
+                                        <div class="d-flex justify-content-between">
+                                            <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
+                                            <small class="ms-2">5hr</small>
+                                        </div>
+                                        <p class="small mb-0">Legal!.</p>
+                                    </div>
+                                    <!-- Comment react -->
+                                    <ul class="nav nav-divider py-2 small">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#!">Curtidas (3)</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#!">
+                                                Responder
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#!">Ver 5 Respostas</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Comment item nested START -->
+                            <ul class="comment-item-nested list-unstyled">
+                                <!-- Comment item START -->
+                                <li class="comment-item">
+                                    <div class="d-flex">
+                                        <!-- Avatar -->
+                                        <div class="avatar avatar-xs">
+                                            <a href="#!"><img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/06.jpg" alt=""></a>
+                                        </div>
+                                        <!-- Comment by -->
+                                        <div class="ms-2">
+                                            <div class="bg-light p-3 rounded">
+                                                <div class="d-flex justify-content-between">
+                                                    <h6 class="mb-1"> <a href="#!"> Lori Stevens </a> </h6>
+                                                    <small class="ms-2">2hr</small>
+                                                </div>
+                                                <p class="small mb-0">Show.</p>
+                                            </div>
+                                            <!-- Comment react -->
+                                            <ul class="nav nav-divider py-2 small">
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#!"> Curtidas (5)</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#!"> Responder</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- Comment item END -->
+                                <!-- Comment item START -->
+                                <li class="comment-item">
+                                    <div class="d-flex">
+                                        <!-- Avatar -->
+                                        <div class="avatar  avatar-xs">
+                                            <a href="#!"><img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/07.jpg" alt=""></a>
+                                        </div>
+                                        <!-- Comment by -->
+                                        <div class="ms-2">
+                                            <div class="bg-light p-3 rounded">
+                                                <div class="d-flex justify-content-between">
+                                                    <h6 class="mb-1"> <a href="#!"> Billy Vasquez </a> </h6>
+                                                    <small class="ms-2">15min</small>
+                                                </div>
+                                                <p class="small mb-0">Hahahaha.</p>
+                                            </div>
+                                            <!-- Comment react -->
+                                            <ul class="nav nav-divider py-2 small">
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#!"> Curitr</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#!"> Responder</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- Comment item END -->
+                            </ul>
+                            <!-- Load more replies -->
+                            <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center mb-3 ms-5" data-bs-toggle="button" aria-pressed="true">
+                                <div class="spinner-dots me-2">
+                                    <span class="spinner-dot"></span>
+                                    <span class="spinner-dot"></span>
+                                    <span class="spinner-dot"></span>
+                                </div>
+                                Carregar mais comentários
+                            </a>
+                            <!-- Comment item nested END -->
+                        </li>
+                        <!-- Comment item END -->
+                        <!-- Comment item START -->
+                        <li class="comment-item">
+                            <div class="d-flex">
+                                <!-- Avatar -->
+                                <div class="avatar avatar-xs">
+                                    <a href="#!"><img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/05.jpg" alt=""></a>
+                                </div>
+                                <!-- Comment by -->
+                                <div class="ms-2">
+                                    <div class="bg-light p-3 rounded">
+                                        <div class="d-flex justify-content-between">
+                                            <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a> </h6>
+                                            <small class="ms-2">4min</small>
+                                        </div>
+                                        <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
+                                    </div>
+                                    <!-- Comment react -->
+                                    <ul class="nav nav-divider pt-2 small">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#!"> Curtidas (1)</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#!"> Respostas</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#!"> Ver 6 Respostas</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Comment item END -->
+                    </ul>
+                    <!-- Comment wrap END -->
+                </div>
+                <!-- Card body END -->
+                <!-- Card footer START -->
+                <div class="card-footer border-0 pt-0">
+                    <!-- Load more comments -->
+                    <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
+                        <div class="spinner-dots me-2">
+                            <span class="spinner-dot"></span>
+                            <span class="spinner-dot"></span>
+                            <span class="spinner-dot"></span>
+                        </div>
+                        Carregar mais comentários
+                    </a>
+                </div>
+                <!-- Card footer END -->
+            </div>
+
+		}
+	</div>
+</div>
+
 

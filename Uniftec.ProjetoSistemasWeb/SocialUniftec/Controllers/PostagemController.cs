@@ -23,7 +23,14 @@ namespace SocialUniftec.Controllers
                 new Story(5, 3, [], DateTime.Now.AddHours(-4), "Ayrton Sena"),
                 new Story(6, 4, [], DateTime.Now.AddHours(-3), "Roberto da Silva"),
                 new Story(7, 5, [], DateTime.Now.AddHours(-2), "Robson da ZS"),
-            };
+				new Story(8, 6, [], DateTime.Now.AddHours(-2), "Robson da ZS"),
+				new Story(9, 7, [], DateTime.Now.AddHours(-2), "Robson da ZS"),
+				new Story(10, 8, [], DateTime.Now.AddHours(-2), "Robson da ZS"),
+				new Story(11, 9, [], DateTime.Now.AddHours(-2), "Robson da ZS"),
+				new Story(12, 10, [], DateTime.Now.AddHours(-2), "Robson da ZS"),
+				new Story(13, 11, [], DateTime.Now.AddHours(-2), "Robson da ZS"),
+
+			};
 
 			List<FeedPost> feedPosts = new List<FeedPost>()
 			{
@@ -49,8 +56,54 @@ namespace SocialUniftec.Controllers
 							Text = "Concordo!"
                         }
 					}
+                },
+                new FeedPost()
+                {
+                    Id = 1,
+                    UserId = 1,
+                    Date =  DateTime.Now.AddHours(-1),
+                    Likes = 2,
+                    PostText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed hendrerit lacus, sit amet tempor velit. Nulla nec urna semper, tempus velit id, scelerisque tellus. Vestibulum interdum, erat vitae mollis semper, elit metus elementum sapien, at convallis nisl lorem vel lorem. Vestibulum malesuada nibh at ligula mattis, consequat iaculis diam elementum. Nunc euismod turpis eu accumsan scelerisque. Pellentesque eu pretium arcu. Donec maximus ligula eu felis pharetra, vel eleifend orci laoreet. Nulla non justo est. Nullam venenatis, est ac lacinia feugiat, augue tortor bibendum eros, et commodo ligula urna ac lorem. Mauris porttitor pharetra vehicula. Pellentesque ante nisi, gravida sed justo eu, sagittis volutpat ex. Nunc id felis mattis, congue sem quis, luctus lacus. Etiam id risus ut orci dignissim convallis pulvinar non urna. Duis vel nulla velit.",
+                    UserName = "Paulo Bodaneze Reva",
+                    UserProfilePicture = [],
+                    Comentarios = new List<Comentario>()
+                    {
+                        new Comentario()
+                        {
+                            Id = 1,
+                            UserId = 2,
+                            UserName = "João das Neves",
+                            UserProfilePicture = [],
+                            Date= DateTime.Now.AddHours(-1),
+                            Likes= 3,
+                            Text = "Concordo!"
+                        }
+                    }
+                },
+                new FeedPost()
+                {
+                    Id = 1,
+                    UserId = 1,
+                    Date =  DateTime.Now.AddHours(-1),
+                    Likes = 2,
+                    PostText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed hendrerit lacus, sit amet tempor velit. Nulla nec urna semper, tempus velit id, scelerisque tellus. Vestibulum interdum, erat vitae mollis semper, elit metus elementum sapien, at convallis nisl lorem vel lorem. Vestibulum malesuada nibh at ligula mattis, consequat iaculis diam elementum. Nunc euismod turpis eu accumsan scelerisque. Pellentesque eu pretium arcu. Donec maximus ligula eu felis pharetra, vel eleifend orci laoreet. Nulla non justo est. Nullam venenatis, est ac lacinia feugiat, augue tortor bibendum eros, et commodo ligula urna ac lorem. Mauris porttitor pharetra vehicula. Pellentesque ante nisi, gravida sed justo eu, sagittis volutpat ex. Nunc id felis mattis, congue sem quis, luctus lacus. Etiam id risus ut orci dignissim convallis pulvinar non urna. Duis vel nulla velit.",
+                    UserName = "Paulo Bodaneze Reva",
+                    UserProfilePicture = [],
+                    Comentarios = new List<Comentario>()
+                    {
+                        new Comentario()
+                        {
+                            Id = 1,
+                            UserId = 2,
+                            UserName = "João das Neves",
+                            UserProfilePicture = [],
+                            Date= DateTime.Now.AddHours(-1),
+                            Likes= 3,
+                            Text = "Concordo!"
+                        }
+                    }
                 }
-			};
+            };
 
             ViewBag.UsuarioLogado = new UsuarioCadastroModel()
             {
