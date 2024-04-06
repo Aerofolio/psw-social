@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Usuario\Cadastrar - Cópia.cshtml" />
     <Content Remove="Views\Usuario\Login - Cópia.cshtml" />
     <Content Remove="wwwroot\css\site - Cópia.css" />
     <Content Remove="wwwroot\css\StyleSheet.css" />
