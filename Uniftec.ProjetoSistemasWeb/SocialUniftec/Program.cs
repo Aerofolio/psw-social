@@ -30,6 +30,6 @@ app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Usuario}/{action=Login}/{id?}");
+    pattern: "{controller=Usuario}/{action=Alterar}/{id?}");
 
 app.Run();

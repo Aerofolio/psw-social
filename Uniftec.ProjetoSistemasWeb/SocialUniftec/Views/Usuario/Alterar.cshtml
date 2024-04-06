@@ -1,0 +1,77 @@
+﻿<div class="card card-body">
+
+
+	<form class="mt-4" asp-controller="Usuario" asp-action="Alterar" method="post">
+
+		@Html.ValidationSummary()
+
+		<div class="row mt-5">
+			<div class="avatar avatar-xxl mt-n5 mb-3 offset-sm-5">
+				<img class="avatar-img rounded-circle border border-white border-3" src="https://social.webestica.com/assets/images/avatar/07.jpg" alt="">
+			</div>
+		</div>
+
+
+		<label class="col-form-label">Nome:</label>
+		<div class="mb-3 position-relative input-group-lg">
+			<input type="text" class="form-control" id="usuariocadastro.nome" name="usuariocadastro.nome" placeholder="Informe seu nome">
+		</div>
+
+		<label class="col-form-label">Sobrenome:</label>
+		<div class="mb-3 position-relative input-group-lg">
+			<input type="text" class="form-control" id="usuariocadastro.sobrenome" name="usuariocadastro.sobrenome" placeholder="Informe seu Sobrenome">
+		</div>
+
+
+		<label class="col-form-label">E-mail:</label>
+		<div class="mb-3 position-relative input-group-lg">
+			<input type="email" class="form-control" id="usuariocadastro.email" name="usuariocadastro.email" placeholder="Informe seu email">
+		</div>
+
+
+		<label class="col-form-label">Telefone:</label>
+		<div class="mb-3 position-relative input-group-lg">
+			<input type="text" class="form-control" id="usuariocadastro.nome" name="usuariocadastro.nome" placeholder="Informe seu telefone">
+		</div>
+
+		<label class="col-form-label">Tipo de Pessoa:</label>
+		<div class="mb-3 position-relative input-group-lg">
+			<select class="form-select form-control">
+				<option value="0">Física</option>
+				<option value="1">Jurídica</option>
+			</select>
+		</div>
+
+		<label class="col-form-label">Sexo:</label>
+		<div class="mb-3 position-relative input-group-lg">
+			<select class="form-select form-control">
+				<option value="0">Masculino</option>
+				<option value="1">Feminino</option>
+			</select>
+		</div>
+
+		<label class="col-form-label">CPF/CNPJ:</label>
+		<div class="mb-3 position-relative input-group-lg">
+			<input type="text" class="form-control" id="usuariocadastro.nome" name="usuariocadastro.nome" placeholder="Informe seu documento">
+		</div>
+
+		<label class="col-form-label">Data Comemorativa:</label>
+		<div class="mb-3 position-relative input-group-lg">
+			<input type="date" class="form-control" id="usuariocadastro.dataComemorativa" name="usuariocadastro.dataComemorativa" placeholder="Informe sua Data Comemorativa">
+		</div>
+
+		<label class="col-form-label">Bio:</label>
+		<div class="mb-3 position-relative input-group-lg">
+			<textarea type="text" class="form-control" id="usuariocadastro.nome" name="usuariocadastro.nome" placeholder="Informe sua bio"></textarea>
+		</div>
+
+
+
+
+		<!-- Button -->
+		<div class="d-grid">
+			<button type="submit" class="btn btn-lg btn-primary-soft">Alterar</button>
+		</div>
+
+	</form>
+</div>

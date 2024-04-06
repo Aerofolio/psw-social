@@ -78,6 +78,15 @@ namespace SocialUniftec.Controllers
             return View();
         }
 
+        public IActionResult Alterar()
+        {
+            ViewBag.UsuarioLogado = new UsuarioCadastroModel()
+            {
+                Nome = "Paulo Bodaneze Reva",
+
+            };
+            return View(); 
+        }
     }
 
 }
