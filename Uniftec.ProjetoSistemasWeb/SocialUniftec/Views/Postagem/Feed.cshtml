@@ -1,1 +1,50 @@
-﻿Feed
+﻿<div style="margin-top: 100px; margin-bottom: 100px;">
+    <div id="stories" style="display: flex;">
+        <a asp-controller="Postagem" asp-action="NovoStory">
+            <div style="width: 150px; aspect-ratio: 9/16; margin-right: 10px; border-radius: 5px; border: solid 2px black">
+                <span>Adicionar Novo Story</span>
+            </div>
+        </a>
+        @foreach (var storyGroup in ViewBag.StoriesAgrupados)
+        {
+            <a asp-controller="Postagem" asp-action="Story">
+                <div style="width: 150px; aspect-ratio: 9/16;  margin-right: 10px; position:relative; border-radius: 5px; border: solid 2px black">
+                    <img style="position:absolute; object-fit:cover; width: 100%; height: 100%; " src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/cavalo.jpg" />
+                    <span style="color: black; font-weight:bold; position:absolute; top:0; padding: 2px">@storyGroup.UserName</span>
+                    <span style="color: black; font-weight:bold; position:absolute; bottom:0; right: 0; padding: 2px">@storyGroup.LatestStoryDate</span>
+                </div>
+            </a>
+        }
+    </div>
+    <div id="feed" style="margin-top:20px">
+        <div id="createPost">
+            <textarea placeholder="Como você esta se sentindo?" style="width: 100%"></textarea>
+            <button class="btn btn-lg btn-primary-soft">Enviar</button>
+        </div>
+        <div style="margin-top:20px">
+            @foreach (var feedPost in ViewBag.Posts)
+            {
+                <div style="border: solid 2px black; border-radius: 5px;background-color: white">
+                    <div style="padding: 10px">
+                        <span style="color: black; font-weight:bold;">@feedPost.UserName</span>
+                        <p>@feedPost.PostText</p>
+                        <button class="btn btn-primary"  style="margin-right: 5px"><span style="font-weight:bold">@feedPost.Likes</span> Likes</button>
+                        <span>@feedPost.Date</span>
+                    </div>
+                    <div style="padding: 10px">
+                        @foreach (var comment in feedPost.Comentarios)
+                        {
+                            <div style="border: solid 2px black; border-radius: 5px; margin-top:10px; padding: 5px">
+                                <span style="color: black; font-weight:bold;">@comment.UserName</span>
+                                <p>@comment.Text</p>
+                                <button class="btn btn-primary" style="margin-right: 5px"><span style="font-weight:bold">@comment.Likes</span> Likes</button>
+                                <span>@comment.Date</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
