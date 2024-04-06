@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SocialUniftec")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b238fd4dfc11afb58c196257adff4ee95db9c118")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1bb72f8dc5eebc252736dc54248cac8097207c4c")]
 [assembly: System.Reflection.AssemblyProductAttribute("SocialUniftec")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SocialUniftec")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
