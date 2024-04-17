@@ -12,107 +12,112 @@
 </head>
 <body>
    
-    <header class="navbar-light bg-mode fixed-top">
+<header class="navbar-light bg-mode fixed-top">
 
-        <!-- Logo Nav START -->
-        <nav class="navbar navbar-icon navbar-expand-lg">
-            <div class="container-fluid">
+    <!-- Logo Nav START -->
+    <nav class="navbar navbar-icon navbar-expand-lg">
+        <div class="container-fluid">
 
-                <!-- Logo START -->
-                <a class="navbar-brand" asp-controller="Postagem" asp-action="Feed">
-                    Uniftec Social
-                </a>
-                <!-- Logo END -->
-                <!-- Responsive navbar toggler -->
-                <button class="navbar-toggler ms-auto icon-md btn btn-light p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-animation">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </span>
-                </button>
+            <!-- Logo START -->
+            <a class="navbar-brand" asp-controller="Postagem" asp-action="Feed">
+                Uniftec Social
+            </a>
+            <!-- Logo END -->
+            <!-- Responsive navbar toggler -->
+            <button class="navbar-toggler ms-auto icon-md btn btn-light p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-animation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
 
-                <!-- Main navbar START -->
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav navbar-nav-scroll mx-auto">
-                        <!-- Nav item -->
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-controller="Postagem" asp-action="Feed"> <i class="fa fa-house"></i> <span class="nav-text"> Home </span> </a>
-                        </li>
+            <!-- Main navbar START -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav navbar-nav-scroll mx-auto">
+                    <!-- Nav item -->
+                    <li class="nav-item">
+                        <a class="nav-link @(Context.Request.Path.ToString().Contains("Feed") ? "active" : "")" asp-controller="Postagem" asp-action="Feed"> <i class="fa fa-house"></i> <span class="nav-text"> Home </span> </a>
+                    </li>
 
-                        <!-- Nav item -->
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Notificacao" asp-action="Index">
-                                <div class="badge-notif badge-notif-bottom"></div>
-                                <i class="bi bi-bell"></i> <span class="nav-text"> Notifications </span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-                <!-- Main navbar END -->
-                <!-- Nav right START -->
-                <ul class="nav flex-nowrap align-items-center ms-auto list-unstyled">
-                    <li class="nav-item ms-2 dropdown nav-search">
-                        <a class="nav-link btn icon-md p-0" href="#" id="searchDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-search fs-5"> </i>
+                    <!-- Nav item -->
+                    <li class="nav-item">
+                        <a class="nav-link @(Context.Request.Path.ToString().Contains("Notificacao") ? "active" : "")" asp-controller="Notificacao" asp-action="Index">
+                            <div class="badge-notif badge-notif-bottom"></div>
+                            <i class="bi bi-bell"></i> <span class="nav-text"> Notifications </span>
                         </a>
-                        <div class="dropdown-menu dropdown-animation dropdown-menu-end p-3 small" aria-labelledby="searchDropdown">
-                            <!-- Profile info -->
-                            <div class="nav flex-nowrap align-items-center">
-                                <div class="nav-item w-100">
-                                    <form class="rounded position-relative">
-                                        <input class="form-control ps-5 bg-light" type="search" placeholder="Buscar..." aria-label="Search">
-                                        <button class="btn bg-transparent px-2 py-0 position-absolute top-50 start-0 translate-middle-y" type="submit"><i class="bi bi-search fs-5"> </i></button>
-                                    </form>
-                                </div>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- Main navbar END -->
+            <!-- Nav right START -->
+            <ul class="nav flex-nowrap align-items-center ms-auto list-unstyled">
+                <li class="nav-item ms-2 dropdown nav-search">
+                    <a class="nav-link btn icon-md p-0" href="#" id="searchDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-search fs-5"> </i>
+                    </a>
+                    <div class="dropdown-menu dropdown-animation dropdown-menu-end p-3 small" aria-labelledby="searchDropdown">
+                        <!-- Profile info -->
+                        <div class="nav flex-nowrap align-items-center">
+                            <div class="nav-item w-100">
+                                <form class="rounded position-relative">
+                                    <input class="form-control ps-5 bg-light" type="search" placeholder="Buscar..." aria-label="Search">
+                                    <button class="btn bg-transparent px-2 py-0 position-absolute top-50 start-0 translate-middle-y" type="submit"><i class="bi bi-search fs-5"> </i></button>
+                                </form>
                             </div>
                         </div>
-                    </li>
-                    <li class="nav-item ms-2 dropdown">
-                        <a class="nav-link btn icon-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="avatar-img rounded-2" src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/cavalo.jpg" alt="">
-                        </a>
-                        <ul class="dropdown-menu dropdown-animation dropdown-menu-end pt-3 small me-md-n3" aria-labelledby="profileDropdown">
-                            <!-- Profile info -->
-                            <li class="px-3">
-                                <div class="d-flex align-items-center position-relative">
-                                    <!-- Avatar -->
-                                    <div class="avatar me-3">
-                                        <img class="avatar-img rounded-circle" src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/cavalo.jpg" alt="avatar">
-                                    </div>
-                                    <div>
-                                        <a class="h6 stretched-link" asp-controller="Usuario" asp-action="1">@ViewBag?.UsuarioLogado?.Nome</a>
-                                    </div>
+                    </div>
+                </li>
+                <li class="nav-item ms-2 dropdown">
+                    <a class="nav-link btn icon-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img class="avatar-img rounded-2" src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/cavalo.jpg" alt="">
+                    </a>
+                    <ul class="dropdown-menu dropdown-animation dropdown-menu-end pt-3 small me-md-n3" aria-labelledby="profileDropdown">
+                        <!-- Profile info -->
+                        <li class="px-3">
+                            <div class="d-flex align-items-center position-relative">
+                                <!-- Avatar -->
+                                <div class="avatar me-3">
+                                    <img class="avatar-img rounded-circle" src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/cavalo.jpg" alt="avatar">
                                 </div>
-                                <a class="dropdown-item btn btn-primary-soft btn-sm my-2 text-center" asp-controller="Usuario" asp-action="Perfil">Ver Perfil</a>
-                            </li>
-                            <!-- Links -->
-                            <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Configuracoes"><i class="bi bi-gear fa-fw me-2"></i>Configurações</a></li>
-                            <li class="dropdown-divider"></li>
-                            <li><a class="dropdown-item bg-danger-soft-hover" asp-controller="Usuario" asp-action="Logout"><i class="bi bi-power fa-fw me-2"></i>Sair</a></li>
-                            <li> <hr class="dropdown-divider"></li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- Nav right END -->
-            </div>
-        </nav>
-        <!-- Logo Nav END -->
-    </header>
-
-    <div class="container">
-          @RenderBody()
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - SocialUniftec - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                <div>
+                                    <a class="h6 stretched-link" asp-controller="Usuario" asp-action="1">@ViewBag?.UsuarioLogado?.Nome</a>
+                                </div>
+                            </div>
+                            <a class="dropdown-item btn btn-primary-soft btn-sm my-2 text-center" asp-controller="Usuario" asp-action="Perfil">Ver Perfil</a>
+                        </li>
+                        <!-- Links -->
+                        <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Configuracoes"><i class="bi bi-gear fa-fw me-2"></i>Configurações</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a class="dropdown-item bg-danger-soft-hover" asp-controller="Usuario" asp-action="Logout"><i class="bi bi-power fa-fw me-2"></i>Sair</a></li>
+                        <li> <hr class="dropdown-divider"></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Nav right END -->
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    </nav>
+    <!-- Logo Nav END -->
+</header>
+
+<div class="container">
+    @RenderBody()
+</div>
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2024 - SocialUniftec - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+</footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
 </body>
+@* <script> *@
+@*     function alterarNavBarAtivo(itemAtivo){ *@
+@*         $(".active").each(x => x.classList.remove("active")); *@
+@*     } *@
+@* </script> *@
 </html>

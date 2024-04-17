@@ -8,6 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86c26f84-c305-4ae4-9205-45f1fa999d63" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Uniftec.ProjetoSistemasWeb/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Uniftec.ProjetoSistemasWeb/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SocialUniftec/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/SocialUniftec/Views/Shared/_Layout.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +75,7 @@
       <option name="presentableId" value="Default" />
       <updated>1712705936129</updated>
       <workItem from="1712705937559" duration="1239000" />
-      <workItem from="1713309113385" duration="355000" />
+      <workItem from="1713309113385" duration="3191000" />
     </task>
     <servers />
   </component>
