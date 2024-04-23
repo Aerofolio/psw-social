@@ -3,7 +3,7 @@
     public class FeedModel
     {
 
-        public required UsuarioModel Usuario { get; set; }
+        public UsuarioModel Usuario { get; set; } = new UsuarioModel();
 
         public List<String> ListaURLMidia { get; set; } = [];
 
