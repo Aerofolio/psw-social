@@ -4,9 +4,9 @@
     {
         public int Id { get; set; }
 
-        public required string Nome { get; set; }
+        public string Nome { get; set; }
 
-        public required string Sobrenome { get; set; }
+        public string Sobrenome { get; set; }
 
         public string? UrlFoto { get; set; }
 

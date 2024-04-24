@@ -1,3 +1,5 @@
+using SocialUniftec.Filtres;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,6 +14,9 @@ builder.Services.AddSession(options =>
 });
 
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<ExceptionFilter>();
+
 
 var app = builder.Build();
 

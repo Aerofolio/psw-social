@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SocialUniftec.Filtres;
 using SocialUniftec.Models;
 
 namespace SocialUniftec.Controllers
@@ -89,6 +90,13 @@ namespace SocialUniftec.Controllers
             };
             return View(); 
         }
+
+        [ServiceFilter(typeof(ExceptionFilter))]
+        public IActionResult Erro()
+        {
+            throw new Exception("Batata testessssssssssss");
+        }
+
     }
 
 }
