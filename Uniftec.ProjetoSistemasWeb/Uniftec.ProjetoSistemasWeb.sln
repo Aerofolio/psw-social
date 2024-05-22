@@ -3,7 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialUniftec", "Services\SocialUniftec\SocialUniftec.csproj", "{2E80FC35-67F7-4518-8292-FB9688D1425C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialUniftec", "SocialUniftec\SocialUniftec.csproj", "{49739A38-D654-48E4-9997-4F39832C0043}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F5EC7C3F-FC07-466D-8FD8-3A9EA50E486F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{842CD988-AA43-47B9-BEB7-B0AB97C0F20D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{33682C21-1BB9-4E18-B83B-CDB7DF1516D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{C38C7034-9951-4FA8-85A3-4EC62AF318A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialUniftec.Repository", "SocialUniftec.Repository\SocialUniftec.Repository.csproj", "{F3432831-9639-40C7-B664-29058264F2B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialUniftec.Repository.Test", "SocialUniftec.Repository.Test\SocialUniftec.Repository.Test.csproj", "{E55E5E2C-FBB6-47CF-9B9C-BDA5564B49D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialUniftec.Domain", "SocialUniftec.Domain\SocialUniftec.Domain.csproj", "{654B1ED2-512E-45F8-8FE1-F24C0BB93785}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +25,31 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2E80FC35-67F7-4518-8292-FB9688D1425C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E80FC35-67F7-4518-8292-FB9688D1425C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E80FC35-67F7-4518-8292-FB9688D1425C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E80FC35-67F7-4518-8292-FB9688D1425C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49739A38-D654-48E4-9997-4F39832C0043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49739A38-D654-48E4-9997-4F39832C0043}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49739A38-D654-48E4-9997-4F39832C0043}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49739A38-D654-48E4-9997-4F39832C0043}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3432831-9639-40C7-B664-29058264F2B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3432831-9639-40C7-B664-29058264F2B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3432831-9639-40C7-B664-29058264F2B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3432831-9639-40C7-B664-29058264F2B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E55E5E2C-FBB6-47CF-9B9C-BDA5564B49D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E55E5E2C-FBB6-47CF-9B9C-BDA5564B49D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E55E5E2C-FBB6-47CF-9B9C-BDA5564B49D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E55E5E2C-FBB6-47CF-9B9C-BDA5564B49D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{654B1ED2-512E-45F8-8FE1-F24C0BB93785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{654B1ED2-512E-45F8-8FE1-F24C0BB93785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{654B1ED2-512E-45F8-8FE1-F24C0BB93785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{654B1ED2-512E-45F8-8FE1-F24C0BB93785}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{49739A38-D654-48E4-9997-4F39832C0043} = {F5EC7C3F-FC07-466D-8FD8-3A9EA50E486F}
+		{F3432831-9639-40C7-B664-29058264F2B3} = {842CD988-AA43-47B9-BEB7-B0AB97C0F20D}
+		{E55E5E2C-FBB6-47CF-9B9C-BDA5564B49D8} = {842CD988-AA43-47B9-BEB7-B0AB97C0F20D}
+		{654B1ED2-512E-45F8-8FE1-F24C0BB93785} = {33682C21-1BB9-4E18-B83B-CDB7DF1516D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {181E69FB-EC43-4BD2-858A-74DB5546AD57}
