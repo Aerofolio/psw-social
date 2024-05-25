@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SocialUniftec.Domain\SocialUniftec.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
