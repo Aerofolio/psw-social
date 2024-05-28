@@ -10,4 +10,8 @@
     <ProjectReference Include="..\SocialUniftec.Domain\SocialUniftec.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repository/Comum/" />
+  </ItemGroup>
+
 </Project>

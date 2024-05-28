@@ -1,4 +1,5 @@
 ﻿using SocialUniftec.Domain.Entities;
+using SocialUniftec.Repository.Repository.Comum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,7 @@ using System.Threading.Tasks;
 
 namespace SocialUniftec.Domain.Repository
 {
-    public interface INotificacaoRepository
+    public interface INotificacaoRepository : IRepository<Notificacao>
     {
-        void Inserir(Notificacao notificacao);
-        void Alterar(Notificacao notificacao);
-        void Excluir(Guid id);
-        Notificacao Procurar(Guid id);
-        List<Notificacao> ProcurarTodos();
     }
 }
