@@ -38,7 +38,7 @@ namespace SocialUniftec.Domain.Entities
             this.Telefone = string.Empty;
             this.Documento = string.Empty;
             this.Tipo = TipoPessoa.Fisica;
-            this.Amigos = new List<Usuario>();
+            this.Amigos = [];
         }
 
         public void AdicionarAmigo(Usuario usuario)

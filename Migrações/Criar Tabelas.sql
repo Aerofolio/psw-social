@@ -4,7 +4,7 @@ CREATE TABLE public.usuario (
 	sobrenome varchar NOT NULL,
 	senha varchar NOT NULL,
 	datacomemorativa date NOT NULL,
-	column1 int NOT NULL,
+	sexo int NOT NULL,
 	bio varchar NULL,
 	fotodeperfil bytea NULL,
 	cidade varchar NULL,
