@@ -16,6 +16,7 @@ namespace SocialUniftec.Repository.Test
 			{
 				usuarioRepository.Inserir(new Usuario()
 				{
+					Id = Guid.Parse("52a06685-f6a1-4109-a25e-be7d76e8bb0e"),
 					Nome = "Carinha",
 					Sobrenome = "Que Mora Logo Ali",
 					Senha = "OdeioATonya",
@@ -42,7 +43,21 @@ namespace SocialUniftec.Repository.Test
 			var usuarioRepository = new UsuarioRepository();
 			try
 			{
-				usuarioRepository.Alterar(new Usuario());
+				usuarioRepository.Alterar(new Usuario()
+				{
+					Id = Guid.Parse("52a06685-f6a1-4109-a25e-be7d76e8bb0e"),
+					Nome = "Carinha",
+					Sobrenome = "Que Mora Logo Ali",
+					Senha = "OdeioATonya",
+					DataComemorativa = new DateTime(1965, 2, 7),
+					Sexo = TipoSexo.Masculino,
+					Bio = "Brooklyn 1983",
+					Cidade = "New York",
+					Uf = EstadosBrasil.AC,
+					Telefone = "91234-5678",
+					Documento = "012345678-09",
+					Tipo = TipoPessoa.Fisica,
+				});
 				Assert.IsTrue(true);
 			}
 			catch (Exception ex)
