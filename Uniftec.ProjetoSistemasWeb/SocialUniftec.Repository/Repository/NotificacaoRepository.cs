@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SocialUniftec.Repository.Repository
 {
-    public class NotificacaoRepository :INotificacaoRepository
+    public class NotificacaoRepository : INotificacaoRepository
     {
         public void Alterar(Notificacao notificacao)
         {

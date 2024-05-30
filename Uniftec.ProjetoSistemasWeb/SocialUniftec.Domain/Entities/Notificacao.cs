@@ -14,7 +14,7 @@ namespace SocialUniftec.Domain.Entities
         public TipoNotificacao Tipo {  get; set; }
         public string Mensagem { get; set; }
         public DateTime DataEnvio { get; set; }
-        public DateTime DataLeitura { get; set; }
+        public DateTime? DataLeitura { get; set; }
 
         public Notificacao()
         {
