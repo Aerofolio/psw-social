@@ -59,7 +59,21 @@ namespace SocialUniftec.Repository.Repository
 
 		public void Excluir(Guid id)
 		{
-			throw new NotImplementedException();
+			using var con = new NpgsqlConnection(ConnectionString);
+			con.Open();
+			
+			using var cmd = new NpgsqlCommand(
+				@"DELETE FROM public.amizade
+					WHERE idusuario=@id;",
+				con);
+				
+			cmd.Parameters.AddWithValue("id", id);
+			cmd.ExecuteNonQuery();
+			
+			cmd.CommandText = 
+				@"DELETE FROM public.usuario
+					WHERE id=@id;";
+			cmd.ExecuteNonQuery();
 		}
 
 		public void Inserir(Usuario usuario)

@@ -7,28 +7,29 @@ namespace SocialUniftec.Repository.Test
 	[TestClass]
 	public class UsuarioRepositoryTest
 	{
-
+		private readonly Usuario UsuarioTeste = new ()
+			{
+				Id = Guid.Parse("52a06685-f6a1-4109-a25e-be7d76e8bb0e"),
+				Nome = "Carinha",
+				Sobrenome = "Que Mora Logo Ali",
+				Senha = "OdeioATonya",
+				DataComemorativa = DateTime.Now,
+				Sexo = TipoSexo.Masculino,
+				Bio = "Brooklyn 1983",
+				Cidade = "New York",
+				Uf = EstadosBrasil.AC,
+				Telefone = "91234-5678",
+				Documento = "012345678-09",
+				Tipo = TipoPessoa.Fisica,
+			};
+		
 		[TestMethod]
 		public void InserirTest()
 		{
 			var usuarioRepository = new UsuarioRepository();
 			try
 			{
-				usuarioRepository.Inserir(new Usuario()
-				{
-					Id = Guid.Parse("52a06685-f6a1-4109-a25e-be7d76e8bb0e"),
-					Nome = "Carinha",
-					Sobrenome = "Que Mora Logo Ali",
-					Senha = "OdeioATonya",
-					DataComemorativa = DateTime.Now,
-					Sexo = TipoSexo.Masculino,
-					Bio = "Brooklyn 1983",
-					Cidade = "New York",
-					Uf = EstadosBrasil.AC,
-					Telefone = "91234-5678",
-					Documento = "012345678-09",
-					Tipo = TipoPessoa.Fisica,
-				});
+				usuarioRepository.Inserir(UsuarioTeste);
 				Assert.IsTrue(true);
 			}
 			catch (Exception ex)
@@ -43,21 +44,9 @@ namespace SocialUniftec.Repository.Test
 			var usuarioRepository = new UsuarioRepository();
 			try
 			{
-				usuarioRepository.Alterar(new Usuario()
-				{
-					Id = Guid.Parse("52a06685-f6a1-4109-a25e-be7d76e8bb0e"),
-					Nome = "Carinha",
-					Sobrenome = "Que Mora Logo Ali",
-					Senha = "OdeioATonya",
-					DataComemorativa = new DateTime(1965, 2, 7),
-					Sexo = TipoSexo.Masculino,
-					Bio = "Brooklyn 1983",
-					Cidade = "New York",
-					Uf = EstadosBrasil.AC,
-					Telefone = "91234-5678",
-					Documento = "012345678-09",
-					Tipo = TipoPessoa.Fisica,
-				});
+				var usuario = UsuarioTeste;
+				usuario.DataComemorativa = new DateTime(1965, 2, 7);
+				usuarioRepository.Alterar(usuario);
 				Assert.IsTrue(true);
 			}
 			catch (Exception ex)
@@ -72,7 +61,7 @@ namespace SocialUniftec.Repository.Test
 			var usuarioRepository = new UsuarioRepository();
 			try
 			{
-				usuarioRepository.Excluir(Guid.NewGuid());
+				usuarioRepository.Excluir(UsuarioTeste.Id);
 				Assert.IsTrue(true);
 			}
 			catch (Exception ex)
