@@ -20,6 +20,22 @@ namespace SocialUniftec.Repository.Test
 				Uf = EstadosBrasil.AC,
 				Telefone = "91234-5678",
 				Documento = "012345678-09",
+				Tipo = TipoPessoa.Fisica
+			};
+		
+		private readonly Usuario UsuarioAmizade = new ()
+			{
+				Id = Guid.Parse("41469b6b-470f-425d-99af-f42b9b938460"),
+				Nome = "Julius",
+				Sobrenome = "Rock",
+				Senha = "AmoARochelle",
+				DataComemorativa = new DateTime(1932, 12, 28),
+				Sexo = TipoSexo.Masculino,
+				Bio = "Trabalho em dois empregos",
+				Cidade = "New York",
+				Uf = EstadosBrasil.AC,
+				Telefone = "91324-5776",
+				Documento = "012345687-49",
 				Tipo = TipoPessoa.Fisica,
 			};
 		
@@ -29,6 +45,8 @@ namespace SocialUniftec.Repository.Test
 			var usuarioRepository = new UsuarioRepository();
 			try
 			{
+				usuarioRepository.Inserir(UsuarioAmizade);
+				UsuarioTeste.AdicionarAmigo(UsuarioAmizade);
 				usuarioRepository.Inserir(UsuarioTeste);
 				Assert.IsTrue(true);
 			}
@@ -46,6 +64,8 @@ namespace SocialUniftec.Repository.Test
 			{
 				var usuario = UsuarioTeste;
 				usuario.DataComemorativa = new DateTime(1965, 2, 7);
+				UsuarioTeste.AdicionarAmigo(UsuarioAmizade);
+				
 				usuarioRepository.Alterar(usuario);
 				Assert.IsTrue(true);
 			}
@@ -62,6 +82,7 @@ namespace SocialUniftec.Repository.Test
 			try
 			{
 				usuarioRepository.Excluir(UsuarioTeste.Id);
+				usuarioRepository.Excluir(UsuarioAmizade.Id);
 				Assert.IsTrue(true);
 			}
 			catch (Exception ex)
@@ -76,7 +97,7 @@ namespace SocialUniftec.Repository.Test
 			var usuarioRepository = new UsuarioRepository();
 			try
 			{
-				var cliente = usuarioRepository.Procurar(Guid.NewGuid());
+				var cliente = usuarioRepository.Procurar(UsuarioTeste.Id);
 				Assert.IsTrue(true);
 			}
 			catch (Exception ex)
