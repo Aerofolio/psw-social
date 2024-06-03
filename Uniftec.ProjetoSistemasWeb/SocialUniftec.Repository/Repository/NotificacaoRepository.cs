@@ -2,7 +2,9 @@
 using SocialUniftec.Domain.Entities;
 using SocialUniftec.Domain.Repository;
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,7 +63,26 @@ namespace SocialUniftec.Repository.Repository
 
 		public Notificacao Procurar(Guid id)
 		{
-			throw new NotImplementedException();
+			using var con = new NpgsqlConnection(ConnectionString);
+			con.Open();
+
+			using var cmd = new NpgsqlCommand(
+				@"SELECT id, idusuarioorigem, idusuariodestino, tipo, mensagem, dataenvio, dataleitura
+					FROM public.notificacao WHERE id=@id;",
+				con);
+				
+			cmd.Parameters.AddWithValue("id", id);
+			
+			List<Notificacao> notificacaos = [];
+			using var reader = cmd.ExecuteReader();
+			while(reader.Read())
+			{
+				notificacaos.Add(CriarNotificacao(reader));
+			}
+			reader.Close();
+			
+			
+			return notificacaos.First();
 		}
 
 		public List<Notificacao> ProcurarTodos()
@@ -78,6 +99,24 @@ namespace SocialUniftec.Repository.Repository
 			cmd.Parameters.AddWithValue("mensagem", notificacao.Mensagem);
 			cmd.Parameters.AddWithValue("dataenvio", notificacao.DataEnvio);
 			cmd.Parameters.AddWithValue("dataleitura", notificacao.DataLeitura);
+		}
+		
+		private Notificacao CriarNotificacao(NpgsqlDataReader reader)
+		{
+			var usuarioRepository= new UsuarioRepository();
+			var usuarioOrigem = usuarioRepository.Procurar(reader.GetGuid(reader.GetOrdinal("idusuarioorigem")));
+			var usuarioDestino = usuarioRepository.Procurar(reader.GetGuid(reader.GetOrdinal("idusuariodestino")));
+			
+			return new()
+			{
+				Id = reader.GetGuid(reader.GetOrdinal("id")),
+				UsuarioOrigem = usuarioOrigem,
+				UsuarioDestino = usuarioDestino,
+				Tipo = (TipoNotificacao)reader.GetInt32(reader.GetOrdinal("tipo")),
+				Mensagem = reader.GetString(reader.GetOrdinal("mensagem")),
+				DataEnvio = reader.GetDateTime(reader.GetOrdinal("dataenvio")),
+				DataLeitura = reader.GetDateTime(reader.GetOrdinal("dataleitura"))
+			};
 		}
 	}
 }

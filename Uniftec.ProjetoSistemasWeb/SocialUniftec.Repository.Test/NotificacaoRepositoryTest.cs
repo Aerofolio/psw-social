@@ -64,7 +64,7 @@ namespace SocialUniftec.Repository.Test
 			var notificacaoRepository = new NotificacaoRepository();
 			try
 			{
-				var cliente = notificacaoRepository.Procurar(Guid.NewGuid());
+				var notificacao = notificacaoRepository.Procurar(EntidadesParaTestes.NotificacaoTeste.Id);
 				Assert.IsTrue(true);
 			}
 			catch (Exception ex)
