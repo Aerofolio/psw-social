@@ -33,7 +33,8 @@ namespace SocialUniftec.Repository.Test
 			var notificacaoRepository = new NotificacaoRepository();
 			try
 			{
-				notificacaoRepository.Alterar(new Domain.Entities.Notificacao());
+				EntidadesParaTestes.NotificacaoTeste.Mensagem = $"{EntidadesParaTestes.NotificacaoTeste.UsuarioOrigem.Nome} {EntidadesParaTestes.NotificacaoTeste.UsuarioOrigem.Sobrenome} deseja ser seu amigo!";
+				notificacaoRepository.Alterar(EntidadesParaTestes.NotificacaoTeste);
 				Assert.IsTrue(true);
 			}
 			catch (Exception ex)
