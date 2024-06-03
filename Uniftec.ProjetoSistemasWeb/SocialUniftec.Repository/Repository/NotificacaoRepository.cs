@@ -20,7 +20,16 @@ namespace SocialUniftec.Repository.Repository
 
 		public void Excluir(Guid id)
 		{
-			throw new NotImplementedException();
+			using var con = new NpgsqlConnection(ConnectionString);
+			con.Open();
+			
+			using var cmd = new NpgsqlCommand(
+				@"DELETE FROM public.notificacao
+					WHERE id=@id;",
+				con);
+				
+			cmd.Parameters.AddWithValue("id", id);
+			cmd.ExecuteNonQuery();
 		}
 
 		public void Inserir(Notificacao notificacao)
