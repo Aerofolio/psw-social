@@ -31,7 +31,7 @@ namespace SocialUniftec.Repository.Repository
 			cmd.Parameters.AddWithValue("idusuario", usuario.Id);
 			cmd.ExecuteNonQuery();
 
-			AdicionarAmizades(usuario, cmd);
+			AdicionarParametrosDeAmizades(usuario, cmd);
 		}
 
 		public void Excluir(Guid id)
@@ -67,7 +67,7 @@ namespace SocialUniftec.Repository.Repository
 			AdicionarParametrosInserirOuAlterar(usuario, cmd);
 			cmd.ExecuteNonQuery();
 			
-			AdicionarAmizades(usuario, cmd);
+			AdicionarParametrosDeAmizades(usuario, cmd);
 		}
 
 		public Usuario Procurar(Guid id)
@@ -88,33 +88,50 @@ namespace SocialUniftec.Repository.Repository
 				usuarios.Add(CriarUsuario(reader));
 			reader.Close();
 			
-			//Fazer amizades?
+			AdicionarListaDeAmigos(con, usuarios);
 			
 			return usuarios.First();
 		}
 
 		public List<Usuario> ProcurarTodos()
-		{
-			using var con = new NpgsqlConnection(ConnectionString);
-			con.Open();
-			
-			using var cmd = new NpgsqlCommand(
-				@"SELECT id, nome, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo
+        {
+            using var con = new NpgsqlConnection(ConnectionString);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand(
+                @"SELECT id, nome, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo
 					FROM public.usuario;",
-				con);
-			
-			List<Usuario> usuarios = [];
-			using var reader = cmd.ExecuteReader();
-			while(reader.Read())
-				usuarios.Add(CriarUsuario(reader));
-			reader.Close();
-			
-			//Fazer amizades?
-			
-			return usuarios;
-		}
-		
-		private void AdicionarParametrosInserirOuAlterar(Usuario usuario, NpgsqlCommand cmd)
+                con);
+
+            List<Usuario> usuarios = [];
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+                usuarios.Add(CriarUsuario(reader));
+            reader.Close();
+
+            AdicionarListaDeAmigos(con, usuarios);
+
+            return usuarios;
+        }
+
+        private void AdicionarListaDeAmigos(NpgsqlConnection con, List<Usuario> usuarios)
+        {
+            foreach (var usuario in usuarios)
+            {
+                using var cmdAmizade = new NpgsqlCommand(
+                    @"SELECT idusuario, idusuarioamigo
+						FROM public.amizade WHERE idusuario=@idusuario;",
+                    con);
+                cmdAmizade.Parameters.AddWithValue("idusuario", usuario.Id);
+
+                using var readerAmizade = cmdAmizade.ExecuteReader();
+                while (readerAmizade.Read())
+                    usuario.Amigos.Add(Procurar(readerAmizade.GetGuid(readerAmizade.GetOrdinal("idusuarioamigo"))));
+                readerAmizade.Close();
+            }
+        }
+
+        private void AdicionarParametrosInserirOuAlterar(Usuario usuario, NpgsqlCommand cmd)
 		{
 			cmd.Parameters.AddWithValue("id", usuario.Id);
 			cmd.Parameters.AddWithValue("nome", usuario.Nome);
@@ -131,7 +148,7 @@ namespace SocialUniftec.Repository.Repository
 			cmd.Parameters.AddWithValue("tipo", (int)usuario.Tipo);
 		}
 		
-		private void AdicionarAmizades(Usuario usuario, NpgsqlCommand cmd)
+		private void AdicionarParametrosDeAmizades(Usuario usuario, NpgsqlCommand cmd)
 		{
 			foreach (var amizade in usuario.Amigos)
 			{

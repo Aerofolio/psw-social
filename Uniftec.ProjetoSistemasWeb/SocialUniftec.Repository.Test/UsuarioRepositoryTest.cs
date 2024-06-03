@@ -64,7 +64,7 @@ namespace SocialUniftec.Repository.Test
 			var usuarioRepository = new UsuarioRepository();
 			try
 			{
-				var cliente = usuarioRepository.Procurar(EntidadesParaTestes.UsuarioTeste.Id);
+				var usuario = usuarioRepository.Procurar(EntidadesParaTestes.UsuarioTeste.Id);
 				Assert.IsTrue(true);
 			}
 			catch (Exception ex)
@@ -79,7 +79,7 @@ namespace SocialUniftec.Repository.Test
 			var usuarioRepository = new UsuarioRepository();
 			try
 			{
-				var clientes = usuarioRepository.ProcurarTodos();
+				var usuario = usuarioRepository.ProcurarTodos();
 				Assert.IsTrue(true);
 			}
 			catch (Exception ex)
