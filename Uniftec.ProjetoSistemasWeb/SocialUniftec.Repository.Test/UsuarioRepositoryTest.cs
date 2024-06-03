@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SocialUniftec.Domain.Entities;
 using SocialUniftec.Repository.Repository;
 
 namespace SocialUniftec.Repository.Test

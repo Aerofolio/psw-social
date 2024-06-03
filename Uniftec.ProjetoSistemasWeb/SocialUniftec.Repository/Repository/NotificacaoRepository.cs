@@ -1,13 +1,6 @@
 ﻿using Npgsql;
 using SocialUniftec.Domain.Entities;
 using SocialUniftec.Domain.Repository;
-using System;
-using System.Collections.Frozen;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialUniftec.Repository.Repository
 {

@@ -1,5 +1,4 @@
-﻿using System.Data;
-using Npgsql;
+﻿using Npgsql;
 using SocialUniftec.Domain.Entities;
 using SocialUniftec.Domain.Repository;
 
