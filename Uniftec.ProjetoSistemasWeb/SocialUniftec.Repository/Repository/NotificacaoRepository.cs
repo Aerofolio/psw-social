@@ -69,9 +69,7 @@ namespace SocialUniftec.Repository.Repository
 			List<Notificacao> notificacaos = [];
 			using var reader = cmd.ExecuteReader();
 			while(reader.Read())
-			{
 				notificacaos.Add(CriarNotificacao(reader));
-			}
 			reader.Close();
 			
 			
@@ -80,7 +78,22 @@ namespace SocialUniftec.Repository.Repository
 
 		public List<Notificacao> ProcurarTodos()
 		{
-			throw new NotImplementedException();
+			using var con = new NpgsqlConnection(ConnectionString);
+			con.Open();
+
+			using var cmd = new NpgsqlCommand(
+				@"SELECT id, idusuarioorigem, idusuariodestino, tipo, mensagem, dataenvio, dataleitura
+					FROM public.notificacao;",
+				con);
+			
+			List<Notificacao> notificacaos = [];
+			using var reader = cmd.ExecuteReader();
+			while(reader.Read())
+				notificacaos.Add(CriarNotificacao(reader));
+				
+			reader.Close();
+			
+			return notificacaos;
 		}
 		
 		private void AdicionarParametrosInserirOuAlterar(Notificacao notificacao, NpgsqlCommand cmd)

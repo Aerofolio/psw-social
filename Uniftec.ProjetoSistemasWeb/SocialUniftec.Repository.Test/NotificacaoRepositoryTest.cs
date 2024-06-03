@@ -73,7 +73,7 @@ namespace SocialUniftec.Repository.Test
 			var notificacaoRepository = new NotificacaoRepository();
 			try
 			{
-				var clientes = notificacaoRepository.ProcurarTodos();
+				var notificacaos = notificacaoRepository.ProcurarTodos();
 				Assert.IsTrue(true);
 			}
 			catch (Exception ex)

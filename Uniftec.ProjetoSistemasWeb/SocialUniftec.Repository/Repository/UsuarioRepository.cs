@@ -85,9 +85,7 @@ namespace SocialUniftec.Repository.Repository
 			List<Usuario> usuarios = [];
 			using var reader = cmd.ExecuteReader();
 			while(reader.Read())
-			{
 				usuarios.Add(CriarUsuario(reader));
-			}
 			reader.Close();
 			
 			//Fazer amizades?
@@ -108,9 +106,7 @@ namespace SocialUniftec.Repository.Repository
 			List<Usuario> usuarios = [];
 			using var reader = cmd.ExecuteReader();
 			while(reader.Read())
-			{
 				usuarios.Add(CriarUsuario(reader));
-			}
 			reader.Close();
 			
 			//Fazer amizades?
