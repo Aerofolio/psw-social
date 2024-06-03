@@ -24,7 +24,6 @@ namespace SocialUniftec.Domain.Entities
             this.Tipo = TipoNotificacao.Solicitacao_Amizade;
             this.Mensagem = string.Empty;
             this.DataEnvio = DateTime.Now;
-            this.DataLeitura = DateTime.Now;
         }
 
     }
