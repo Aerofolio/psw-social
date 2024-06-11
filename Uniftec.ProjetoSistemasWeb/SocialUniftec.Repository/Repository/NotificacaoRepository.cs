@@ -6,7 +6,12 @@ namespace SocialUniftec.Repository.Repository
 {
 	public class NotificacaoRepository : INotificacaoRepository
 	{
-		private readonly string ConnectionString = "User ID=postgres;Password=;Host=localhost;Port=5432;Database=socialuniftec;";
+        private string ConnectionString;
+
+        public NotificacaoRepository(string ConnectionString = null)
+        {
+            this.ConnectionString = ConnectionString;
+        }
 		
 		public void Alterar(Notificacao notificacao)
 		{

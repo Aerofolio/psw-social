@@ -6,9 +6,14 @@ namespace SocialUniftec.Repository.Repository
 {
 	public class UsuarioRepository : IUsuarioRepository
 	{
-		private readonly string ConnectionString = "User ID=postgres;Password=;Host=localhost;Port=5432;Database=socialuniftec;";
-		
-		public void Alterar(Usuario usuario)
+        private string ConnectionString;
+
+        public UsuarioRepository(string ConnectionString = null)
+        {
+            this.ConnectionString = ConnectionString;
+        }
+
+        public void Alterar(Usuario usuario)
 		{
 			using var con = new NpgsqlConnection(ConnectionString);
 			con.Open();
