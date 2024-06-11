@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Adapter\" />
-    <Folder Include="Dto\" />
   </ItemGroup>
 
   <ItemGroup>

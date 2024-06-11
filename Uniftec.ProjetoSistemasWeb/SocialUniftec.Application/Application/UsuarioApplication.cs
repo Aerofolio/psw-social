@@ -1,4 +1,7 @@
-﻿using SocialUniftec.Repository.Repository;
+﻿using SocialUniftec.Application.Adapter;
+using SocialUniftec.Application.Dto;
+using SocialUniftec.Domain.Entities;
+using SocialUniftec.Repository.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +21,54 @@ namespace SocialUniftec.Application.Application
             this.usuarioRepository = new UsuarioRepository(strConexao);
         }
 
+        public Guid Inserir(UsuarioDto usuario)
+        {
 
+            Usuario user = UsuarioAdapter.ToDomain(usuario)!;
+            user.Id = Guid.NewGuid();
+
+            usuarioRepository.Inserir(user);
+
+            return user.Id;
+        }
+
+        public Guid Alterar(UsuarioDto usuario)
+        {
+
+            Usuario user = UsuarioAdapter.ToDomain(usuario)!;
+
+            usuarioRepository.Alterar(user);
+
+            return user.Id;
+        }
+
+        public void Excluir(Guid id)
+        {
+            usuarioRepository.Excluir(id);
+        }
+
+        public UsuarioDto Procurar(Guid id)
+        {
+
+            Usuario usuario = usuarioRepository.Procurar(id);
+
+            return UsuarioAdapter.ToDto(usuario)!;
+        }
+
+        public List<UsuarioDto> ProcurarTodos()
+        {
+
+            List<Usuario> usuarios = usuarioRepository.ProcurarTodos();
+
+            List<UsuarioDto> usuariosDto = [];
+
+            foreach (Usuario usuario in usuarios)
+            {
+                usuariosDto.Add(UsuarioAdapter.ToDto(usuario)!);
+            }
+
+            return usuariosDto;
+        }
 
     }
 }

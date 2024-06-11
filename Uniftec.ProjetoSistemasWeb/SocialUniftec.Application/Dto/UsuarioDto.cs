@@ -1,70 +1,34 @@
-﻿using System;
+﻿using SocialUniftec.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocialUniftec.Domain.Entities
+namespace SocialUniftec.Application.Dto
 {
-    public class Usuario
+    public class UsuarioDto
     {
+
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
-        public string Senha {  get; set; }
+        public string Senha { get; set; }
         public DateTime DataComemorativa { get; set; }
-        public TipoSexo Sexo { get; set; }
-        public string Bio {  get; set; }
+        public TipoSexoDto Sexo { get; set; }
+        public string Bio { get; set; }
         public Byte[] FotoPefil { get; set; }
         public string Cidade { get; set; }
-        public EstadosBrasil Uf { get; set; }
+        public EstadosBrasilDto Uf { get; set; }
         public string Telefone { get; set; }
         public string Documento { get; set; }
-        public TipoPessoa Tipo { get; set; }
-        public List<Usuario> Amigos { get; set; }
-
-        public Usuario() {
-            this.Id = Guid.NewGuid();
-            this.Nome = string.Empty;
-            this.Sobrenome = string.Empty;
-            this.Senha = string.Empty;
-            this.DataComemorativa = DateTime.Now;
-            this.Sexo = TipoSexo.Masculino;
-            this.Bio = string.Empty;
-            this.FotoPefil = [];
-            this.Cidade = string.Empty;
-            this.Uf = EstadosBrasil.RS;
-            this.Telefone = string.Empty;
-            this.Documento = string.Empty;
-            this.Tipo = TipoPessoa.Fisica;
-            this.Amigos = [];
-        }
-
-        public void AdicionarAmigo(Usuario usuario)
-        {
-            if (usuario == null)
-            {
-                throw new Exception("Usuário não informado!");
-            }
-
-            this.Amigos.Add(usuario);
-        }
-
-        public void RemoverAmigo(Usuario usuario)
-        {
-            if (usuario == null)
-            {
-                throw new Exception("Usuário não informado!");
-            }
-
-            this.Amigos.Remove(usuario);
-            
-        }
+        public TipoPessoaDto Tipo { get; set; }
+        public List<UsuarioDto> Amigos { get; set; }
 
     }
 
-    public enum EstadosBrasil
+    public enum EstadosBrasilDto
     {
         [Display(Name = "Acre")]
         AC,
@@ -122,15 +86,15 @@ namespace SocialUniftec.Domain.Entities
         TO
     }
 
-    public enum TipoPessoa
+    public enum TipoPessoaDto
     {
         Fisica = 0,
         Juridica = 1
     }
 
-    public enum TipoSexo
+    public enum TipoSexoDto
     {
-        Masculino = 0, 
+        Masculino = 0,
         Feminino = 1
     }
 }
