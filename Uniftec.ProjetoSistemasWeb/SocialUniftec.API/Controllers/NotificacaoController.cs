@@ -38,8 +38,13 @@ namespace SocialUniftec.API.Controllers
             NotificacaoApplication notificacaoApplication = new NotificacaoApplication();
             NotificacaoDto notificacao = notificacaoApplication.Procurar(id);
             return NotificacaoMapping.ToModel(notificacao);
+        }
 
-
+        [HttpPut("{id:Guid}/ler")]
+        public Guid Ler(Guid id)
+        {
+            NotificacaoApplication application = new NotificacaoApplication();
+            return application.Ler(id);
         }
 
     }

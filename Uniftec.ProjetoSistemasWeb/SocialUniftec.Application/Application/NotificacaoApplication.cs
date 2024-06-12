@@ -71,5 +71,14 @@ namespace SocialUniftec.Application.Application
             return notificacaosDto;
         }
 
+        public Guid Ler(Guid id)
+        {
+            Notificacao notificacao = notificacaoRepository.Procurar(id);
+            notificacao.DataLeitura = DateTime.Now;
+
+            notificacaoRepository.Alterar(notificacao);
+
+            return notificacao.Id;
+        }
     }
 }

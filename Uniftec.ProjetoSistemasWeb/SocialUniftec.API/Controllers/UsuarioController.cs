@@ -37,8 +37,11 @@ namespace SocialUniftec.API.Controllers
             UsuarioApplication usuarioApplication = new UsuarioApplication();
             UsuarioDto usuario = usuarioApplication.Procurar(id);
             return UsuarioMapping.ToModel(usuario);
-
-
         }
+
+        //TODO enviar solicitacao amizade
+        //TODO aceitar solicitacao amizade
+        //TODO remover amizade
+
     }
 }
