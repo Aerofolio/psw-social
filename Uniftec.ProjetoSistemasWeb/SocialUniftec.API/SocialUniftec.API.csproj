@@ -11,8 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Adapter\" />
+    <ProjectReference Include="..\SocialUniftec.Application\SocialUniftec.Application.csproj" />
   </ItemGroup>
 
 </Project>
