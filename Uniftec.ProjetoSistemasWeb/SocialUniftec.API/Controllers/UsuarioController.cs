@@ -39,6 +39,8 @@ namespace SocialUniftec.API.Controllers
             return UsuarioMapping.ToModel(usuario);
         }
 
+        
+
         //TODO enviar solicitacao amizade
         //TODO aceitar solicitacao amizade
         //TODO remover amizade

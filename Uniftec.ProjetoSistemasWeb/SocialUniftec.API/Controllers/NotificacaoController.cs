@@ -47,5 +47,22 @@ namespace SocialUniftec.API.Controllers
             return application.Ler(id);
         }
 
+        [HttpGet("{idUsuario:Guid}/pendentes")]
+        public List<NotificacaoModel> ProcurarNotificacoesPendentes(Guid idUsuario)
+        {
+            NotificacaoApplication notificacaoApplication = new NotificacaoApplication();
+            
+            List<NotificacaoDto> notificacoesDto = notificacaoApplication.ProcurarNotificacoesPendentes(idUsuario);
+
+            List<NotificacaoModel> notificacoes = [];
+
+            foreach (var notificacao in notificacoesDto)
+            {
+                notificacoes.Add(NotificacaoMapping.ToModel(notificacao));
+            }
+
+            return notificacoes;
+        }
+
     }
 }

@@ -81,7 +81,30 @@ namespace SocialUniftec.Repository.Repository
 			return notificacaos.First();
 		}
 
-		public List<Notificacao> ProcurarTodos()
+        public List<Notificacao> ProcurarNotificacoesPendentes(Guid idUsuario)
+        {
+            using var con = new NpgsqlConnection(ConnectionString);
+          
+			con.Open();
+
+            using var cmd = new NpgsqlCommand(@"SELECT id, idusuarioorigem, idusuariodestino, tipo, mensagem, dataenvio, dataleitura FROM public.notificacao WHERE idusuarioorigem = @idusuarioorigem AND dataleitura IS NULL;", con);
+
+			cmd.Parameters.AddWithValue("idusuarioorigem", idUsuario);
+
+            List<Notificacao> notificacaos = [];
+           
+			using var reader = cmd.ExecuteReader();
+           
+			while (reader.Read())
+                notificacaos.Add(CriarNotificacao(reader));
+
+            reader.Close();
+
+            return notificacaos;
+
+        }
+
+        public List<Notificacao> ProcurarTodos()
 		{
 			using var con = new NpgsqlConnection(ConnectionString);
 			con.Open();

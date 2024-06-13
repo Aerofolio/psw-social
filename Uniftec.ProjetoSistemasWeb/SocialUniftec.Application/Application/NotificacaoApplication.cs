@@ -80,5 +80,20 @@ namespace SocialUniftec.Application.Application
 
             return notificacao.Id;
         }
+
+        public List<NotificacaoDto> ProcurarNotificacoesPendentes(Guid idUsuario)
+        {
+
+            List<Notificacao> notificacaos = notificacaoRepository.ProcurarNotificacoesPendentes(idUsuario);
+
+            List<NotificacaoDto> notificacaosDto = [];
+
+            foreach (Notificacao notificacao in notificacaos)
+            {
+                notificacaosDto.Add(NotificacaoAdapter.ToDto(notificacao)!);
+            }
+
+            return notificacaosDto;
+        }
     }
 }
