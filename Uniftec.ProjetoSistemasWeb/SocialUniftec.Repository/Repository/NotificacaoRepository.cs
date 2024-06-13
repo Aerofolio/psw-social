@@ -87,9 +87,9 @@ namespace SocialUniftec.Repository.Repository
           
 			con.Open();
 
-            using var cmd = new NpgsqlCommand(@"SELECT id, idusuarioorigem, idusuariodestino, tipo, mensagem, dataenvio, dataleitura FROM public.notificacao WHERE idusuarioorigem = @idusuarioorigem AND dataleitura IS NULL;", con);
+            using var cmd = new NpgsqlCommand(@"SELECT id, idusuarioorigem, idusuariodestino, tipo, mensagem, dataenvio, dataleitura FROM public.notificacao WHERE idusuariodestino = @idusuariodestino AND dataleitura IS NULL;", con);
 
-			cmd.Parameters.AddWithValue("idusuarioorigem", idUsuario);
+			cmd.Parameters.AddWithValue("idusuariodestino", idUsuario);
 
             List<Notificacao> notificacaos = [];
            

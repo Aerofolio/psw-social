@@ -39,11 +39,16 @@ namespace SocialUniftec.API.Controllers
             return UsuarioMapping.ToModel(usuario);
         }
 
-        
+        [HttpPost("Amizade/{id:Guid}/Solicitar/{idUsuarioDestino:Guid}")]
+        public Guid EnviarSolicitacaoAmizade(Guid id, Guid idUsuarioDestino)
+        {
+            UsuarioApplication usuarioApplication = new UsuarioApplication();
+            return usuarioApplication.EnviarSolicitacaoAmizade(id, idUsuarioDestino);
+        }
 
-        //TODO enviar solicitacao amizade
         //TODO aceitar solicitacao amizade
         //TODO remover amizade
+        //TODO login
 
     }
 }

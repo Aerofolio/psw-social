@@ -40,14 +40,14 @@ namespace SocialUniftec.API.Controllers
             return NotificacaoMapping.ToModel(notificacao);
         }
 
-        [HttpPut("{id:Guid}/ler")]
+        [HttpPut("{id:Guid}/Ler")]
         public Guid Ler(Guid id)
         {
             NotificacaoApplication application = new NotificacaoApplication();
             return application.Ler(id);
         }
 
-        [HttpGet("{idUsuario:Guid}/pendentes")]
+        [HttpGet("{idUsuario:Guid}/Pendentes")]
         public List<NotificacaoModel> ProcurarNotificacoesPendentes(Guid idUsuario)
         {
             NotificacaoApplication notificacaoApplication = new NotificacaoApplication();
