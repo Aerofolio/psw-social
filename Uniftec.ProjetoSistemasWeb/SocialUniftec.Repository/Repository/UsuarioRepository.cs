@@ -20,7 +20,7 @@ namespace SocialUniftec.Repository.Repository
 
 			using var cmd = new NpgsqlCommand(
 				@"UPDATE public.usuario
-					SET nome=@nome, sobrenome=@sobrenome, senha=@senha, datacomemorativa=@datacomemorativa, sexo=@sexo, 
+					SET nome=@nome, email=@email sobrenome=@sobrenome, senha=@senha, datacomemorativa=@datacomemorativa, sexo=@sexo, 
 					bio=@bio, fotodeperfil=@fotodeperfil, cidade=@cidade, uf=@uf, telefone=@telefone, documento=@documento, tipo=@tipo
 					WHERE id=@id;",
 				con);
@@ -65,8 +65,8 @@ namespace SocialUniftec.Repository.Repository
 			
 			using var cmd = new NpgsqlCommand(
 				@"INSERT INTO public.usuario
-					(id, nome, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo)
-					VALUES(@id, @nome, @sobrenome, @senha, @datacomemorativa, @sexo, @bio, @fotodeperfil, @cidade, @uf, @telefone, @documento, @tipo);",
+					(id, email, nome, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo)
+					VALUES(@id, @email, @nome, @sobrenome, @senha, @datacomemorativa, @sexo, @bio, @fotodeperfil, @cidade, @uf, @telefone, @documento, @tipo);",
 				con);
 				
 			AdicionarParametrosInserirOuAlterar(usuario, cmd);
@@ -81,7 +81,7 @@ namespace SocialUniftec.Repository.Repository
 			con.Open();
 			
 			using var cmd = new NpgsqlCommand(
-				@"SELECT id, nome, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo
+				@"SELECT id, nome, email, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo
 					FROM public.usuario WHERE id=@id;",
 				con);
 			
@@ -104,7 +104,7 @@ namespace SocialUniftec.Repository.Repository
             con.Open();
 
             using var cmd = new NpgsqlCommand(
-                @"SELECT id, nome, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo
+                @"SELECT id, nome, email, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo
 					FROM public.usuario;",
                 con);
 
@@ -139,7 +139,8 @@ namespace SocialUniftec.Repository.Repository
         private void AdicionarParametrosInserirOuAlterar(Usuario usuario, NpgsqlCommand cmd)
 		{
 			cmd.Parameters.AddWithValue("id", usuario.Id);
-			cmd.Parameters.AddWithValue("nome", usuario.Nome);
+            cmd.Parameters.AddWithValue("email", usuario.Email);
+            cmd.Parameters.AddWithValue("nome", usuario.Nome);
 			cmd.Parameters.AddWithValue("sobrenome", usuario.Sobrenome);
 			cmd.Parameters.AddWithValue("senha", usuario.Senha);
 			cmd.Parameters.AddWithValue("datacomemorativa", usuario.DataComemorativa);
@@ -172,6 +173,7 @@ namespace SocialUniftec.Repository.Repository
 		private Usuario CriarUsuario(NpgsqlDataReader reader) => new ()
 			{
 				Id = reader.GetGuid(reader.GetOrdinal("id")),
+			    Email = reader.GetString(reader.GetOrdinal("email")),
 				Nome = reader.GetString(reader.GetOrdinal("nome")),
 				Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
 				Senha = reader.GetString(reader.GetOrdinal("senha")),
@@ -184,5 +186,31 @@ namespace SocialUniftec.Repository.Repository
 				Documento = reader.GetString(reader.GetOrdinal("documento")),
 				Tipo = (TipoPessoa)reader.GetInt32(reader.GetOrdinal("tipo")),
 			};
-	}
+
+        public Usuario ProcurarPorEmailESenha(string email, string senha)
+        {
+
+            using var con = new NpgsqlConnection(ConnectionString);
+            con.Open();
+
+            using var cmd = new NpgsqlCommand(
+                @"SELECT id, nome, email, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo
+					FROM public.usuario WHERE email=@email AND senha=@senha;",
+                con);
+
+            cmd.Parameters.AddWithValue("email", email);
+            cmd.Parameters.AddWithValue("senha", senha);
+
+            List<Usuario> usuarios = [];
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+                usuarios.Add(CriarUsuario(reader));
+            reader.Close();
+
+            AdicionarListaDeAmigos(con, usuarios);
+
+            return usuarios.First();
+
+        }
+    }
 }

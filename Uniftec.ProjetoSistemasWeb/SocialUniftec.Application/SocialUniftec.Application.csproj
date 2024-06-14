@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Adapter\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SocialUniftec.Domain\SocialUniftec.Domain.csproj" />
     <ProjectReference Include="..\SocialUniftec.Repository\SocialUniftec.Repository.csproj" />
   </ItemGroup>

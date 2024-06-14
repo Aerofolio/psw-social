@@ -94,5 +94,37 @@ namespace SocialUniftec.Application.Application
 
             return notificacao.Id;
         }
+
+        public UsuarioDto Login(UsuarioDto usuarioDto)
+        {
+
+            Usuario usuario = usuarioRepository.ProcurarPorEmailESenha(usuarioDto.Email, usuarioDto.Senha);
+
+            return UsuarioAdapter.ToDto(usuario)!;
+        }
+
+        public void AceitarSolicitacaoAmizade(Guid id, Guid idUsuarioAmigo)
+        {
+
+            Usuario usuarioOrigem = usuarioRepository.Procurar(id);
+            Usuario usuarioDestino = usuarioRepository.Procurar(idUsuarioAmigo);
+
+            usuarioOrigem.AdicionarAmigo(usuarioDestino);
+            usuarioDestino.AdicionarAmigo(usuarioOrigem);
+
+            usuarioRepository.Alterar(usuarioOrigem);
+            usuarioRepository.Alterar(usuarioDestino);
+
+        }
+
+        public void RemoverAmizade(Guid id, Guid idUsuarioAmigo)
+        {
+            Usuario usuarioOrigem = usuarioRepository.Procurar(id);
+            Usuario usuarioDestino = usuarioRepository.Procurar(idUsuarioAmigo);
+
+            usuarioOrigem.Amigos.Remove(usuarioDestino);
+            usuarioDestino.Amigos.Remove(usuarioOrigem);
+
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SocialUniftec.API.Adapter;
 using SocialUniftec.API.Models;
 using SocialUniftec.Application.Adapter;
 using SocialUniftec.Application.Application;
@@ -46,9 +47,28 @@ namespace SocialUniftec.API.Controllers
             return usuarioApplication.EnviarSolicitacaoAmizade(id, idUsuarioDestino);
         }
 
-        //TODO aceitar solicitacao amizade
-        //TODO remover amizade
-        //TODO login
+        [HttpPost("Amizade/{id:Guid}/Aceitar/{idUsuarioAmigo:Guid}")]
+        public void AceitarSolicitacaoAmizade(Guid id, Guid idUsuarioAmigo)
+        {
+            UsuarioApplication usuarioApplication = new UsuarioApplication();
+            usuarioApplication.AceitarSolicitacaoAmizade(id, idUsuarioAmigo);
+        }
+
+        [HttpDelete("Amizade/{id:Guid}/Remover/{idUsuarioAmigo:Guid}")]
+        public void RemoverAmizade(Guid id, Guid idUsuarioAmigo)
+        {
+            UsuarioApplication usuarioApplication = new UsuarioApplication();
+            usuarioApplication.RemoverAmizade(id, idUsuarioAmigo);
+        }
+
+        [HttpPost("Login")]
+        public UsuarioModel Login(UsuarioLoginModel usuario)
+        {
+            UsuarioApplication usuarioApplication = new UsuarioApplication();
+            UsuarioDto usuarioDto = usuarioApplication.Login(UsuarioLoginMapping.ToDto(usuario));
+
+            return UsuarioMapping.ToModel(usuarioDto);
+        }
 
     }
 }

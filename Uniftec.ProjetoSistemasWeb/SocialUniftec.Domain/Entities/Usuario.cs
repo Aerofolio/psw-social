@@ -10,6 +10,7 @@ namespace SocialUniftec.Domain.Entities
     public class Usuario
     {
         public Guid Id { get; set; }
+        public string Email { get; set; }
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public string Senha {  get; set; }
@@ -26,6 +27,7 @@ namespace SocialUniftec.Domain.Entities
 
         public Usuario() {
             this.Id = Guid.NewGuid();
+            this.Email = string.Empty;
             this.Nome = string.Empty;
             this.Sobrenome = string.Empty;
             this.Senha = string.Empty;
