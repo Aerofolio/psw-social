@@ -16,6 +16,7 @@ namespace SocialUniftec.Application.Adapter
 
             Usuario usuarioDomain = new Usuario();
             usuarioDomain.Id = usuario.Id;
+            usuarioDomain.Email = usuario.Email;
             usuarioDomain.Nome = usuario.Nome;
             usuarioDomain.Sobrenome = usuario.Sobrenome;
             usuarioDomain.Senha = usuario.Senha;
@@ -50,6 +51,7 @@ namespace SocialUniftec.Application.Adapter
 
             UsuarioDto usuarioDto = new UsuarioDto();
             usuarioDto.Id = usuario.Id;
+            usuarioDto.Email = usuario.Email;
             usuarioDto.Nome = usuario.Nome;
             usuarioDto.Sobrenome = usuario.Sobrenome;
             usuarioDto.Senha = usuario.Senha;

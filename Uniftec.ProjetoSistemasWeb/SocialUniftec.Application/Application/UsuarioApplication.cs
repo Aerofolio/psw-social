@@ -19,7 +19,7 @@ namespace SocialUniftec.Application.Application
 
         public UsuarioApplication()
         {
-            string strConexao = "User ID=postgres;Password=123456789;Host=localhost;Port=5432;Database=socialuniftec;"; ;
+            string strConexao = "User ID=postgres;Password=123456789;Host=localhost;Port=5432;Database=socialuniftec;";
             this.usuarioRepository = new UsuarioRepository(strConexao);
             this.notificacaoRepository = new NotificacaoRepository(strConexao);
         }
@@ -119,12 +119,7 @@ namespace SocialUniftec.Application.Application
 
         public void RemoverAmizade(Guid id, Guid idUsuarioAmigo)
         {
-            Usuario usuarioOrigem = usuarioRepository.Procurar(id);
-            Usuario usuarioDestino = usuarioRepository.Procurar(idUsuarioAmigo);
-
-            usuarioOrigem.Amigos.Remove(usuarioDestino);
-            usuarioDestino.Amigos.Remove(usuarioOrigem);
-
+            usuarioRepository.RemoverAmigo(id, idUsuarioAmigo);
         }
     }
 }

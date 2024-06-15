@@ -8,120 +8,157 @@ namespace SocialUniftec.Repository.Repository
 	{
         private string ConnectionString;
 
-        public NotificacaoRepository(string ConnectionString = null)
+        public NotificacaoRepository(string ConnectionString)
         {
+			if (ConnectionString == null)
+			{
+                ConnectionString = "User ID=postgres;Password=123456789;Host=localhost;Port=5432;Database=socialuniftec;"; ;
+
+            }
             this.ConnectionString = ConnectionString;
         }
 		
 		public void Alterar(Notificacao notificacao)
 		{
-			using var con = new NpgsqlConnection(ConnectionString);
-			con.Open();
 
-			using var cmd = new NpgsqlCommand(
-				@"UPDATE public.notificacao
+			using (NpgsqlConnection con = new NpgsqlConnection(ConnectionString))
+			{
+				con.Open();
+
+				using (NpgsqlCommand cmd = new NpgsqlCommand())
+				{
+
+					cmd.Connection = con;
+					cmd.CommandText = @"UPDATE public.notificacao
 					SET idusuarioorigem=@idusuarioorigem, idusuariodestino=@idusuariodestino, tipo=@tipo, mensagem=@mensagem, dataenvio=@dataenvio, dataleitura=@dataleitura
-					WHERE id=@id;",
-				con);
-				
-			AdicionarParametrosInserirOuAlterar(notificacao, cmd);
-			
-			cmd.ExecuteNonQuery();
+					WHERE id=@id;";
+
+					AdicionarParametrosInserirOuAlterar(notificacao, cmd);
+
+					cmd.ExecuteNonQuery();
+				}
+			}
 		}
 
 		public void Excluir(Guid id)
 		{
-			using var con = new NpgsqlConnection(ConnectionString);
-			con.Open();
-			
-			using var cmd = new NpgsqlCommand(
-				@"DELETE FROM public.notificacao
-					WHERE id=@id;",
-				con);
-				
-			cmd.Parameters.AddWithValue("id", id);
-			cmd.ExecuteNonQuery();
+			using (NpgsqlConnection con = new NpgsqlConnection(ConnectionString))
+			{
+				con.Open();
+
+				using (NpgsqlCommand cmd = new NpgsqlCommand())
+				{
+
+					cmd.Connection = con;
+					cmd.CommandText = @"DELETE FROM public.notificacao
+					WHERE id=@id;";
+
+					cmd.Parameters.AddWithValue("id", id);
+					cmd.ExecuteNonQuery();
+				}
+			}
 		}
 
 		public void Inserir(Notificacao notificacao)
 		{
-			using var con = new NpgsqlConnection(ConnectionString);
-			con.Open();
+			using (NpgsqlConnection con = new NpgsqlConnection(ConnectionString))
+			{
+				con.Open();
 
-			using var cmd = new NpgsqlCommand(
-				@"INSERT INTO public.notificacao
+				using (NpgsqlCommand cmd = new NpgsqlCommand())
+				{
+
+					cmd.Connection = con;
+					cmd.CommandText = @"INSERT INTO public.notificacao
 					(id, idusuarioorigem, idusuariodestino, tipo, mensagem, dataenvio, dataleitura)
-					VALUES(@id, @idusuarioorigem, @idusuariodestino, @tipo, @mensagem, @dataenvio, @dataleitura);",
-				con);
+					VALUES(@id, @idusuarioorigem, @idusuariodestino, @tipo, @mensagem, @dataenvio, @dataleitura);";
 
-			AdicionarParametrosInserirOuAlterar(notificacao, cmd);
+					AdicionarParametrosInserirOuAlterar(notificacao, cmd);
 
-			cmd.ExecuteNonQuery();
+					cmd.ExecuteNonQuery();
+				}
+			}
 		}
 
 		public Notificacao Procurar(Guid id)
 		{
-			using var con = new NpgsqlConnection(ConnectionString);
-			con.Open();
+			using (NpgsqlConnection con = new NpgsqlConnection(ConnectionString))
+			{
+				con.Open();
 
-			using var cmd = new NpgsqlCommand(
-				@"SELECT id, idusuarioorigem, idusuariodestino, tipo, mensagem, dataenvio, dataleitura
-					FROM public.notificacao WHERE id=@id;",
-				con);
-				
-			cmd.Parameters.AddWithValue("id", id);
-			
-			List<Notificacao> notificacaos = [];
-			using var reader = cmd.ExecuteReader();
-			while(reader.Read())
-				notificacaos.Add(CriarNotificacao(reader));
-			reader.Close();
-			
-			
-			return notificacaos.First();
+				using (NpgsqlCommand cmd = new NpgsqlCommand())
+				{
+
+					cmd.Connection = con;
+					cmd.CommandText = @"SELECT id, idusuarioorigem, idusuariodestino, tipo, mensagem, dataenvio, dataleitura
+					FROM public.notificacao WHERE id=@id;";
+
+					cmd.Parameters.AddWithValue("id", id);
+
+					List<Notificacao> notificacaos = [];
+					using var reader = cmd.ExecuteReader();
+					while (reader.Read())
+						notificacaos.Add(CriarNotificacao(reader));
+					reader.Close();
+
+
+					return notificacaos.First();
+				}
+			}
 		}
 
         public List<Notificacao> ProcurarNotificacoesPendentes(Guid idUsuario)
         {
-            using var con = new NpgsqlConnection(ConnectionString);
-          
-			con.Open();
+			using (NpgsqlConnection con = new NpgsqlConnection(ConnectionString))
+			{
+				con.Open();
 
-            using var cmd = new NpgsqlCommand(@"SELECT id, idusuarioorigem, idusuariodestino, tipo, mensagem, dataenvio, dataleitura FROM public.notificacao WHERE idusuariodestino = @idusuariodestino AND dataleitura IS NULL;", con);
+				using (NpgsqlCommand cmd = new NpgsqlCommand())
+				{
 
-			cmd.Parameters.AddWithValue("idusuariodestino", idUsuario);
+					cmd.Connection = con;
+					cmd.CommandText = @"SELECT id, idusuarioorigem, idusuariodestino, tipo, mensagem, dataenvio, dataleitura FROM public.notificacao WHERE idusuariodestino = @idusuariodestino AND dataleitura IS NULL;";
 
-            List<Notificacao> notificacaos = [];
-           
-			using var reader = cmd.ExecuteReader();
-           
-			while (reader.Read())
-                notificacaos.Add(CriarNotificacao(reader));
+					cmd.Parameters.AddWithValue("idusuariodestino", idUsuario);
 
-            reader.Close();
+					List<Notificacao> notificacaos = [];
 
-            return notificacaos;
+					using var reader = cmd.ExecuteReader();
+
+					while (reader.Read())
+						notificacaos.Add(CriarNotificacao(reader));
+
+					reader.Close();
+
+					return notificacaos;
+				}
+			}
 
         }
 
         public List<Notificacao> ProcurarTodos()
 		{
-			using var con = new NpgsqlConnection(ConnectionString);
-			con.Open();
+			using (NpgsqlConnection con = new NpgsqlConnection(ConnectionString))
+			{
+				con.Open();
 
-			using var cmd = new NpgsqlCommand(
-				@"SELECT id, idusuarioorigem, idusuariodestino, tipo, mensagem, dataenvio, dataleitura
-					FROM public.notificacao;",
-				con);
-			
-			List<Notificacao> notificacaos = [];
-			using var reader = cmd.ExecuteReader();
-			while(reader.Read())
-				notificacaos.Add(CriarNotificacao(reader));
-				
-			reader.Close();
-			
-			return notificacaos;
+				using (NpgsqlCommand cmd = new NpgsqlCommand())
+				{
+
+					cmd.Connection = con;
+					cmd.CommandText = @"SELECT id, idusuarioorigem, idusuariodestino, tipo, mensagem, dataenvio, dataleitura
+					FROM public.notificacao;";
+
+					List<Notificacao> notificacaos = [];
+					using var reader = cmd.ExecuteReader();
+					while (reader.Read())
+						notificacaos.Add(CriarNotificacao(reader));
+
+					reader.Close();
+
+					return notificacaos;
+				}
+			}
 		}
 		
 		private void AdicionarParametrosInserirOuAlterar(Notificacao notificacao, NpgsqlCommand cmd)
@@ -132,7 +169,16 @@ namespace SocialUniftec.Repository.Repository
 			cmd.Parameters.AddWithValue("tipo", (int)notificacao.Tipo);
 			cmd.Parameters.AddWithValue("mensagem", notificacao.Mensagem);
 			cmd.Parameters.AddWithValue("dataenvio", notificacao.DataEnvio);
-			cmd.Parameters.AddWithValue("dataleitura", notificacao.DataLeitura);
+
+			if (notificacao.DataLeitura != null)
+			{
+                cmd.Parameters.AddWithValue("dataleitura", notificacao.DataLeitura);
+            } else
+			{
+                cmd.Parameters.AddWithValue("dataleitura", DBNull.Value);
+            }
+
+			
 		}
 		
 		private Notificacao CriarNotificacao(NpgsqlDataReader reader)

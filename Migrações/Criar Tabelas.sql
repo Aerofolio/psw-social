@@ -4,14 +4,15 @@ CREATE TABLE public.usuario (
 	sobrenome varchar NOT NULL,
 	senha varchar NOT NULL,
 	datacomemorativa date NOT NULL,
-	sexo int NOT NULL,
+	sexo int4 NOT NULL,
 	bio varchar NULL,
 	fotodeperfil bytea NULL,
 	cidade varchar NULL,
-	uf int NULL,
+	uf int4 NULL,
 	telefone varchar NULL,
 	documento varchar NULL,
-	tipo int NULL,
+	tipo int4 NULL,
+	email varchar NOT NULL,
 	CONSTRAINT usuario_pk PRIMARY KEY (id)
 );
 
@@ -27,10 +28,10 @@ CREATE TABLE public.notificacao (
 	id uuid NOT NULL,
 	idusuarioorigem uuid NOT NULL,
 	idusuariodestino uuid NOT NULL,
-	tipo int NOT NULL,
+	tipo int4 NOT NULL,
 	mensagem varchar NOT NULL,
-	dataenvio date NOT NULL,
-	dataleitura date NULL,
+	dataenvio timestamp NOT NULL,
+	dataleitura timestamp NULL,
 	CONSTRAINT notificacao_pk PRIMARY KEY (id),
 	CONSTRAINT notificacao_usuario_fk FOREIGN KEY (idusuarioorigem) REFERENCES public.usuario(id),
 	CONSTRAINT notificacao_usuario_fk_1 FOREIGN KEY (idusuariodestino) REFERENCES public.usuario(id)

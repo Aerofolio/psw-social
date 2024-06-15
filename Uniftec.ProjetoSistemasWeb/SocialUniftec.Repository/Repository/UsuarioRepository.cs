@@ -15,124 +15,224 @@ namespace SocialUniftec.Repository.Repository
 
         public void Alterar(Usuario usuario)
 		{
-			using var con = new NpgsqlConnection(ConnectionString);
-			con.Open();
+			using (NpgsqlConnection con = new NpgsqlConnection(ConnectionString))
+			{
+				con.Open();
+				
+				using (NpgsqlCommand cmd = new NpgsqlCommand())
+				{
 
-			using var cmd = new NpgsqlCommand(
-				@"UPDATE public.usuario
-					SET nome=@nome, email=@email sobrenome=@sobrenome, senha=@senha, datacomemorativa=@datacomemorativa, sexo=@sexo, 
-					bio=@bio, fotodeperfil=@fotodeperfil, cidade=@cidade, uf=@uf, telefone=@telefone, documento=@documento, tipo=@tipo
-					WHERE id=@id;",
-				con);
+                    cmd.Connection = con;
+					cmd.CommandText = @"UPDATE public.usuario
+									SET nome=@nome, email=@email, sobrenome=@sobrenome, senha=@senha, datacomemorativa=@datacomemorativa, sexo=@sexo, 
+									bio=@bio, fotodeperfil=@fotodeperfil, cidade=@cidade, uf=@uf, telefone=@telefone, documento=@documento, tipo=@tipo
+									WHERE id=@id;";
 
-			AdicionarParametrosInserirOuAlterar(usuario, cmd);
-			cmd.ExecuteNonQuery();
+					AdicionarParametrosInserirOuAlterar(usuario, cmd);
 
-			cmd.Parameters.Clear();
-			cmd.CommandText =
-				@"DELETE FROM public.amizade
-					WHERE idusuario=@idusuario;";
+					cmd.ExecuteNonQuery();
 
-			cmd.Parameters.AddWithValue("idusuario", usuario.Id);
-			cmd.ExecuteNonQuery();
+					cmd.Parameters.Clear();
 
-			AdicionarParametrosDeAmizades(usuario, cmd);
+					cmd.CommandText =
+						@"DELETE FROM public.amizade
+						WHERE idusuario=@idusuario;";
+
+					cmd.Parameters.AddWithValue("idusuario", usuario.Id);
+
+					cmd.ExecuteNonQuery();
+
+					AdicionarParametrosDeAmizades(usuario, cmd);
+				}
+			}
 		}
 
 		public void Excluir(Guid id)
 		{
-			using var con = new NpgsqlConnection(ConnectionString);
-			con.Open();
-			
-			using var cmd = new NpgsqlCommand(
-				@"DELETE FROM public.amizade
-					WHERE idusuario=@id;",
-				con);
-				
-			cmd.Parameters.AddWithValue("id", id);
-			cmd.ExecuteNonQuery();
-			
-			cmd.CommandText = 
-				@"DELETE FROM public.usuario
-					WHERE id=@id;";
-			cmd.ExecuteNonQuery();
+			using (NpgsqlConnection con = new NpgsqlConnection(ConnectionString))
+			{
+				con.Open();
+
+				using (NpgsqlCommand cmd = new NpgsqlCommand())
+				{
+
+					cmd.Connection = con;
+					cmd.CommandText = @"DELETE FROM public.amizade
+						WHERE idusuario=@id;";
+
+
+					cmd.Parameters.AddWithValue("id", id);
+					cmd.ExecuteNonQuery();
+
+					cmd.CommandText =
+						@"DELETE FROM public.usuario
+						WHERE id=@id;";
+					cmd.ExecuteNonQuery();
+				}
+			}
 		}
 
 		public void Inserir(Usuario usuario)
 		{
-			using var con = new NpgsqlConnection(ConnectionString);
-			con.Open();
-			
-			using var cmd = new NpgsqlCommand(
-				@"INSERT INTO public.usuario
+			using (NpgsqlConnection con = new NpgsqlConnection(ConnectionString))
+			{
+				con.Open();
+
+				using (NpgsqlCommand cmd = new NpgsqlCommand())
+				{
+
+					cmd.Connection = con;
+					cmd.CommandText = @"INSERT INTO public.usuario
 					(id, email, nome, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo)
-					VALUES(@id, @email, @nome, @sobrenome, @senha, @datacomemorativa, @sexo, @bio, @fotodeperfil, @cidade, @uf, @telefone, @documento, @tipo);",
-				con);
-				
-			AdicionarParametrosInserirOuAlterar(usuario, cmd);
-			cmd.ExecuteNonQuery();
-			
-			AdicionarParametrosDeAmizades(usuario, cmd);
+					VALUES(@id, @email, @nome, @sobrenome, @senha, @datacomemorativa, @sexo, @bio, @fotodeperfil, @cidade, @uf, @telefone, @documento, @tipo);";
+
+					AdicionarParametrosInserirOuAlterar(usuario, cmd);
+					cmd.ExecuteNonQuery();
+
+					AdicionarParametrosDeAmizades(usuario, cmd);
+				}
+			}
 		}
 
-		public Usuario Procurar(Guid id)
-		{
-			using var con = new NpgsqlConnection(ConnectionString);
-			con.Open();
-			
-			using var cmd = new NpgsqlCommand(
-				@"SELECT id, nome, email, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo
-					FROM public.usuario WHERE id=@id;",
-				con);
-			
-			cmd.Parameters.AddWithValue("id", id);
-			
-			List<Usuario> usuarios = [];
-			using var reader = cmd.ExecuteReader();
-			while(reader.Read())
-				usuarios.Add(CriarUsuario(reader));
-			reader.Close();
-			
-			AdicionarListaDeAmigos(con, usuarios);
-			
-			return usuarios.First();
-		}
-
-		public List<Usuario> ProcurarTodos()
+        public Usuario Procurar(Guid id)
         {
-            using var con = new NpgsqlConnection(ConnectionString);
-            con.Open();
+            using (var con = new NpgsqlConnection(ConnectionString))
+            {
+                con.Open();
 
-            using var cmd = new NpgsqlCommand(
-                @"SELECT id, nome, email, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo
-					FROM public.usuario;",
-                con);
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = @"SELECT id, nome, email, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo
+                                        FROM public.usuario WHERE id=@id;";
+                    cmd.Parameters.AddWithValue("id", id);
 
-            List<Usuario> usuarios = [];
-            using var reader = cmd.ExecuteReader();
-            while (reader.Read())
-                usuarios.Add(CriarUsuario(reader));
-            reader.Close();
+                    Usuario usuario = null;
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            usuario = CriarUsuario(reader);
+                        }
+                    }
 
-            AdicionarListaDeAmigos(con, usuarios);
+                    if (usuario != null)
+                    {
+                        AdicionarAmigos(con, usuario);
+                    }
 
-            return usuarios;
+                    return usuario;
+                }
+            }
+        }
+        private void AdicionarAmigos(NpgsqlConnection con, Usuario usuario)
+        {
+            using (var cmdAmizade = new NpgsqlCommand(
+                @"SELECT u.id, u.nome, u.email, u.sobrenome, u.senha, u.datacomemorativa, u.sexo, u.bio, u.fotodeperfil, u.cidade, u.uf, u.telefone, u.documento, u.tipo
+          FROM public.amizade a
+          JOIN public.usuario u ON a.idusuarioamigo = u.id
+          WHERE a.idusuario = @idusuario;", con))
+            {
+                cmdAmizade.Parameters.AddWithValue("idusuario", usuario.Id);
+
+                using (var readerAmizade = cmdAmizade.ExecuteReader())
+                {
+                    while (readerAmizade.Read())
+                    {
+                        usuario.Amigos.Add(CriarUsuario(readerAmizade));
+                    }
+                }
+            }
+        }
+
+        public void RemoverAmigo(Guid idUsuario, Guid idAmigo)
+        {
+            using (var con = new NpgsqlConnection(ConnectionString))
+            {
+                con.Open();
+
+                using (var transaction = con.BeginTransaction())
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.Transaction = transaction;
+
+                    cmd.CommandText = @"
+                DELETE FROM public.amizade
+                WHERE (idusuario = @idUsuario AND idusuarioamigo = @idAmigo) OR
+                      (idusuario = @idAmigo AND idusuarioamigo = @idUsuario);";
+
+                    cmd.Parameters.AddWithValue("idUsuario", idUsuario);
+                    cmd.Parameters.AddWithValue("idAmigo", idAmigo);
+
+                    cmd.ExecuteNonQuery();
+                    transaction.Commit();
+                }
+            }
+        }
+
+        public List<Usuario> ProcurarTodos()
+        {
+            using (var con = new NpgsqlConnection(ConnectionString))
+            {
+                con.Open();
+
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandText = @"SELECT id, nome, email, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo
+                                        FROM public.usuario;";
+
+                    var usuarios = new List<Usuario>();
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            usuarios.Add(CriarUsuario(reader));
+                        }
+                    }
+
+                    AdicionarListaDeAmigos(con, usuarios);
+
+                    return usuarios;
+                }
+            }
         }
 
         private void AdicionarListaDeAmigos(NpgsqlConnection con, List<Usuario> usuarios)
         {
-            foreach (var usuario in usuarios)
-            {
-                using var cmdAmizade = new NpgsqlCommand(
-                    @"SELECT idusuario, idusuarioamigo
-						FROM public.amizade WHERE idusuario=@idusuario;",
-                    con);
-                cmdAmizade.Parameters.AddWithValue("idusuario", usuario.Id);
+            var usuarioIds = usuarios.Select(u => u.Id).ToArray();
 
-                using var readerAmizade = cmdAmizade.ExecuteReader();
-                while (readerAmizade.Read())
-                    usuario.Amigos.Add(Procurar(readerAmizade.GetGuid(readerAmizade.GetOrdinal("idusuarioamigo"))));
-                readerAmizade.Close();
+            using (var cmdAmizade = new NpgsqlCommand(
+                @"SELECT idusuario, idusuarioamigo
+                  FROM public.amizade WHERE idusuario = ANY(@ids);", con))
+            {
+                cmdAmizade.Parameters.AddWithValue("ids", usuarioIds);
+
+                var amizades = new Dictionary<Guid, List<Guid>>();
+                using (var readerAmizade = cmdAmizade.ExecuteReader())
+                {
+                    while (readerAmizade.Read())
+                    {
+                        var idUsuario = readerAmizade.GetGuid(readerAmizade.GetOrdinal("idusuario"));
+                        var idAmigo = readerAmizade.GetGuid(readerAmizade.GetOrdinal("idusuarioamigo"));
+
+                        if (!amizades.ContainsKey(idUsuario))
+                        {
+                            amizades[idUsuario] = new List<Guid>();
+                        }
+
+                        amizades[idUsuario].Add(idAmigo);
+                    }
+                }
+
+                foreach (var usuario in usuarios)
+                {
+                    if (amizades.TryGetValue(usuario.Id, out var amigos))
+                    {
+                        usuario.Amigos.AddRange(amigos.Select(id => new Usuario { Id = id }));
+                    }
+                }
             }
         }
 
@@ -190,27 +290,31 @@ namespace SocialUniftec.Repository.Repository
         public Usuario ProcurarPorEmailESenha(string email, string senha)
         {
 
-            using var con = new NpgsqlConnection(ConnectionString);
-            con.Open();
+			using (NpgsqlConnection con = new NpgsqlConnection(ConnectionString))
+			{
+				con.Open();
 
-            using var cmd = new NpgsqlCommand(
-                @"SELECT id, nome, email, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo
-					FROM public.usuario WHERE email=@email AND senha=@senha;",
-                con);
+				using (NpgsqlCommand cmd = new NpgsqlCommand())
+				{
 
-            cmd.Parameters.AddWithValue("email", email);
-            cmd.Parameters.AddWithValue("senha", senha);
+					cmd.Connection = con;
+					cmd.CommandText = @"SELECT id, nome, email, sobrenome, senha, datacomemorativa, sexo, bio, fotodeperfil, cidade, uf, telefone, documento, tipo
+					FROM public.usuario WHERE email=@email AND senha=@senha;";
 
-            List<Usuario> usuarios = [];
-            using var reader = cmd.ExecuteReader();
-            while (reader.Read())
-                usuarios.Add(CriarUsuario(reader));
-            reader.Close();
+					cmd.Parameters.AddWithValue("email", email);
+					cmd.Parameters.AddWithValue("senha", senha);
 
-            AdicionarListaDeAmigos(con, usuarios);
+					List<Usuario> usuarios = [];
+					using var reader = cmd.ExecuteReader();
+					while (reader.Read())
+						usuarios.Add(CriarUsuario(reader));
+					reader.Close();
 
-            return usuarios.First();
+					AdicionarListaDeAmigos(con, usuarios);
 
+					return usuarios.First();
+				}
+			}
         }
     }
 }
