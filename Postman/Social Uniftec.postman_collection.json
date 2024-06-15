@@ -1,0 +1,424 @@
+{
+	"info": {
+		"_postman_id": "0815efbe-85ff-4541-aa4f-c2a49e35de96",
+		"name": "Social Uniftec",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22051778"
+	},
+	"item": [
+		{
+			"name": "Usuários",
+			"item": [
+				{
+					"name": "Criar Usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"fulano@gmail.com\",\r\n  \"nome\": \"Fulano\",\r\n  \"sobrenome\": \"Silva\",\r\n  \"senha\": \"umasenhamuitoforte\",\r\n  \"dataComemorativa\": \"2002-01-01T00:07:22.950Z\",\r\n  \"sexo\": 0,\r\n  \"bio\": \"Oi, meu nome é Fulano e eu sou um desenvolvedor!\",\r\n  \"fotoPefil\": \"\",\r\n  \"cidade\": \"Caxias do Sul\",\r\n  \"uf\": 0,\r\n  \"telefone\": \"99999999999\",\r\n  \"documento\": \"99999999999\",\r\n  \"tipo\": 0,\r\n  \"amigos\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/Usuario",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enviar Solicitação de Amizade",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/Usuario/Amizade/e3d6e96a-f0c1-4d49-8617-f440db06ed1c/Solicitar/1021013a-f752-4002-bd7a-ad7aaad1f3d2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Usuario",
+								"Amizade",
+								"e3d6e96a-f0c1-4d49-8617-f440db06ed1c",
+								"Solicitar",
+								"1021013a-f752-4002-bd7a-ad7aaad1f3d2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Aceitar Solicitação de Amizade",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/Usuario/Amizade/1021013a-f752-4002-bd7a-ad7aaad1f3d2/Aceitar/e3d6e96a-f0c1-4d49-8617-f440db06ed1c",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Usuario",
+								"Amizade",
+								"1021013a-f752-4002-bd7a-ad7aaad1f3d2",
+								"Aceitar",
+								"e3d6e96a-f0c1-4d49-8617-f440db06ed1c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"fulano@gmail.com\",\r\n    \"senha\": \"umasenhamuitoforte\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/Usuario/Login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Usuario",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Usuário",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"e3d6e96a-f0c1-4d49-8617-f440db06ed1c\",\r\n  \"email\": \"fulano@gmail.com\",\r\n  \"nome\": \"Jonas\",\r\n  \"sobrenome\": \"Pereira\",\r\n  \"senha\": \"umasenhamuitoforte\",\r\n  \"dataComemorativa\": \"2002-01-01T00:07:22.950Z\",\r\n  \"sexo\": 0,\r\n  \"bio\": \"Oi, meu nome é Fulano e eu sou um desenvolvedor!\",\r\n  \"fotoPefil\": \"\",\r\n  \"cidade\": \"Caxias do Sul\",\r\n  \"uf\": 0,\r\n  \"telefone\": \"99999999999\",\r\n  \"documento\": \"99999999999\",\r\n  \"tipo\": 0,\r\n  \"amigos\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/Usuario",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover Amizade",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/Usuario/Amizade/1021013a-f752-4002-bd7a-ad7aaad1f3d2/Remover/e3d6e96a-f0c1-4d49-8617-f440db06ed1c",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Usuario",
+								"Amizade",
+								"1021013a-f752-4002-bd7a-ad7aaad1f3d2",
+								"Remover",
+								"e3d6e96a-f0c1-4d49-8617-f440db06ed1c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Usuário",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/Usuario/643a1099-486c-4394-800f-e4dd2e50f0f5",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Usuario",
+								"643a1099-486c-4394-800f-e4dd2e50f0f5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Usuário",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/Usuario/1021013a-f752-4002-bd7a-ad7aaad1f3d2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Usuario",
+								"1021013a-f752-4002-bd7a-ad7aaad1f3d2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procurar Todos Usuários",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/Usuario",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procurar Por Parametros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/Usuario/ProcurarPorParametros?nome=Jonas&sobrenome=Pereira",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Usuario",
+								"ProcurarPorParametros"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "Jonas"
+								},
+								{
+									"key": "sobrenome",
+									"value": "Pereira"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notificações",
+			"item": [
+				{
+					"name": "Criar Notificação",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"usuarioOrigemId\": \"e3d6e96a-f0c1-4d49-8617-f440db06ed1c\",\r\n  \"usuarioDestinoId\": \"1021013a-f752-4002-bd7a-ad7aaad1f3d2\",\r\n  \"tipo\": 0,\r\n  \"mensagem\": \"Aqui você poem a mensagem\",\r\n  \"dataEnvio\": \"2024-06-15T02:37:17.187Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/Notificacao",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Notificacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Notificação",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"0e306c3e-2d45-40f2-94fe-d81d1b2c4958\",\r\n  \"usuarioOrigemId\": \"e3d6e96a-f0c1-4d49-8617-f440db06ed1c\",\r\n  \"usuarioDestinoId\": \"1021013a-f752-4002-bd7a-ad7aaad1f3d2\",\r\n  \"tipo\": 0,\r\n  \"mensagem\": \"Aqui você poem a mensagem alterada\",\r\n  \"dataEnvio\": \"2024-06-15T02:37:17.187Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/Notificacao",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Notificacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ler Notificação",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/Notificacao/4c3ef3c8-e566-4f4a-b275-8d72fdc10d2b/Ler",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Notificacao",
+								"4c3ef3c8-e566-4f4a-b275-8d72fdc10d2b",
+								"Ler"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Notificação",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/Notificacao/bb564000-74a1-461a-bbd1-0d1ba49ef222",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Notificacao",
+								"bb564000-74a1-461a-bbd1-0d1ba49ef222"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procurar Notificação",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/Notificacao/0e306c3e-2d45-40f2-94fe-d81d1b2c4958",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Notificacao",
+								"0e306c3e-2d45-40f2-94fe-d81d1b2c4958"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procurar Todas Notificações",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/Notificacao",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Notificacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procurar Notificações Pendentes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/Notificacao/1021013a-f752-4002-bd7a-ad7aaad1f3d2/Pendentes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"Notificacao",
+								"1021013a-f752-4002-bd7a-ad7aaad1f3d2",
+								"Pendentes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:5048/api",
+			"type": "string"
+		}
+	]
+}
