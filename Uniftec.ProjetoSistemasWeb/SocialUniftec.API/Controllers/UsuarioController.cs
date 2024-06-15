@@ -4,6 +4,8 @@ using SocialUniftec.API.Models;
 using SocialUniftec.Application.Adapter;
 using SocialUniftec.Application.Application;
 using SocialUniftec.Application.Dto;
+using SocialUniftec.Domain.Entities;
+using System.Collections.Generic;
 
 namespace SocialUniftec.API.Controllers
 {
@@ -38,6 +40,40 @@ namespace SocialUniftec.API.Controllers
             UsuarioApplication usuarioApplication = new UsuarioApplication();
             UsuarioDto usuario = usuarioApplication.Procurar(id);
             return UsuarioMapping.ToModel(usuario);
+        }
+
+        [HttpGet]
+        public List<UsuarioModel> ProcurarTodos()
+        {
+            UsuarioApplication usuarioApplication = new UsuarioApplication();
+           
+            List <UsuarioDto> usuariosDto= usuarioApplication.ProcurarTodos();
+
+            List<UsuarioModel> usuarios = [];
+
+            foreach(var usuarioDto in usuariosDto)
+            {
+                usuarios.Add(UsuarioMapping.ToModel(usuarioDto));
+            }
+
+            return usuarios;
+        }
+
+        [HttpGet("ProcurarPorParametros")]
+        public ActionResult<List<UsuarioModel>> ProcurarPorParametros([FromQuery] string nome = null, [FromQuery] string sobrenome = null)
+        {
+            UsuarioApplication usuarioApplication = new UsuarioApplication();
+
+            List<UsuarioDto> usuariosDto = usuarioApplication.ProcurarPorParametros(nome, sobrenome);
+
+            List<UsuarioModel> usuarios = new List<UsuarioModel>();
+
+            foreach (var usuarioDto in usuariosDto)
+            {
+                usuarios.Add(UsuarioMapping.ToModel(usuarioDto));
+            }
+
+            return usuarios;
         }
 
         [HttpPost("Amizade/{id:Guid}/Solicitar/{idUsuarioDestino:Guid}")]

@@ -121,5 +121,22 @@ namespace SocialUniftec.Application.Application
         {
             usuarioRepository.RemoverAmigo(id, idUsuarioAmigo);
         }
+
+        public List<UsuarioDto> ProcurarPorParametros(string nome, string sobrenome)
+        {
+            var usuarios = ProcurarTodos();
+
+            if (!string.IsNullOrEmpty(nome))
+            {
+                usuarios = usuarios.Where(u => u.Nome.Contains(nome, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(sobrenome))
+            {
+                usuarios = usuarios.Where(u => u.Sobrenome.Contains(sobrenome, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            return usuarios;
+        }
     }
 }
