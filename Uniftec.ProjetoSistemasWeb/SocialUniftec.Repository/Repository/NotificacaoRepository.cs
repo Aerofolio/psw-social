@@ -8,17 +8,12 @@ namespace SocialUniftec.Repository.Repository
 	{
         private string ConnectionString;
 
-        public NotificacaoRepository(string ConnectionString)
+        public NotificacaoRepository(string strConexao = null)
         {
-			if (ConnectionString == null)
-			{
-                ConnectionString = "User ID=postgres;Password=123456789;Host=localhost;Port=5432;Database=socialuniftec;"; ;
-
-            }
-            this.ConnectionString = ConnectionString;
+            this.ConnectionString = strConexao;
         }
-		
-		public void Alterar(Notificacao notificacao)
+
+        public void Alterar(Notificacao notificacao)
 		{
 
 			using (NpgsqlConnection con = new NpgsqlConnection(ConnectionString))
@@ -183,7 +178,7 @@ namespace SocialUniftec.Repository.Repository
 		
 		private Notificacao CriarNotificacao(NpgsqlDataReader reader)
 		{
-			var usuarioRepository= new UsuarioRepository();
+			var usuarioRepository= new UsuarioRepository(ConnectionString);
 			var usuarioOrigem = usuarioRepository.Procurar(reader.GetGuid(reader.GetOrdinal("idusuarioorigem")));
 			var usuarioDestino = usuarioRepository.Procurar(reader.GetGuid(reader.GetOrdinal("idusuariodestino")));
 			
@@ -195,8 +190,10 @@ namespace SocialUniftec.Repository.Repository
 				Tipo = (TipoNotificacao)reader.GetInt32(reader.GetOrdinal("tipo")),
 				Mensagem = reader.GetString(reader.GetOrdinal("mensagem")),
 				DataEnvio = reader.GetDateTime(reader.GetOrdinal("dataenvio")),
-				DataLeitura = reader.GetDateTime(reader.GetOrdinal("dataleitura"))
-			};
+                DataLeitura = reader.IsDBNull(reader.GetOrdinal("dataleitura"))
+                      ? (DateTime?)null
+                      : reader.GetDateTime(reader.GetOrdinal("dataleitura"))
+            };
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SocialUniftec.API.Adapter;
 using SocialUniftec.API.Models;
 using SocialUniftec.Application.Adapter;
 using SocialUniftec.Application.Application;
@@ -12,17 +13,17 @@ namespace SocialUniftec.API.Controllers
     {
 
         [HttpPost]
-        public Guid Post(NotificacaoModel notificacao)
+        public Guid Post(NotificacaoResumidaModel notificacao)
         {
             NotificacaoApplication application = new NotificacaoApplication();
-            return application.Inserir(NotificacaoMapping.ToDto(notificacao));
+            return application.Inserir(NotificacaoResumidaMapping.ToDto(notificacao));
         }
 
         [HttpPut]
-        public Guid Put(NotificacaoModel notificacao)
+        public Guid Put(NotificacaoResumidaModel notificacao)
         {
             NotificacaoApplication application = new NotificacaoApplication();
-            return application.Alterar(NotificacaoMapping.ToDto(notificacao));
+            return application.Alterar(NotificacaoResumidaMapping.ToDto(notificacao));
         }
 
         [HttpDelete("{id:Guid}")]
@@ -38,6 +39,23 @@ namespace SocialUniftec.API.Controllers
             NotificacaoApplication notificacaoApplication = new NotificacaoApplication();
             NotificacaoDto notificacao = notificacaoApplication.Procurar(id);
             return NotificacaoMapping.ToModel(notificacao);
+        }
+
+        [HttpGet]
+        public List<NotificacaoModel> ProcurarTodas(Guid id)
+        {
+            NotificacaoApplication notificacaoApplication = new NotificacaoApplication();
+           
+            List<NotificacaoDto> notificacacoesDto = notificacaoApplication.ProcurarTodos();
+           
+            List<NotificacaoModel> notificacoes = [];
+
+            foreach (var notificacao in notificacacoesDto)
+            {
+                notificacoes.Add(NotificacaoMapping.ToModel(notificacao));
+            }
+
+            return notificacoes;
         }
 
         [HttpPut("{id:Guid}/Ler")]

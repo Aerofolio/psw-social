@@ -8,9 +8,9 @@ namespace SocialUniftec.Repository.Repository
 	{
         private string ConnectionString;
 
-        public UsuarioRepository(string ConnectionString = null)
+        public UsuarioRepository(string strConexao = null)
         {
-            this.ConnectionString = ConnectionString;
+            this.ConnectionString = strConexao;
         }
 
         public void Alterar(Usuario usuario)
