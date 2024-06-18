@@ -62,7 +62,7 @@ namespace SocialUniftec.Application.Adapter
                 DataComemorativa = usuario.DataComemorativa,
                 Sexo = (TipoSexoDto)usuario.Sexo,
                 Bio = usuario.Bio,
-                FotoPerfil = Encoding.Default.GetString(usuario.FotoPerfil),
+                FotoPerfil = Convert.ToBase64String(usuario.FotoPerfil),
                 Cidade = usuario.Cidade,
                 Uf = (EstadosBrasilDto)usuario.Uf,
                 Telefone = usuario.Telefone,
