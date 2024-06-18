@@ -1,4 +1,5 @@
-﻿using SocialUniftec.Application.Dto;
+﻿using System.Text;
+using SocialUniftec.Application.Dto;
 using SocialUniftec.Domain.Entities;
 
 namespace SocialUniftec.Application.Adapter
@@ -14,22 +15,24 @@ namespace SocialUniftec.Application.Adapter
                 return null;
             }
 
-            Usuario usuarioDomain = new Usuario();
-            usuarioDomain.Id = usuario.Id;
-            usuarioDomain.Email = usuario.Email;
-            usuarioDomain.Nome = usuario.Nome;
-            usuarioDomain.Sobrenome = usuario.Sobrenome;
-            usuarioDomain.Senha = usuario.Senha;
-            usuarioDomain.DataComemorativa = usuario.DataComemorativa;
-            usuarioDomain.Sexo = (TipoSexo) usuario.Sexo;
-            usuarioDomain.Bio = usuario.Bio;
-            usuarioDomain.FotoPefil = usuario.FotoPefil;
-            usuarioDomain.Cidade = usuario.Cidade;
-            usuarioDomain.Uf = (EstadosBrasil) usuario.Uf;
-            usuarioDomain.Telefone = usuario.Telefone;
-            usuarioDomain.Documento = usuario.Documento;
-            usuarioDomain.Tipo = (TipoPessoa) usuario.Tipo;
-            usuarioDomain.Amigos = [];
+            Usuario usuarioDomain = new()
+            {
+                Id = usuario.Id,
+                Email = usuario.Email,
+                Nome = usuario.Nome,
+                Sobrenome = usuario.Sobrenome,
+                Senha = usuario.Senha,
+                DataComemorativa = usuario.DataComemorativa,
+                Sexo = (TipoSexo)usuario.Sexo,
+                Bio = usuario.Bio,
+                FotoPerfil = Convert.FromBase64String(usuario.FotoPerfil),
+                Cidade = usuario.Cidade,
+                Uf = (EstadosBrasil)usuario.Uf,
+                Telefone = usuario.Telefone,
+                Documento = usuario.Documento,
+                Tipo = (TipoPessoa)usuario.Tipo,
+                Amigos = []
+            };
 
             foreach (var amg in usuario.Amigos)
             {
@@ -49,21 +52,23 @@ namespace SocialUniftec.Application.Adapter
                 return null;
             }
 
-            UsuarioDto usuarioDto = new UsuarioDto();
-            usuarioDto.Id = usuario.Id;
-            usuarioDto.Email = usuario.Email;
-            usuarioDto.Nome = usuario.Nome;
-            usuarioDto.Sobrenome = usuario.Sobrenome;
-            usuarioDto.Senha = usuario.Senha;
-            usuarioDto.DataComemorativa = usuario.DataComemorativa;
-            usuarioDto.Sexo = (TipoSexoDto) usuario.Sexo;
-            usuarioDto.Bio = usuario.Bio;
-            usuarioDto.FotoPefil = usuario.FotoPefil;
-            usuarioDto.Cidade = usuario.Cidade;
-            usuarioDto.Uf = (EstadosBrasilDto) usuario.Uf;
-            usuarioDto.Telefone = usuario.Telefone;
-            usuarioDto.Documento = usuario.Documento;
-            usuarioDto.Tipo = (TipoPessoaDto) usuario.Tipo;
+            UsuarioDto usuarioDto = new()
+            {
+                Id = usuario.Id,
+                Email = usuario.Email,
+                Nome = usuario.Nome,
+                Sobrenome = usuario.Sobrenome,
+                Senha = usuario.Senha,
+                DataComemorativa = usuario.DataComemorativa,
+                Sexo = (TipoSexoDto)usuario.Sexo,
+                Bio = usuario.Bio,
+                FotoPerfil = Encoding.Default.GetString(usuario.FotoPerfil),
+                Cidade = usuario.Cidade,
+                Uf = (EstadosBrasilDto)usuario.Uf,
+                Telefone = usuario.Telefone,
+                Documento = usuario.Documento,
+                Tipo = (TipoPessoaDto)usuario.Tipo
+            };
 
             List<UsuarioDto> amigos = [];
 

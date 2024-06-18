@@ -15,21 +15,23 @@ namespace SocialUniftec.Application.Adapter
                 return null;
             }
 
-            UsuarioModel usuarioModel = new UsuarioModel();
-            usuarioModel.Id = usuario.Id;
-            usuarioModel.Email = usuario.Email;
-            usuarioModel.Nome = usuario.Nome;
-            usuarioModel.Sobrenome = usuario.Sobrenome;
-            usuarioModel.Senha = usuario.Senha;
-            usuarioModel.DataComemorativa = usuario.DataComemorativa;
-            usuarioModel.Sexo = (TipoSexoModel) usuario.Sexo;
-            usuarioModel.Bio = usuario.Bio;
-            usuarioModel.FotoPefil = usuario.FotoPefil;
-            usuarioModel.Cidade = usuario.Cidade;
-            usuarioModel.Uf = (EstadosBrasilModel) usuario.Uf;
-            usuarioModel.Telefone = usuario.Telefone;
-            usuarioModel.Documento = usuario.Documento;
-            usuarioModel.Tipo = (TipoPessoaModel) usuario.Tipo;
+            UsuarioModel usuarioModel = new()
+            {
+                Id = usuario.Id,
+                Email = usuario.Email,
+                Nome = usuario.Nome,
+                Sobrenome = usuario.Sobrenome,
+                Senha = usuario.Senha,
+                DataComemorativa = usuario.DataComemorativa,
+                Sexo = (TipoSexoModel)usuario.Sexo,
+                Bio = usuario.Bio,
+                FotoPerfil = usuario.FotoPerfil,
+                Cidade = usuario.Cidade,
+                Uf = (EstadosBrasilModel)usuario.Uf,
+                Telefone = usuario.Telefone,
+                Documento = usuario.Documento,
+                Tipo = (TipoPessoaModel)usuario.Tipo
+            };
 
             List<UsuarioModel> amigos = new List<UsuarioModel>();
 
@@ -53,21 +55,23 @@ namespace SocialUniftec.Application.Adapter
                 return null;
             }
 
-            UsuarioDto usuarioDto = new UsuarioDto();
-            usuarioDto.Id = usuario.Id;
-            usuarioDto.Email = usuario.Email;
-            usuarioDto.Nome = usuario.Nome;
-            usuarioDto.Sobrenome = usuario.Sobrenome;
-            usuarioDto.Senha = usuario.Senha;
-            usuarioDto.DataComemorativa = usuario.DataComemorativa;
-            usuarioDto.Sexo = (TipoSexoDto) usuario.Sexo;
-            usuarioDto.Bio = usuario.Bio;
-            usuarioDto.FotoPefil = usuario.FotoPefil;
-            usuarioDto.Cidade = usuario.Cidade;
-            usuarioDto.Uf = (EstadosBrasilDto) usuario.Uf;
-            usuarioDto.Telefone = usuario.Telefone;
-            usuarioDto.Documento = usuario.Documento;
-            usuarioDto.Tipo = (TipoPessoaDto) usuario.Tipo;
+            UsuarioDto usuarioDto = new()
+            {
+                Id = usuario.Id,
+                Email = usuario.Email,
+                Nome = usuario.Nome,
+                Sobrenome = usuario.Sobrenome,
+                Senha = usuario.Senha,
+                DataComemorativa = usuario.DataComemorativa,
+                Sexo = (TipoSexoDto)usuario.Sexo,
+                Bio = usuario.Bio,
+                FotoPerfil = usuario.FotoPerfil,
+                Cidade = usuario.Cidade,
+                Uf = (EstadosBrasilDto)usuario.Uf,
+                Telefone = usuario.Telefone,
+                Documento = usuario.Documento,
+                Tipo = (TipoPessoaDto)usuario.Tipo
+            };
 
             List<UsuarioDto> amigos = [];
 

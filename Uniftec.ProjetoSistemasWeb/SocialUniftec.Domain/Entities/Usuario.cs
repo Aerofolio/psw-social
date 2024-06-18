@@ -17,7 +17,7 @@ namespace SocialUniftec.Domain.Entities
         public DateTime DataComemorativa { get; set; }
         public TipoSexo Sexo { get; set; }
         public string Bio {  get; set; }
-        public Byte[] FotoPefil { get; set; }
+        public Byte[] FotoPerfil { get; set; }
         public string Cidade { get; set; }
         public EstadosBrasil Uf { get; set; }
         public string Telefone { get; set; }
@@ -34,7 +34,7 @@ namespace SocialUniftec.Domain.Entities
             this.DataComemorativa = DateTime.Now;
             this.Sexo = TipoSexo.Masculino;
             this.Bio = string.Empty;
-            this.FotoPefil = [];
+            this.FotoPerfil = [];
             this.Cidade = string.Empty;
             this.Uf = EstadosBrasil.RS;
             this.Telefone = string.Empty;

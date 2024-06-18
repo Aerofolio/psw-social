@@ -19,7 +19,7 @@ namespace SocialUniftec.Application.Dto
         public DateTime DataComemorativa { get; set; }
         public TipoSexoDto Sexo { get; set; }
         public string Bio { get; set; }
-        public Byte[] FotoPefil { get; set; }
+        public string FotoPerfil { get; set; }
         public string Cidade { get; set; }
         public EstadosBrasilDto Uf { get; set; }
         public string Telefone { get; set; }

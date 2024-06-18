@@ -13,7 +13,7 @@ namespace SocialUniftec.API.Models
         public DateTime DataComemorativa { get; set; }
         public TipoSexoModel Sexo { get; set; }
         public string Bio { get; set; }
-        public Byte[] FotoPefil { get; set; }
+        public string FotoPerfil { get; set; }
         public string Cidade { get; set; }
         public EstadosBrasilModel Uf { get; set; }
         public string Telefone { get; set; }
