@@ -19,7 +19,7 @@ namespace SocialUniftec.Application.Application
 
         public UsuarioApplication()
         {
-            string strConexao = "User ID=postgres;Password=123456789;Host=localhost;Port=5432;Database=socialuniftec;";
+            string strConexao = "User ID=jmenzen2;Password='8N9;FLC?;@?I';Host=pgsql.jmenzen.com.br;Port=5432;Database=jmenzen2;";
             this.usuarioRepository = new UsuarioRepository(strConexao);
             this.notificacaoRepository = new NotificacaoRepository(strConexao);
         }
