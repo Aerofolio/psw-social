@@ -50,12 +50,12 @@ namespace SocialUniftec.Controllers
             {
                 try
                 {
-                    var a = new Website.Backend.UsuarioModel()
+                    var usuarioModel = new Website.Backend.UsuarioModel()
                     {
                         Nome = usuarioCadastro.Nome,
                         Sobrenome = usuarioCadastro.Sobrenome,
                         Email = usuarioCadastro.Email,
-                        Senha = usuarioCadastro.Senha,
+                        Senha = usuarioCadastro.Senha!,
                         DataComemorativa = usuarioCadastro.DataComemorativa,
                         Sexo = Website.Backend.TipoSexoModel.Masculino,
                         Bio = "teste",
@@ -68,7 +68,7 @@ namespace SocialUniftec.Controllers
                         Amigos = []
                     };
                     
-                    var request = new APIHttpClient("http://localhost:5048/api/").Post("Usuario", a);
+                    var request = new APIHttpClient("http://localhost:5048/api/").Post("Usuario", usuarioModel);
                     
                     return Redirect("Postagem/Feed");
                 }
