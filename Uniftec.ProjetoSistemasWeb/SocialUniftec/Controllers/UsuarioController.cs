@@ -68,7 +68,7 @@ namespace SocialUniftec.Controllers
                     
                     var request = new APIHttpClient(URLBase).Post("Usuario", usuarioModel);
                     
-                    return Redirect("Postagem/Feed");
+                    return View("Login");
                 }
                 catch (Exception ex)
                 {
