@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Text;
+using System.Text.Json.Serialization;
+using System.Text.Unicode;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SocialUniftec.Filtres;
 using SocialUniftec.Models;
 using SocialUniftec.Website.Backend;
@@ -31,6 +35,8 @@ namespace SocialUniftec.Controllers
                 
                 if(retorno is not null)
                 {
+                    HttpContext.Session.Set("UsuarioLogado", Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(retorno)));
+                    ViewBag.UsuarioLogado = UsuarioAdapter.ToUsuarioCadastroModel(retorno);
                     return Redirect("Postagem/Feed");
                 }
                 else
@@ -86,7 +92,7 @@ namespace SocialUniftec.Controllers
             
             // var request = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{id}");
             
-            // ViewBag.UsuarioLogado = UsuarioAdapter.ToUsuarioCadastroModel(request);
+            ViewBag.UsuarioLogado = JsonConvert.DeserializeObject<Website.Backend.UsuarioModel>(Encoding.UTF8.GetString(HttpContext.Session.Get("UsuarioLogado")));
             
             return View();
         }

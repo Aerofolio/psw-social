@@ -12,8 +12,8 @@
 			</div>
 			<div class="ms-sm-4 mt-sm-3">
 				<!-- Info -->
-				<h1 class="mb-0 h5">Sam Lanson <i class="bi bi-patch-check-fill text-success small"></i></h1>
-				<p>5 Amigos</p>
+				<h1 class="mb-0 h5">@ViewBag.UsuarioLogado?.Nome @ViewBag.UsuarioLogado?.Sobrenome<i class="bi bi-patch-check-fill text-success small"></i></h1>
+				<p>@ViewBag.UsuarioLogado?.Amigos?.Count Amigos</p>
 			</div>
 			<!-- Button -->
 			<div class="d-flex mt-3 justify-content-center ms-sm-auto">
