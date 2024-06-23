@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SocialUniftec.Filtres;
 using SocialUniftec.Models;
+using SocialUniftec.Website.Backend;
 using SocialUniftec.Website.Backend.Adapter;
 using SocialUniftec.Website.Backend.HTTPClient;
 
@@ -8,6 +9,7 @@ namespace SocialUniftec.Controllers
 {
     public class UsuarioController : Controller
     {
+        private static readonly string URLBase = "http://grupo3.neurosky.com.br/api/";
         public IActionResult Index()
         {
             return View("Login");
@@ -21,9 +23,20 @@ namespace SocialUniftec.Controllers
         [HttpPost]
         public IActionResult Login(LoginModel login) {
             
+            
             if (ModelState.IsValid)
             {
-                return Redirect("Postagem/Feed");
+                var apiModel = UsuarioAdapter.ToUsuarioLoginModel(login);
+                var retorno = new APIHttpClient(URLBase).Post<UsuarioLoginModel, Website.Backend.UsuarioModel>("Usuario/Login", apiModel);
+                
+                if(retorno is not null)
+                {
+                    return Redirect("Postagem/Feed");
+                }
+                else
+                {
+                    return this.Index();
+                }
             } 
             else
             {
@@ -51,9 +64,9 @@ namespace SocialUniftec.Controllers
             {
                 try
                 {
-                    var usuarioModel = UsuarioAdapter.ToModel(usuarioCadastro);
+                    var usuarioModel = UsuarioAdapter.ToUsuarioModel(usuarioCadastro);
                     
-                    var request = new APIHttpClient("http://grupo3.neurosky.com.br/api/").Post("Usuario", usuarioModel);
+                    var request = new APIHttpClient(URLBase).Post("Usuario", usuarioModel);
                     
                     return Redirect("Postagem/Feed");
                 }
@@ -68,40 +81,35 @@ namespace SocialUniftec.Controllers
             }
         }
 
-        public IActionResult Perfil(int idUsuario)
+        public IActionResult Perfil(Guid id)
         {
-
-            ViewBag.UsuarioLogado = new UsuarioCadastroModel()
-            {
-                Nome = "Paulo Bodaneze Reva",
-
-            };
-
-            //UsuarioPerfilModel
-
-
+            
+            // var request = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{id}");
+            
+            // ViewBag.UsuarioLogado = UsuarioAdapter.ToUsuarioCadastroModel(request);
+            
             return View();
         }
 
         public IActionResult Amigos(int idUsuario)
         {
 
-            ViewBag.UsuarioLogado = new UsuarioCadastroModel()
-            {
-                Nome = "Paulo Bodaneze Reva",
+            // ViewBag.UsuarioLogado = new UsuarioCadastroModel()
+            // {
+            //     Nome = "Paulo Bodaneze Reva",
 
-            };
+            // };
 
             return View();
         }
 
         public IActionResult Alterar()
         {
-            ViewBag.UsuarioLogado = new UsuarioCadastroModel()
-            {
-                Nome = "Paulo Bodaneze Reva",
+            // ViewBag.UsuarioLogado = new UsuarioCadastroModel()
+            // {
+            //     Nome = "Paulo Bodaneze Reva",
 
-            };
+            // };
             return View(); 
         }
 

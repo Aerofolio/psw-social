@@ -1,11 +1,10 @@
 using SocialUniftec.Models;
-using SocialUniftec.Website.Backend;
 
 namespace SocialUniftec.Website.Backend.Adapter
 {
     public static class UsuarioAdapter
     {
-        public static UsuarioModel ToModel(UsuarioCadastroModel usuarioCadastro)
+        public static UsuarioModel ToUsuarioModel(UsuarioCadastroModel usuarioCadastro)
         {
             return new ()
             {
@@ -23,6 +22,26 @@ namespace SocialUniftec.Website.Backend.Adapter
                 Documento = "teste",
                 Tipo = TipoPessoaModel.Juridica,
                 Amigos = []   
+            };
+        }
+        
+        public static UsuarioCadastroModel ToUsuarioCadastroModel(UsuarioModel usuarioModel)
+        {
+            return new ()
+            {
+                Nome = usuarioModel.Nome,
+                Sobrenome = usuarioModel.Sobrenome,
+                Email = usuarioModel.Email,
+                DataComemorativa = usuarioModel.DataComemorativa
+            };
+        }
+        
+        public static UsuarioLoginModel ToUsuarioLoginModel(LoginModel login)
+        {
+            return new UsuarioLoginModel()
+            {
+                Email = login.Email,
+                Senha = login.Senha,
             };
         }
     } 

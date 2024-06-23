@@ -51,6 +51,27 @@ namespace SocialUniftec.Website.Backend.HTTPClient
                 }
             }
         }
+        
+        public TReturn Post<T, TReturn>(string action, T data)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseAPI);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.PostAsJsonAsync(action, data).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var sucesso = response.Content.ReadAsAsync<TReturn>().Result;
+                    return sucesso;
+                }
+                else
+                {
+                    throw new Exception(response.Content.ReadAsStringAsync().Result);
+                }
+            }
+        }
 
         public T Get<T>(string actionUri)
         {
