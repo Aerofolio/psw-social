@@ -5,20 +5,21 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Models\Class.cs"/>
+    <Compile Remove="Models\Class.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Remove="Views\Usuario\Cadastrar - Cópia.cshtml"/>
-    <Content Remove="Views\Usuario\Login - Cópia.cshtml"/>
-    <Content Remove="wwwroot\css\site - Cópia.css"/>
-    <Content Remove="wwwroot\css\StyleSheet.css"/>
+    <Content Remove="Views\Usuario\Cadastrar - Cópia.cshtml" />
+    <Content Remove="Views\Usuario\Login - Cópia.cshtml" />
+    <Content Remove="wwwroot\css\site - Cópia.css" />
+    <Content Remove="wwwroot\css\StyleSheet.css" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Backend/"/>
-    <Folder Include="Backend/HTTPClient/"/>
-    <Folder Include="wwwroot\lib\fontawesome\"/>
+    <Folder Include="Backend/" />
+    <Folder Include="Backend/Adapter/" />
+    <Folder Include="Backend/HTTPClient/" />
+    <Folder Include="wwwroot\lib\fontawesome\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0"/>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0" />
   </ItemGroup>
 </Project>

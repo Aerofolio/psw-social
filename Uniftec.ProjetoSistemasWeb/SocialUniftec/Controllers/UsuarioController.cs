@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SocialUniftec.Filtres;
 using SocialUniftec.Models;
+using SocialUniftec.Website.Backend.Adapter;
 using SocialUniftec.Website.Backend.HTTPClient;
 
 namespace SocialUniftec.Controllers
@@ -50,25 +51,9 @@ namespace SocialUniftec.Controllers
             {
                 try
                 {
-                    var usuarioModel = new Website.Backend.UsuarioModel()
-                    {
-                        Nome = usuarioCadastro.Nome,
-                        Sobrenome = usuarioCadastro.Sobrenome,
-                        Email = usuarioCadastro.Email,
-                        Senha = usuarioCadastro.Senha!,
-                        DataComemorativa = usuarioCadastro.DataComemorativa,
-                        Sexo = Website.Backend.TipoSexoModel.Masculino,
-                        Bio = "teste",
-                        FotoPerfil = string.Empty,
-                        Cidade = "teste",
-                        Uf = Website.Backend.EstadosBrasilModel.AC,
-                        Telefone = "teste",
-                        Documento = "teste",
-                        Tipo = Website.Backend.TipoPessoaModel.Juridica,
-                        Amigos = []
-                    };
+                    var usuarioModel = UsuarioAdapter.ToModel(usuarioCadastro);
                     
-                    var request = new APIHttpClient("http://localhost:5048/api/").Post("Usuario", usuarioModel);
+                    var request = new APIHttpClient("http://grupo3.neurosky.com.br/api/").Post("Usuario", usuarioModel);
                     
                     return Redirect("Postagem/Feed");
                 }
