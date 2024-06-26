@@ -1,7 +1,7 @@
 ﻿<div class="card card-body">
 
 
-	<form class="mt-4" asp-controller="Usuario" asp-action="Alterar" method="post">
+	<form class="mt-4" asp-controller="Usuario" asp-action="AlterarPerfil" method="post">
 
 		@Html.ValidationSummary()
 
@@ -14,29 +14,29 @@
 
 		<label class="col-form-label">Nome:</label>
 		<div class="mb-3 position-relative input-group-lg">
-			<input type="text" class="form-control" id="usuariocadastro.nome" name="usuariocadastro.nome" placeholder="Informe seu nome">
+			<input type="text" class="form-control" id="nome" name="nome" placeholder="Informe seu nome" value="@ViewBag.UsuarioLogado.Nome">
 		</div>
 
 		<label class="col-form-label">Sobrenome:</label>
 		<div class="mb-3 position-relative input-group-lg">
-			<input type="text" class="form-control" id="usuariocadastro.sobrenome" name="usuariocadastro.sobrenome" placeholder="Informe seu Sobrenome">
+			<input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder="Informe seu Sobrenome" value="@ViewBag.UsuarioLogado.Sobrenome">
 		</div>
 
 
 		<label class="col-form-label">E-mail:</label>
 		<div class="mb-3 position-relative input-group-lg">
-			<input type="email" class="form-control" id="usuariocadastro.email" name="usuariocadastro.email" placeholder="Informe seu email">
+			<input type="email" class="form-control" id="email" name="email" placeholder="Informe seu email" value="@ViewBag.UsuarioLogado.Email">
 		</div>
 
 
 		<label class="col-form-label">Telefone:</label>
 		<div class="mb-3 position-relative input-group-lg">
-			<input type="text" class="form-control" id="usuariocadastro.nome" name="usuariocadastro.nome" placeholder="Informe seu telefone">
+			<input type="text" class="form-control" id="telefone" name="telefone" placeholder="Informe seu telefone" value="@ViewBag.UsuarioLogado.Telefone">
 		</div>
 
 		<label class="col-form-label">Tipo de Pessoa:</label>
 		<div class="mb-3 position-relative input-group-lg">
-			<select class="form-select form-control">
+			<select class="form-select form-control" id="tipoPessoa" name="tipoPessoa" value="@ViewBag.UsuarioLogado.Tipo">
 				<option value="0">Física</option>
 				<option value="1">Jurídica</option>
 			</select>
@@ -44,7 +44,7 @@
 
 		<label class="col-form-label">Sexo:</label>
 		<div class="mb-3 position-relative input-group-lg">
-			<select class="form-select form-control">
+			<select class="form-select form-control" id="tipoSexo" name="tipoSexo" value="@ViewBag.UsuarioLogado.Sexo">
 				<option value="0">Masculino</option>
 				<option value="1">Feminino</option>
 			</select>
@@ -52,21 +52,18 @@
 
 		<label class="col-form-label">CPF/CNPJ:</label>
 		<div class="mb-3 position-relative input-group-lg">
-			<input type="text" class="form-control" id="usuariocadastro.nome" name="usuariocadastro.nome" placeholder="Informe seu documento">
+			<input type="text" class="form-control" id="documento" name="documento" placeholder="Informe seu documento" value="@ViewBag.UsuarioLogado.Documento">
 		</div>
 
 		<label class="col-form-label">Data Comemorativa:</label>
 		<div class="mb-3 position-relative input-group-lg">
-			<input type="date" class="form-control" id="usuariocadastro.dataComemorativa" name="usuariocadastro.dataComemorativa" placeholder="Informe sua Data Comemorativa">
+			<input type="date" class="form-control" id="dataComemorativa" name="dataComemorativa" placeholder="Informe sua Data Comemorativa" value="@ViewBag.UsuarioLogado.DataComemorativa.ToString("yyyy-MM-dd")">
 		</div>
 
 		<label class="col-form-label">Bio:</label>
 		<div class="mb-3 position-relative input-group-lg">
-			<textarea type="text" class="form-control" id="usuariocadastro.nome" name="usuariocadastro.nome" placeholder="Informe sua bio"></textarea>
+			<textarea type="text" class="form-control" id="bio" name="bio" placeholder="Informe sua bio" >@ViewBag.UsuarioLogado.Bio</textarea>
 		</div>
-
-
-
 
 		<!-- Button -->
 		<div class="d-grid">

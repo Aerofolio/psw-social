@@ -1,4 +1,5 @@
 ﻿using SocialUniftec.Domain.Entities;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace SocialUniftec.API.Models

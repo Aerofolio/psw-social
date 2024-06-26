@@ -1,6 +1,4 @@
 ﻿using System.Text;
-using System.Text.Json.Serialization;
-using System.Text.Unicode;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SocialUniftec.Filtres;
@@ -26,8 +24,6 @@ namespace SocialUniftec.Controllers
 
         [HttpPost]
         public IActionResult Login(LoginModel login) {
-            
-            
             if (ModelState.IsValid)
             {
                 var apiModel = UsuarioAdapter.ToUsuarioLoginModel(login);
@@ -65,7 +61,6 @@ namespace SocialUniftec.Controllers
                 ModelState.AddModelError("senhainvalida", "As senhas não coincidem!");
             }
             
-
             if (ModelState.IsValid)
             {
                 try
@@ -89,34 +84,36 @@ namespace SocialUniftec.Controllers
 
         public IActionResult Perfil(Guid id)
         {
-            
-            // var request = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{id}");
-            
-            ViewBag.UsuarioLogado = JsonConvert.DeserializeObject<Website.Backend.UsuarioModel>(Encoding.UTF8.GetString(HttpContext.Session.Get("UsuarioLogado")));
+            ViewBag.UsuarioLogado = ObterUsuarioLogado();
             
             return View();
         }
 
         public IActionResult Amigos(int idUsuario)
         {
-
-            // ViewBag.UsuarioLogado = new UsuarioCadastroModel()
-            // {
-            //     Nome = "Paulo Bodaneze Reva",
-
-            // };
-
             return View();
         }
 
         public IActionResult Alterar()
         {
-            // ViewBag.UsuarioLogado = new UsuarioCadastroModel()
-            // {
-            //     Nome = "Paulo Bodaneze Reva",
-
-            // };
+            ViewBag.UsuarioLogado = ObterUsuarioLogado();
+            
             return View(); 
+        }
+        
+        [HttpPost]
+        public IActionResult AlterarPerfil(UsuarioAlterarModel model)
+        {
+            var usuarioLogado = ObterUsuarioLogado();
+            model.Id = usuarioLogado.Id;
+            model.Senha = usuarioLogado?.Senha ?? string.Empty;
+            
+            new APIHttpClient(URLBase).Put("Usuario", UsuarioAdapter.ToUsuarioModel(model));
+
+            var usuarioAlterado = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{model.Id}");
+            HttpContext.Session.Set("UsuarioLogado", Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(usuarioAlterado)));    
+            
+            return View("Perfil"); 
         }
 
         [ServiceFilter(typeof(ExceptionFilter))]
@@ -124,6 +121,9 @@ namespace SocialUniftec.Controllers
         {
             throw new Exception("Batata testessssssssssss");
         }
+        
+        private Website.Backend.UsuarioModel? ObterUsuarioLogado() => 
+            JsonConvert.DeserializeObject<Website.Backend.UsuarioModel>(Encoding.UTF8.GetString(HttpContext.Session.Get("UsuarioLogado")));
 
     }
 

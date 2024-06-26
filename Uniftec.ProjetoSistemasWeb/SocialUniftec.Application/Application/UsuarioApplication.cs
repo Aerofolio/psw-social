@@ -1,13 +1,7 @@
 ﻿using SocialUniftec.Application.Adapter;
 using SocialUniftec.Application.Dto;
 using SocialUniftec.Domain.Entities;
-using SocialUniftec.Domain.Repository;
 using SocialUniftec.Repository.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialUniftec.Application.Application
 {
