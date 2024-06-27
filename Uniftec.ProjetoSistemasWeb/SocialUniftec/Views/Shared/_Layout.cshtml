@@ -82,13 +82,13 @@
                                     <img class="avatar-img rounded-circle" src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/cavalo.jpg" alt="avatar">
                                 </div>
                                 <div>
-                                    <a class="h6 stretched-link" asp-controller="Usuario" asp-action="Perfil">@ViewBag?.UsuarioLogado?.Nome @ViewBag?.UsuarioLogado?.Sobrenome</a>
+                                    <a class="h6 stretched-link" asp-controller="Usuario" asp-action="Perfil" asp-route-id=@ViewBag?.UsuarioLogado?.Id>@ViewBag?.UsuarioLogado?.Nome @ViewBag?.UsuarioLogado?.Sobrenome</a>
                                 </div>
                             </div>
-                            <a class="dropdown-item btn btn-primary-soft btn-sm my-2 text-center" asp-controller="Usuario" asp-action="Perfil">Ver Perfil</a>
+                            <a class="dropdown-item btn btn-primary-soft btn-sm my-2 text-center" asp-controller="Usuario" asp-action="Perfil" asp-route-id=@ViewBag?.UsuarioLogado?.Id>Ver Perfil</a>
                         </li>
                         <!-- Links -->
-                        <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Configuracoes"><i class="bi bi-gear fa-fw me-2"></i>Configurações</a></li>
+                        <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Alterar"><i class="bi bi-gear fa-fw me-2"></i>Configurações</a></li>
                         <li class="dropdown-divider"></li>
                         <li><a class="dropdown-item bg-danger-soft-hover" asp-controller="Usuario" asp-action="Login"><i class="bi bi-power fa-fw me-2"></i>Sair</a></li>
                         <li> <hr class="dropdown-divider"></li>

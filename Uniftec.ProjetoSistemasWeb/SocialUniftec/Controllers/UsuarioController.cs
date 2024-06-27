@@ -85,6 +85,9 @@ namespace SocialUniftec.Controllers
         public IActionResult Perfil(Guid id)
         {
             ViewBag.UsuarioLogado = ObterUsuarioLogado();
+            var usuarioSendoVisto = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{id}");
+            ViewBag.UsuarioSendoVisto = usuarioSendoVisto;
+            
             
             return View();
         }
@@ -113,7 +116,7 @@ namespace SocialUniftec.Controllers
             var usuarioAlterado = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{model.Id}");
             HttpContext.Session.Set("UsuarioLogado", Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(usuarioAlterado)));    
             
-            return View("Perfil"); 
+            return Redirect($"Perfil/{usuarioAlterado.Id}");
         }
 
         [ServiceFilter(typeof(ExceptionFilter))]
