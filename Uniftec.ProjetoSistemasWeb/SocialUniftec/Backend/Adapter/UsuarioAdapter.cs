@@ -1,3 +1,4 @@
+using System.Text;
 using SocialUniftec.Models;
 
 namespace SocialUniftec.Website.Backend.Adapter
@@ -27,7 +28,7 @@ namespace SocialUniftec.Website.Backend.Adapter
         
         public static UsuarioModel ToUsuarioModel(UsuarioAlterarModel usuarioAlterarModel)
         {
-            return new ()
+            var usuarioModel = new UsuarioModel()
             {
                 Id = usuarioAlterarModel.Id,
                 Nome = usuarioAlterarModel.Nome,
@@ -37,14 +38,22 @@ namespace SocialUniftec.Website.Backend.Adapter
                 DataComemorativa = usuarioAlterarModel.DataComemorativa,
                 Sexo = usuarioAlterarModel.TipoSexo,
                 Bio = usuarioAlterarModel.Bio,
-                FotoPerfil = string.Empty,//n temos como alterar
-                Cidade = string.Empty,//n temos como alterar
+                Cidade = usuarioAlterarModel.Cidade,
                 Uf = EstadosBrasilModel.AC,//n temos como alterar
                 Telefone = usuarioAlterarModel.Telefone,
                 Documento = usuarioAlterarModel.Documento,
                 Tipo = usuarioAlterarModel.TipoPessoa,
                 Amigos = []   
             };
+            
+            using var ms = new MemoryStream();
+            if (usuarioAlterarModel.FotoPerfil is not null)
+            {
+                usuarioAlterarModel.FotoPerfil.CopyTo(ms);
+                usuarioModel.FotoPerfil = Convert.ToBase64String(ms.ToArray());
+            }
+            
+            return usuarioModel;
         }
         
         public static UsuarioCadastroModel ToUsuarioCadastroModel(UsuarioModel usuarioModel)

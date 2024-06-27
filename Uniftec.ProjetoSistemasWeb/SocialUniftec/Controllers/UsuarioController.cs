@@ -111,7 +111,11 @@ namespace SocialUniftec.Controllers
             model.Id = usuarioLogado.Id;
             model.Senha = usuarioLogado?.Senha ?? string.Empty;
             
-            new APIHttpClient(URLBase).Put("Usuario", UsuarioAdapter.ToUsuarioModel(model));
+            var usuarioAlteradoModel = UsuarioAdapter.ToUsuarioModel(model);
+            usuarioAlteradoModel.Amigos = usuarioLogado.Amigos;
+            usuarioAlteradoModel.FotoPerfil ??= usuarioLogado.FotoPerfil;
+            
+            new APIHttpClient(URLBase).Put("Usuario", usuarioAlteradoModel);
 
             var usuarioAlterado = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{model.Id}");
             HttpContext.Session.Set("UsuarioLogado", Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(usuarioAlterado)));    
