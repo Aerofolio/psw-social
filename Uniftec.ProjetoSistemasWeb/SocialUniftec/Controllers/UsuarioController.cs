@@ -99,6 +99,19 @@ namespace SocialUniftec.Controllers
             
             return View();
         }
+        
+        public IActionResult RemoverAmigoViewAmigos(Guid id)
+        {
+            var usuarioLogado = ObterUsuarioLogado();
+            
+            new APIHttpClient(URLBase).Delete<Guid>($"Usuario/Amizade/{usuarioLogado.Id}/Remover", id);
+            
+            ViewBag.UsuarioLogado = usuarioLogado;
+            var usuarioSendoVisto = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{id}");
+            ViewBag.UsuarioSendoVisto = usuarioSendoVisto;
+            
+            return View("Amigos");
+        }
 
         public IActionResult Alterar()
         {

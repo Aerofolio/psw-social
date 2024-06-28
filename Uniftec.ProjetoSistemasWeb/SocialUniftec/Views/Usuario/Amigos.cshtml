@@ -24,9 +24,19 @@
                     <a asp-controller="Usuario" asp-action="Perfil" asp-route-id="@amigo?.Id"><p class="mb-0 small lh-sm mb-3">Clique para ver</p></a>
 
                 </div>
-                <div class="card-footer p-2 border-0 pb-3">
-                    <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Remove friend" data-bs-original-title="Remove friend"> <i class="bi bi-person-x"></i> Remover </button>
-                </div>
+                @if(ViewBag.UsuarioLogado?.Id == ViewBag.UsuarioSendoVisto?.Id){
+                    <div class="card-footer p-2 border-0 pb-3">
+                        <button 
+                            class="btn btn-sm btn-danger" 
+                            data-bs-toggle="tooltip" 
+                            data-bs-placement="top" 
+                            aria-label="Remove friend" 
+                            asp-controller="Usuario"
+                            asp-action="RemoverAmigoViewAmigos"
+                            asp-route-id="@amigo.Id"
+                            data-bs-original-title="Remove friend"> <i class="bi bi-person-x"></i> Remover </button>
+                    </div>
+                }
             </div>
         </div>
     }
