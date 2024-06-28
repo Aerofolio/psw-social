@@ -32,7 +32,9 @@
                     </button></a>
                 }
                 else {
-                    <button class="btn btn-success-soft me-2" type="button"> <i class="fas fa-user-plus pe-1"></i> Adicionar Amigo </button>
+                    <a asp-controller="Usuario" asp-action="EnviarSolicitacaoDeAmizade" asp-route-id="@ViewBag.UsuarioSendoVisto?.Id">
+                        <button class="btn btn-success-soft me-2" type="button"> <i class="fas fa-user-plus pe-1"></i> Adicionar Amigo </button>
+                    </a>
                 }
             </div>
 		</div>
