@@ -21,6 +21,7 @@ namespace SocialUniftec.Website.Backend
         public List<UsuarioModel> Amigos { get; set; }
         
         public bool UsuarioAmigo(Guid id) => Amigos.Any(a => a.Id == id);
+        public List<UsuarioModel> ObterPrimeirosAmigos() => Amigos.Take(4).ToList();
 
     }
 

@@ -88,12 +88,15 @@ namespace SocialUniftec.Controllers
             var usuarioSendoVisto = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{id}");
             ViewBag.UsuarioSendoVisto = usuarioSendoVisto;
             
-            
             return View();
         }
 
-        public IActionResult Amigos(int idUsuario)
+        public IActionResult Amigos(Guid id)
         {
+            ViewBag.UsuarioLogado = ObterUsuarioLogado();
+            var usuarioSendoVisto = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{id}");
+            ViewBag.UsuarioSendoVisto = usuarioSendoVisto;
+            
             return View();
         }
 
