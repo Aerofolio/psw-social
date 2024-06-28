@@ -84,10 +84,9 @@ namespace SocialUniftec.Controllers
 
         public IActionResult Perfil(Guid id)
         {
-            ViewBag.UsuarioLogado = ObterUsuarioLogado();
-            var usuarioSendoVisto = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{id}");
-            ViewBag.UsuarioSendoVisto = usuarioSendoVisto;
-            
+            ViewBag.UsuarioLogado = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{ObterUsuarioLogado().Id}");
+            ViewBag.UsuarioSendoVisto = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{id}");
+                        
             return View();
         }
 
@@ -103,14 +102,27 @@ namespace SocialUniftec.Controllers
         public IActionResult RemoverAmigoViewAmigos(Guid id)
         {
             var usuarioLogado = ObterUsuarioLogado();
+            new APIHttpClient(URLBase).Delete($"Usuario/Amizade/{usuarioLogado.Id}/Remover/", id);
             
-            new APIHttpClient(URLBase).Delete<Guid>($"Usuario/Amizade/{usuarioLogado.Id}/Remover", id);
+            usuarioLogado = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{usuarioLogado.Id}");
             
             ViewBag.UsuarioLogado = usuarioLogado;
-            var usuarioSendoVisto = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{id}");
-            ViewBag.UsuarioSendoVisto = usuarioSendoVisto;
+            ViewBag.UsuarioSendoVisto = usuarioLogado;
             
             return View("Amigos");
+        }
+        
+        public IActionResult RemoverAmigoViewPerfil(Guid id)
+        {
+            var usuarioLogado = ObterUsuarioLogado();
+            new APIHttpClient(URLBase).Delete($"Usuario/Amizade/{usuarioLogado.Id}/Remover/", id);
+            
+            usuarioLogado = new APIHttpClient(URLBase).Get<Website.Backend.UsuarioModel>($"Usuario/{usuarioLogado.Id}");
+            
+            ViewBag.UsuarioLogado = usuarioLogado;
+            ViewBag.UsuarioSendoVisto = usuarioLogado;
+            
+            return RedirectToAction($"Perfil", new {id = id});
         }
 
         public IActionResult Alterar()

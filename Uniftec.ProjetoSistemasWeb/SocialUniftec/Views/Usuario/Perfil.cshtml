@@ -28,7 +28,8 @@
                     </div>
                 }
                 else if (ViewBag.UsuarioLogado?.UsuarioAmigo(ViewBag.UsuarioSendoVisto?.Id)){
-                    <button class="btn btn-danger-soft me-2" type="button"> <i class="fas fa-user-plus pe-1"></i> Remover Amigo </button>
+                    <a asp-controller="Usuario" asp-action="RemoverAmigoViewPerfil" asp-route-id="@ViewBag.UsuarioSendoVisto?.Id"><button class="btn btn-danger-soft me-2" type="button"> <i class="fas fa-user-plus pe-1"></i> Remover Amigo 
+                    </button></a>
                 }
                 else {
                     <button class="btn btn-success-soft me-2" type="button"> <i class="fas fa-user-plus pe-1"></i> Adicionar Amigo </button>
@@ -51,16 +52,12 @@
 <div class="row g-4 mt-3">
 	<div class="col-sm-4">
 		<div class="card">
-			<!-- Card header START -->
 			<div class="card-header d-sm-flex justify-content-between align-items-center border-0">
 				<h5 class="card-title">Amigos <span class="badge bg-danger bg-opacity-10 text-danger">@ViewBag.UsuarioSendoVisto?.Amigos?.Count</span></h5>
                 <a class="btn btn-primary-soft btn-sm" asp-controller="Usuario" asp-action="Amigos" asp-route-id="@ViewBag.UsuarioSendoVisto?.Id"> Ver todos amigos</a>
 			</div>
-			<!-- Card header END -->
-			<!-- Card body START -->
 			<div class="card-body position-relative pt-0">
 				<div class="row g-3">
-                    
                     @foreach(var amigo in ViewBag.UsuarioSendoVisto?.ObterPrimeirosAmigos()){
                         <div class="col-6">
                             <div class="card shadow-none text-center h-100">
@@ -68,16 +65,15 @@
                                     <div class="avatar  avatar-xl">
                                         <a asp-controller="Usuario" asp-action="Perfil" asp-route-id="@amigo?.Id"><img class="avatar-img rounded-circle" src="data:image/png;base64,@amigo?.FotoPerfil" alt=""></a>
                                     </div>
-                                    <h6 class="card-title mb-1 mt-3"> <a href="#!"> @amigo?.Nome @amigo?.Sobrenome </a></h6>								
+                                    <h6 class="card-title mb-1 mt-3"> <a asp-controller="Usuario" asp-action="Perfil" asp-route-id="@amigo?.Id"> @amigo?.Nome @amigo?.Sobrenome </a></h6>								
                                     <p class="mb-0 small lh-sm mb-3">Clique para ver</p>
+
                                 </div>
                             </div>
 					    </div>
                     }
-
 				</div>
 			</div>
-			<!-- Card body END -->
 		</div>
 	</div>
     <div class="col-lg-8 vstack gap-4">

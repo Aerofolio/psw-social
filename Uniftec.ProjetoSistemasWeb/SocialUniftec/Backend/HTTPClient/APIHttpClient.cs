@@ -137,5 +137,21 @@ namespace SocialUniftec.Website.Backend.HTTPClient
                 }
             }
         }
+        
+        public void Delete(string action, Guid id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseAPI);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.DeleteAsync(action + id.ToString()).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception(response.Content.ReadAsStringAsync().Result);
+                }
+            }
+        }
     }
 }
