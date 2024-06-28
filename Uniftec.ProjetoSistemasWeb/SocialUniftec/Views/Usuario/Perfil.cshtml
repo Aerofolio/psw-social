@@ -63,20 +63,15 @@
                     
                     @foreach(var amigo in ViewBag.UsuarioSendoVisto?.ObterPrimeirosAmigos()){
                         <div class="col-6">
-                            <!-- Friends item START -->
                             <div class="card shadow-none text-center h-100">
-                                <!-- Card body -->
                                 <div class="card-body p-2 pb-0">
                                     <div class="avatar  avatar-xl">
                                         <a asp-controller="Usuario" asp-action="Perfil" asp-route-id="@amigo?.Id"><img class="avatar-img rounded-circle" src="data:image/png;base64,@amigo?.FotoPerfil" alt=""></a>
                                     </div>
                                     <h6 class="card-title mb-1 mt-3"> <a href="#!"> @amigo?.Nome @amigo?.Sobrenome </a></h6>								
                                     <p class="mb-0 small lh-sm mb-3">Clique para ver</p>
-
                                 </div>
-
                             </div>
-                            <!-- Friends item END -->
 					    </div>
                     }
 
