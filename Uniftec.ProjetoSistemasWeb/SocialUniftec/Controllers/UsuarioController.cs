@@ -124,6 +124,14 @@ namespace SocialUniftec.Controllers
             
             return RedirectToAction($"Perfil", new {id = id});
         }
+        
+        public IActionResult EnviarSolicitacaoDeAmizade(Guid id)
+        {
+            var usuarioLogado = ObterUsuarioLogado();
+            new APIHttpClient(URLBase).Post($"Usuario/Amizade/{usuarioLogado.Id}/Solicitar/{id}");
+                        
+            return RedirectToAction($"Perfil", new {id = id});
+        }
 
         public IActionResult Alterar()
         {
