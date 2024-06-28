@@ -27,9 +27,9 @@
                         </ul>
                     </div>
                 }
-                else if (ViewBag.UsuarioLogado?.Amigos?.Any(x => x.Id == ViewBag.UsuarioSendoVisto?.Id)){
+                @* else if (ViewBag.UsuarioLogado?.Amigos?.Any(x => x.Id == ViewBag.UsuarioSendoVisto?.Id)){
                     <button class="btn btn-danger-soft me-2" type="button"> <i class="fas fa-user-plus pe-1"></i> Remover Amigo </button>
-                }
+                } *@
                 else {
                     <button class="btn btn-success-soft me-2" type="button"> <i class="fas fa-user-plus pe-1"></i> Adicionar Amigo </button>
                 }
