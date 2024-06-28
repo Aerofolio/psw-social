@@ -38,17 +38,28 @@
 
 		<label class="col-form-label">Tipo de Pessoa:</label>
 		<div class="mb-3 position-relative input-group-lg">
-			<select class="form-select form-control" id="tipoPessoa" name="tipoPessoa" selected="@ViewBag.UsuarioLogado.Tipo">
-				<option value="0">Física</option>
-				<option value="1">Jurídica</option>
+			<select class="form-select form-control" id="tipoPessoa" name="tipoPessoa">
+				<option value="0" selected="@((int)ViewBag.UsuarioLogado.Tipo == 0)">Física</option>
+				<option value="1" selected="@((int)ViewBag.UsuarioLogado.Tipo == 1)">Jurídica</option>
 			</select>
 		</div>
 
 		<label class="col-form-label">Sexo:</label>
 		<div class="mb-3 position-relative input-group-lg">
-			<select class="form-select form-control" id="tipoSexo" name="tipoSexo" selected="@ViewBag.UsuarioLogado.Sexo">
-				<option value="0">Masculino</option>
-				<option value="1">Feminino</option>
+			<select class="form-select form-control" id="tipoSexo" name="tipoSexo">
+				<option value="0" selected="@((int)ViewBag.UsuarioLogado.Sexo == 0)">Masculino</option>
+				<option value="1" selected="@((int)ViewBag.UsuarioLogado.Sexo == 1)">Feminino</option>
+			</select>
+		</div>
+
+        <label class="col-form-label">Estado:</label>
+		<div class="mb-3 position-relative input-group-lg">
+			<select 
+                class="form-select form-control" 
+                id="uf" 
+                name="uf" 
+                asp-for="Uf" 
+                asp-items="@Html.GetEnumSelectList<SocialUniftec.Website.Backend.EstadosBrasilModel>()">
 			</select>
 		</div>
 

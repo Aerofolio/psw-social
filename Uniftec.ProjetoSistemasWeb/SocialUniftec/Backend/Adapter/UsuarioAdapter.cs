@@ -1,4 +1,3 @@
-using System.Text;
 using SocialUniftec.Models;
 
 namespace SocialUniftec.Website.Backend.Adapter
@@ -39,7 +38,7 @@ namespace SocialUniftec.Website.Backend.Adapter
                 Sexo = usuarioAlterarModel.TipoSexo,
                 Bio = usuarioAlterarModel.Bio,
                 Cidade = usuarioAlterarModel.Cidade,
-                Uf = EstadosBrasilModel.AC,//n temos como alterar
+                Uf = usuarioAlterarModel.Uf,
                 Telefone = usuarioAlterarModel.Telefone,
                 Documento = usuarioAlterarModel.Documento,
                 Tipo = usuarioAlterarModel.TipoPessoa,

@@ -19,6 +19,8 @@ namespace SocialUniftec.Website.Backend
         public string Documento { get; set; }
         public TipoPessoaModel Tipo { get; set; }
         public List<UsuarioModel> Amigos { get; set; }
+        
+        public bool UsuarioAmigo(Guid id) => Amigos.Any(a => a.Id == id);
 
     }
 
@@ -89,7 +91,9 @@ namespace SocialUniftec.Website.Backend
 
     public enum TipoSexoModel
     {
+        [Display(Name = "Masculino")]
         Masculino = 0,
+        [Display(Name = "Feminino")]
         Feminino = 1
     }
 }
