@@ -351,10 +351,19 @@
 
         reader.onload = function (e) {
             var base64Image = e.target.result.split(',')[1]; 
+            var ContentType = e.target.result.split(',')[0];
+
+            let listaImagens = [
+                {
+                    ContentType: ContentType,
+                    FileContents: base64Image,
+                    FileDownloadName: fileInput.files[0].name,
+                }
+            ]
 
             var postagem = {
                 Descricao: descricao,
-                Midias: [base64Image]
+                Midias: listaImagens,
             };
 
             $.ajax({

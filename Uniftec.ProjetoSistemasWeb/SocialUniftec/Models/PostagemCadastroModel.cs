@@ -6,6 +6,6 @@
         public string? Usuario { get; set; }
         public string? Descricao { get; set; }
         public DateTime? DataPublicacao { get; set; }
-        public List<string>? Midias { get; set; }
+        public List<PostagemCadastroMidiaModel>? Midias { get; set; }
     }
 }
