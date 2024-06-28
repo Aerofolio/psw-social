@@ -33,44 +33,47 @@
 <div id="feed" style="margin-top:20px">
 	
 	<div class="card card-body">
-		<div class="d-flex mb-3">
-			<!-- Avatar -->
-			<div class="avatar avatar-xs me-2">
-				<a href="#"> 
-                    @if (!string.IsNullOrEmpty(ViewBag.UsuarioLogado.FotoPerfil))
-                    {
-                        <img class="avatar-img rounded-circle" src="data:image/png;base64,ViewBag.UsuarioLogado.FotoPerfil" alt="Feed Image" />
-                    }
-                    else
-                    {
-                        <img class="avatar-img rounded-circle" src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="Feed Image" />
-                    }
+		<form class="w-100" asp-controller="Postagem" asp-action="Cadastrar" method="post" enctype="multipart/form-data">
+         
+            <input type="file" name="postagemCadastro.MidiaPostagem" id="midiaPostagem" style="display: none;">
+
+            <div class="d-flex mb-3">
+			    <!-- Avatar -->
+			    <div class="avatar avatar-xs me-2">
+				    <a href="#"> 
+                        @if (!string.IsNullOrEmpty(ViewBag.UsuarioLogado.FotoPerfil))
+                        {
+                            <img class="avatar-img rounded-circle" src="data:image/png;base64,ViewBag.UsuarioLogado.FotoPerfil" alt="Feed Image" />
+                        }
+                        else
+                        {
+                            <img class="avatar-img rounded-circle" src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="Feed Image" />
+                        }
                 
-                </a>
-			</div>
-			<!-- Post input -->
-			<form class="w-100">
-                <input class="form-control pe-4 border-0" placeholder="No que você está pensando?" id="postText" name="postText" data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
-			</form>
-		</div>
+                    </a>
+			    </div>
+			    <!-- Post input -->
+                <input class="form-control pe-4 border-0" placeholder="No que você está pensando?" id="postText" name="postagemCadastro.Descricao" data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
+		    </div>
 
-        <div id="imagePreview" class="mb-3" style="display: none;">
-            <img id="thumbnail" src="#" width="150" alt="Image Preview" class="img-thumbnail">
-        </div>
+            <div id="imagePreview" class="mb-3" style="display: none;">
+                <img id="thumbnail" src="#" width="150" alt="Image Preview" class="img-thumbnail">
+            </div>
 
-		<!-- Share feed toolbar START -->
-		<ul class="nav nav-pills nav-stack small fw-normal">
-			<li class="nav-item">
-				<a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPhoto"> <i class="bi bi-image-fill text-success pe-2"></i>Foto</a>
-			</li>
-			<li class="nav-item dropdown ms-sm-auto">
-                <a class="nav-link bg-light py-1 px-2 mb-0" href="#" id="feedActionShare" onclick="uploadPost()">
-					<i class="bi bi-send"></i>
-				</a>
+		    <!-- Share feed toolbar START -->
+		    <ul class="nav nav-pills nav-stack small fw-normal">
+			    <li class="nav-item">
+				    <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPhoto"> <i class="bi bi-image-fill text-success pe-2"></i>Foto</a>
+			    </li>
+			    <li class="nav-item dropdown ms-sm-auto">
+                    <button class="nav-link bg-light py-1 px-2 mb-0" href="#" id="feedActionShare" type="submit">
+					    <i class="bi bi-send"></i>
+                    </button>
 
-			</li>
-		</ul>
-		<!-- Share feed toolbar END -->
+			    </li>
+		    </ul>
+		    <!-- Share feed toolbar END -->
+        </form>
 	</div>
 
 	<div style="margin-top:20px">
@@ -333,61 +336,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 
-    function uploadPost() {
-        var descricao = $('#postText').val();
-        var fileInput = $('#postFile')[0];
-
-        if (!descricao) {
-            alert('Digite um texto para a postagem.');
-            return;
-        }
-
-        if (!fileInput.files || !fileInput.files[0]) {
-            alert('Selecione uma imagem para a postagem.');
-            return;
-        }
-
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            var base64Image = e.target.result.split(',')[1]; 
-            var ContentType = e.target.result.split(',')[0];
-
-            let listaImagens = [
-                {
-                    ContentType: ContentType,
-                    FileContents: base64Image,
-                    FileDownloadName: fileInput.files[0].name,
-                }
-            ]
-
-            var postagem = {
-                Descricao: descricao,
-                Midias: listaImagens,
-            };
-
-            $.ajax({
-                url: '@Url.Action("Cadastrar", "Postagem")',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(postagem),
-                success: function (response) {
-                    alert('Post enviado com sucesso!');
-                    $('#postText').val('');
-                    $('#thumbnail').attr('src', '').hide();
-                    $('#imagePreview').hide();
-                },
-                error: function (err) {
-                    alert('Erro ao enviar o post.');
-                }
-            });
-        };
-
-        reader.readAsDataURL(fileInput.files[0]);
-    }
-
     $('#postFile').on('change', function () {
+       
         var fileInput = this;
+       
         if (fileInput.files && fileInput.files[0]) {
             var reader = new FileReader();
 
@@ -398,5 +350,33 @@
 
             reader.readAsDataURL(fileInput.files[0]);
         }
+
+        // Get the file input elements
+        var modalFileInput = document.getElementById('postFile');
+        var hiddenFileInput = document.getElementById('midiaPostagem');
+
+        // Check if a file is selected in the modal file input
+        if (modalFileInput.files.length > 0) {
+            // Get the file from the modal file input
+            var file = modalFileInput.files[0];
+
+            // Create a new DataTransfer object
+            var dataTransfer = new DataTransfer();
+
+            // Append the file to the DataTransfer object
+            dataTransfer.items.add(file);
+
+            // Set the files property of the hidden file input to the files from DataTransfer object
+            hiddenFileInput.files = dataTransfer.files;
+
+            // Clear the modal file input
+            modalFileInput.value = '';
+
+            console.log("File moved successfully!");
+        } else {
+            console.log("No file selected in the modal.");
+        }
+
     });
+
 </script>

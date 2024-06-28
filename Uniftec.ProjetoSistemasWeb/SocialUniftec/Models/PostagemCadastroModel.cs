@@ -1,11 +1,12 @@
-﻿namespace SocialUniftec.Website.Models
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace SocialUniftec.Website.Models
 {
     public class PostagemCadastroModel
     {
-        public Guid? Id { get; set; }
-        public string? Usuario { get; set; }
-        public string? Descricao { get; set; }
-        public DateTime? DataPublicacao { get; set; }
-        public List<PostagemCadastroMidiaModel>? Midias { get; set; }
+        public string Descricao { get; set; }
+
+        [BindProperty]
+        public IFormFile MidiaPostagem { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace SocialUniftec.Controllers
         }
 
         [HttpPost]
-        public Guid Cadastrar([FromBody] PostagemCadastroModel postagemCadastro)
+        public IActionResult Cadastrar(PostagemCadastroModel postagemCadastro)
         {
             var postagemModel = PostagemAdapter.ToPostagemModel(postagemCadastro);
             postagemModel.DataPublicacao = DateTime.Now;
@@ -45,7 +45,7 @@ namespace SocialUniftec.Controllers
 
             var id = new APIHttpClient(URLBasePublicacao).Post("Publicacao?Usuario=" + postagemModel.Usuario + "&Descricao=" + postagemModel.Descricao + "&DataPublicacao=" + postagemModel.DataPublicacao.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"), postagemModel);
 
-            return id;
+            return View("feed");
  
         }
 
