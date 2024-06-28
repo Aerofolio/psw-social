@@ -7,6 +7,7 @@ using SocialUniftec.Website.Backend.HTTPClient;
 using SocialUniftec.Website.Backend;
 using SocialUniftec.Website.Models;
 using SocialUniftec.Website.Backend.Adapter;
+using System.Collections.Generic;
 
 namespace SocialUniftec.Controllers
 {
@@ -15,7 +16,8 @@ namespace SocialUniftec.Controllers
        
         private static readonly string URLBasePublicacao = "http://grupo5.neurosky.com.br/api/";
         private static readonly string URLBaseUsuario = "http://grupo3.neurosky.com.br/api/";
-
+        private static readonly string URLBaseLikeEComentario = "http://grupo4.neurosky.com.br/api/";
+        
         public IActionResult Index()
         {
             return View();
@@ -33,6 +35,20 @@ namespace SocialUniftec.Controllers
             return View();
         }
 
+        [HttpPost]
+        public Guid Cadastrar(PostagemCadastroModel postagemCadastro)
+        {
+            var postagemModel = PostagemAdapter.ToPostagemModel(postagemCadastro);
+            postagemModel.DataPublicacao = DateTime.Now;
+            var usuarioLogado = ObterUsuarioLogado();
+            postagemModel.Usuario = usuarioLogado.Id;
+
+            var id = new APIHttpClient(URLBasePublicacao).Post("Publicacao?Usuario=" + postagemModel.Usuario + "&Descricao=" + postagemModel.Descricao + "&DataPublicacao=" + postagemModel.DataPublicacao, postagemModel);
+
+            return id;
+ 
+        }
+
         private List<FeedModel> buscarListaPost(Website.Backend.UsuarioModel usuarioLogado) {
 
             var publicacoes = new APIHttpClient(URLBasePublicacao).Get<List<PublicacaoIntegracaoModel>>("Publicacao?idUsuario=" + usuarioLogado.Id);
@@ -43,10 +59,7 @@ namespace SocialUniftec.Controllers
             {
 
                 //buscar curtidas
-                //buscar comentarios
                 //buscar curtidas dos comentarios
-                //buscar comentarios dos comentarios
-                //loop
 
                 List<String> midias = new List<String>();
 
@@ -57,13 +70,15 @@ namespace SocialUniftec.Controllers
 
                 Models.UsuarioModel usuarioDono = buscarUsuarioModelPorIdUsuario(item.Usuario);
 
+                List<ComentarioModel> comentarios = [];//buscarListaComentariosPorPostId(item.Id);
+
                 FeedModel feedModel = new FeedModel()
                 {
                     Descricao = item.Descricao,
                     Curtidas = 0,
                     DataPublicacao = item.DataPublicacao,
                     IsUsuarioAutenticadoCurtiu = false,
-                    ListaComentarios = [],
+                    ListaComentarios = comentarios,
                     ListaMidia = midias,
                     Usuario = usuarioDono
                 };
@@ -73,6 +88,61 @@ namespace SocialUniftec.Controllers
             }
 
             return feeds;
+        }
+
+        private List<ComentarioModel> buscarListaComentariosPorPostId(Guid id)
+        {
+
+            List<ComentarioIntegracaoModel> comentariosPost = new APIHttpClient(URLBaseLikeEComentario).Get<List<ComentarioIntegracaoModel>>($"comentarios/post/{id}");
+
+            List<ComentarioModel> comentarios = [];
+
+            foreach (var item in comentariosPost)
+            {
+
+                var usuarioComentario = buscarUsuarioModelPorIdUsuario(item.IdUsuario);
+
+                List<ComentarioModel> respostas = buscarRespostasRecursivamentePorComentarioId(item.Id);
+
+                comentarios.Add(new ComentarioModel()
+                {
+                    Comentario = item.Conteudo,
+                    Curtidas = item.QuantidadeLikes,
+                    DataComentario = item.DataCriacao,
+                    Usuario = usuarioComentario,
+                    IsUsuarioAutenticadoCurtiu = false,
+                    ListaComentarios = respostas
+                }); ;
+            }
+
+            return comentarios;
+        }
+
+        private List<ComentarioModel> buscarRespostasRecursivamentePorComentarioId(Guid id)
+        {
+            List<ComentarioIntegracaoModel> comentariosPost = new APIHttpClient(URLBaseLikeEComentario).Get<List<ComentarioIntegracaoModel>>($"comentarios/resposta/{id}");
+
+            List<ComentarioModel> comentarios = [];
+
+            foreach (var item in comentariosPost)
+            {
+
+                var usuarioComentario = buscarUsuarioModelPorIdUsuario(item.IdUsuario);
+
+                List<ComentarioModel> respostas = buscarRespostasRecursivamentePorComentarioId(item.Id);
+
+                comentarios.Add(new ComentarioModel()
+                {
+                    Comentario = item.Conteudo,
+                    Curtidas = item.QuantidadeLikes,
+                    DataComentario = item.DataCriacao,
+                    Usuario = usuarioComentario,
+                    IsUsuarioAutenticadoCurtiu = false,
+                    ListaComentarios = respostas
+                }); ;
+            }
+
+            return comentarios;
         }
 
         private Models.UsuarioModel buscarUsuarioModelPorIdUsuario(Guid id)

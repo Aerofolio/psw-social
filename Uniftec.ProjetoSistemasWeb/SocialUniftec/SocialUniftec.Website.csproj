@@ -14,8 +14,6 @@
     <Content Remove="wwwroot\css\StyleSheet.css" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Backend/" />
-    <Folder Include="Backend/Adapter/" />
     <Folder Include="Backend/HTTPClient/" />
     <Folder Include="wwwroot\lib\fontawesome\" />
   </ItemGroup>
