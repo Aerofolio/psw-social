@@ -124,7 +124,11 @@
                 <div class="card-body">
                     <p>@feedPost.Descricao</p>
                     <!-- Card img -->
-                    <img class="card-img" src="data:image/png;base64,@feedPost.ListaMidia[0]" alt="Post">
+                    @if (feedPost.ListaMidia.Count > 0)
+                    {
+                        <img class="card-img" src="data:image/png;base64,@feedPost.ListaMidia[0]" alt="Post">
+
+                    } 
                     <!-- Feed react START -->
                     <ul class="nav nav-stack py-3 small">
                         <li class="nav-item">
