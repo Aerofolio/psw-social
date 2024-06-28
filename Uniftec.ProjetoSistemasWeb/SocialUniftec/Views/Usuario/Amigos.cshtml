@@ -18,7 +18,7 @@
             <div class="card shadow-none text-center h-100">
                 <div class="card-body p-2 pb-0 pt-3">
                     <div class="avatar  avatar-xl">
-                        <a asp-controller="Usuario" asp-action="Perfil" asp-route-id="@amigo?.Id"><img class="avatar-img rounded-circle" src="data:image/png;base64,@amigo?.FotoPerfil" alt=""></a>
+                        <a asp-controller="Usuario" asp-action="Perfil" asp-route-id="@amigo?.Id"><img class="avatar-img rounded-circle" src="data:image/png;base64,@amigo?.FotoDePerfilTratada" alt=""></a>
                     </div>
                     <h6 class="card-title mb-1 mt-3"> <a asp-controller="Usuario" asp-action="Perfil" asp-route-id="@amigo?.Id"> @amigo?.Nome @amigo?.Sobrenome </a></h6>
                     <a asp-controller="Usuario" asp-action="Perfil" asp-route-id="@amigo?.Id"><p class="mb-0 small lh-sm mb-3">Clique para ver</p></a>
