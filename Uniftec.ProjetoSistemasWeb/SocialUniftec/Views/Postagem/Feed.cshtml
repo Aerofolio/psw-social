@@ -64,27 +64,6 @@
 	<div style="margin-top:20px">
 		@foreach (var feedPost in ViewBag.Posts)
 		{
-			/*
-			<div style="border: solid 2px black; border-radius: 5px;background-color: white">
-				<div style="padding: 10px">
-					<span style="color: black; font-weight:bold;">@feedPost.UserName</span>
-					<p>@feedPost.PostText</p>
-					<button class="btn btn-primary" style="margin-right: 5px"><span style="font-weight:bold">@feedPost.Likes</span> Likes</button>
-					<span>@feedPost.Date</span>
-				</div>
-				<div style="padding: 10px">
-					@foreach (var comment in feedPost.Comentarios)
-					{
-						<div style="border: solid 2px black; border-radius: 5px; margin-top:10px; padding: 5px">
-							<span style="color: black; font-weight:bold;">@comment.UserName</span>
-							<p>@comment.Text</p>
-							<button class="btn btn-primary" style="margin-right: 5px"><span style="font-weight:bold">@comment.Likes</span> Likes</button>
-							<span>@comment.Date</span>
-						</div>
-					}
-				</div>
-			</div>*/
-
             <div class="card mt-3">
                 <!-- Card header START -->
                 <div class="card-header border-0 pb-0">
@@ -92,36 +71,48 @@
                         <div class="d-flex align-items-center">
                             <!-- Avatar -->
                             <div class="avatar  me-2">
-                                <a href="#!"> <img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/04.jpg" alt=""> </a>
+                                <a href="#!">
+                                    @if (!string.IsNullOrEmpty(feedPost.Usuario.FotoPerfil))
+                                    {
+                                        <img class ="avatar-img rounded-circle" src="data:image/png;base64,@feedPost.Usuario.FotoPerfil" alt="Feed Image" />
+                                    } else
+                                    {
+                                        <img class="avatar-img rounded-circle" src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="Feed Image" />
+                                    }
+
+                                </a>
                             </div>
                             <!-- Info -->
                             <div>
                                 <div class="nav nav-divider">
-                                    <h6 class="nav-item card-title mb-0"> <a href="#!"> Lori Ferguson </a></h6>
-                                    <span class="nav-item small">2hr</span>
+                                    <h6 class="nav-item card-title mb-0"> <a href="#!"> @feedPost.Usuario.Nome @feedPost.Usuario.Sobrenome</a></h6>
+                                    <span class="nav-item small">@feedPost.DataPublicacao</span>
                                 </div>
                             </div>
                         </div>
                         <!-- Card feed action dropdown START -->
-                        <div class="dropdown">
-                            <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-three-dots"></i>
-                            </a>
-                            <!-- Card feed action dropdown menu -->
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction1">
-                                <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Excluir post</a></li>
+                        @if (feedPost.Usuario.Id == ViewBag.UsuarioLogado?.Id)
+                        {
+                            <div class="dropdown">
+                                <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </a>
+                                <!-- Card feed action dropdown menu -->
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction1">
+                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Excluir post</a></li>
 
-                            </ul>
-                        </div>
+                                </ul>
+                            </div>
+                        }
                         <!-- Card feed action dropdown END -->
                     </div>
                 </div>
                 <!-- Card header END -->
                 <!-- Card body START -->
                 <div class="card-body">
-                    <p>Decrição do post.</p>
+                    <p>@feedPost.Descricao</p>
                     <!-- Card img -->
-                    <img class="card-img" src="	https://social.webestica.com/assets/images/post/3by2/01.jpg" alt="Post">
+                    <img class="card-img" src="data:image/png;base64,@feedPost.ListaMidia[0]" alt="Post">
                     <!-- Feed react START -->
                     <ul class="nav nav-stack py-3 small">
                         <li class="nav-item">
