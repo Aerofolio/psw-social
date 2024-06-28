@@ -8,7 +8,7 @@ namespace SocialUniftec.Website.Models
         public Guid Usuario { get; set; }
         public string Descricao { get; set; }
         public DateTime DataPublicacao { get; set; }
-
+        [BindProperty]
         public List<IFormFile> Midias { get; set; }
     }
 }
