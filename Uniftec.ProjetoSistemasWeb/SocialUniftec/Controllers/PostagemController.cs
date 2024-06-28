@@ -6,6 +6,7 @@ using SocialUniftec.Models;
 using SocialUniftec.Website.Backend.HTTPClient;
 using SocialUniftec.Website.Backend;
 using SocialUniftec.Website.Models;
+using SocialUniftec.Website.Backend.Adapter;
 
 namespace SocialUniftec.Controllers
 {
@@ -13,6 +14,7 @@ namespace SocialUniftec.Controllers
     {
        
         private static readonly string URLBasePublicacao = "http://grupo5.neurosky.com.br/api/";
+        private static readonly string URLBaseUsuario = "http://grupo3.neurosky.com.br/api/";
 
         public IActionResult Index()
         {
@@ -26,6 +28,7 @@ namespace SocialUniftec.Controllers
 
             ViewBag.Posts = buscarListaPost(usuarioLogado);
             ViewBag.StoriesAgrupados = new List<Story>();
+            ViewBag.UsuarioLogado = usuarioLogado;
 
             return View();
         }
@@ -45,14 +48,14 @@ namespace SocialUniftec.Controllers
                 //buscar comentarios dos comentarios
                 //loop
 
-                //converter para objeto feedModel
-
                 List<String> midias = new List<String>();
 
                 foreach (var midia in item.Midias)
                 {
                     midias.Add(midia.FileContents);
                 }
+
+                Models.UsuarioModel usuarioDono = buscarUsuarioModelPorIdUsuario(item.Usuario);
 
                 FeedModel feedModel = new FeedModel()
                 {
@@ -62,7 +65,7 @@ namespace SocialUniftec.Controllers
                     IsUsuarioAutenticadoCurtiu = false,
                     ListaComentarios = [],
                     ListaMidia = midias,
-                    Usuario = new Models.UsuarioModel() { }
+                    Usuario = usuarioDono
                 };
 
                 feeds.Add(feedModel);
@@ -70,6 +73,12 @@ namespace SocialUniftec.Controllers
             }
 
             return feeds;
+        }
+
+        private Models.UsuarioModel buscarUsuarioModelPorIdUsuario(Guid id)
+        {
+            var user = new APIHttpClient(URLBaseUsuario).Get<Models.UsuarioModel>($"Usuario/{id}");
+            return user;
         }
 
         private Website.Backend.UsuarioModel? ObterUsuarioLogado() =>
@@ -93,31 +102,6 @@ namespace SocialUniftec.Controllers
 
             public DateTime Date { get; set; }
         }
-
-        public class FeedPost
-        {
-            public int Id { get; set; }
-            public int UserId { get; set; }
-            public string UserName { get; set; }
-            public byte[] UserProfilePicture { get; set; }
-            public string PostText { get; set; }
-            public int Likes { get; set; }
-            public DateTime Date { get; set; }
-            public List<Comentario> Comentarios { get; set; }
-
-        }
-
-        public class Comentario 
-        {
-            public int Id { get; set; }
-            public int UserId { get; set; }
-            public string UserName { get; set; }
-            public byte[] UserProfilePicture { get; set; }
-            public string Text { get; set; }
-            public int Likes { get; set; }
-            public DateTime Date { get; set; }
-        }
-
 
     }
 }

@@ -4,7 +4,7 @@
     {
         public Guid Id { get; set; }
 
-        public string Usuario { get; set; }
+        public Guid Usuario { get; set; }
 
         public string Descricao { get; set; }
 
