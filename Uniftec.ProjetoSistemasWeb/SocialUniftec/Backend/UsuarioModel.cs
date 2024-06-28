@@ -89,7 +89,9 @@ namespace SocialUniftec.Website.Backend
 
     public enum TipoSexoModel
     {
+        [Display(Name = "Masculino")]
         Masculino = 0,
+        [Display(Name = "Feminino")]
         Feminino = 1
     }
 }
