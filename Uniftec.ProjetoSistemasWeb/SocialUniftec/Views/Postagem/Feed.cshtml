@@ -250,8 +250,12 @@
                             }
                         </div>
                         <!-- Comment box  -->
-                        <form class="position-relative w-100">
-                            <textarea class="form-control pe-4 bg-light" rows="1" placeholder="Escreva um Comentário..."></textarea>
+                        <form class="position-relative w-100" asp-action="Comentar" asp-controller="Postagem" method="POST">
+                            <input type="hidden" value="@feedPost.Id" name="IdPublicacao" id="IdPublicacao" />
+                            <textarea class="form-control pe-4 bg-light" name="Comentario" id="Comentario" rows="1" placeholder="Escreva um Comentário..."></textarea>
+                            <button class="nav-link bg-light py-1 px-2 mb-0" href="#" type="submit">
+                                <i class="bi bi-send"></i>
+                            </button>
                         </form>
                     </div>
                     <!-- Comment wrap START -->

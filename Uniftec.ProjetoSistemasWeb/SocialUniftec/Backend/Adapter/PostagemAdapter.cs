@@ -20,5 +20,12 @@ namespace SocialUniftec.Website.Backend.Adapter
             };
         }
 
+        public static ComentarioIntegracaoModel ToComentarioIntegracaoModel(ComentarioCadastroModel comentarioCadastro)
+        {
+            return new()
+            {
+                Conteudo = comentarioCadastro.Comentario,
+            };
+        }
     }
 }

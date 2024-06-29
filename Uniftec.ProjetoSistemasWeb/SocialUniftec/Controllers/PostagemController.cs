@@ -36,6 +36,33 @@ namespace SocialUniftec.Controllers
         }
 
         [HttpPost]
+        public IActionResult Comentar(ComentarioCadastroModel comentarioCadastro)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuarioLogado = ObterUsuarioLogado();
+
+                var comentarioModel = PostagemAdapter.ToComentarioIntegracaoModel(comentarioCadastro);
+                comentarioModel.DataCriacao = DateTime.Now;
+                comentarioModel.QuantidadeLikes = 0;
+                comentarioModel.IdUsuario = usuarioLogado.Id;
+
+                var id = new APIHttpClient(URLBaseLikeEComentario).Post("comentarios/post/" + comentarioCadastro.IdPublicacao, comentarioModel);
+
+                ViewBag.Posts = buscarListaPost(usuarioLogado);
+                ViewBag.StoriesAgrupados = new List<Story>();
+                ViewBag.UsuarioLogado = usuarioLogado;
+
+                return View("feed");
+
+            } else
+            {
+                return View("erro");
+            }
+         
+        }
+
+        [HttpPost]
         public IActionResult Cadastrar(PostagemCadastroModel postagemCadastro)
         {
             var postagemModel = PostagemAdapter.ToPostagemModel(postagemCadastro);
@@ -74,6 +101,7 @@ namespace SocialUniftec.Controllers
 
                 FeedModel feedModel = new FeedModel()
                 {
+                    Id = item.Id,
                     Descricao = item.Descricao,
                     Curtidas = 0,
                     DataPublicacao = item.DataPublicacao,
