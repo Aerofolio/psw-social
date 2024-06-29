@@ -146,7 +146,14 @@
                     <div class="d-flex mb-3">
                         <!-- Avatar -->
                         <div class="avatar avatar-xs me-2">
-                            <a href="#!"> <img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/12.jpg" alt=""> </a>
+                            @if (!string.IsNullOrEmpty(ViewBag.UsuarioLogado.FotoPerfil))
+                            {
+                                <img class="avatar-img rounded-circle" src="data:image/png;base64,@feedPost.Usuario.FotoPerfil" alt="Feed Image" />
+                            }
+                            else
+                            {
+                                <img class="avatar-img rounded-circle" src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="Feed Image" />
+                            }
                         </div>
                         <!-- Comment box  -->
                         <form class="position-relative w-100">
@@ -156,41 +163,48 @@
                     <!-- Comment wrap START -->
                     <ul class="comment-wrap list-unstyled">
                         <!-- Comment item START -->
-                        <li class="comment-item">
-                            <div class="d-flex position-relative">
-                                <!-- Avatar -->
-                                <div class="avatar avatar-xs">
-                                    <a href="#!"><img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/05.jpg" alt=""></a>
-                                </div>
-                                <div class="ms-2">
-                                    <!-- Comment by -->
-                                    <div class="bg-light rounded-start-top-0 p-3 rounded">
-                                        <div class="d-flex justify-content-between">
-                                            <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
-                                            <small class="ms-2">5hr</small>
-                                        </div>
-                                        <p class="small mb-0">Legal!.</p>
+                        @foreach (var comentario in feedPost.ListaComentarios)
+                        {
+                            <li class="comment-item">
+                                <div class="d-flex position-relative">
+                                    <!-- Avatar -->
+                                    <div class="avatar avatar-xs">
+                                        <a href="#!">
+                                            @if (!string.IsNullOrEmpty(comentario.Usuario.FotoPerfil))
+                                            {
+                                                <img class="avatar-img rounded-circle" src="data:image/png;base64,@feedPost.Usuario.FotoPerfil" alt="Feed Image" />
+                                            }
+                                            else
+                                            {
+                                                <img class="avatar-img rounded-circle" src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="Feed Image" />
+                                            }
+                                        </a>
                                     </div>
-                                    <!-- Comment react -->
-                                    <ul class="nav nav-divider py-2 small">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#!">Curtidas (3)</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#!">
-                                                Responder
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#!">Ver 5 Respostas</a>
-                                        </li>
-                                    </ul>
+                                    <div class="ms-2">
+                                        <!-- Comment by -->
+                                        <div class="bg-light rounded-start-top-0 p-3 rounded">
+                                            <div class="d-flex justify-content-between">
+                                                <h6 class="mb-1"> <a href="#!"> @comentario.Usuario.Nome @comentario.Usuario.Sobrenome </a></h6>
+                                                <small class="ms-2">@comentario.DataComentario</small>
+                                            </div>
+                                            <p class="small mb-0">@comentario.Comentario</p>
+                                        </div>
+                                        <!-- Comment react -->
+                                        <ul class="nav nav-divider py-2 small">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#!">Curtidas (@comentario.Curtidas)</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#!">
+                                                    Responder
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- Comment item nested START -->
-                            <ul class="comment-item-nested list-unstyled">
-                                <!-- Comment item START -->
-                                <li class="comment-item">
+                                <!-- Comment item nested START -->
+                                <ul class="comment-item-nested list-unstyled">
+                                    <li class="comment-item">
                                     <div class="d-flex">
                                         <!-- Avatar -->
                                         <div class="avatar avatar-xs">
@@ -217,100 +231,14 @@
                                         </div>
                                     </div>
                                 </li>
-                                <!-- Comment item END -->
-                                <!-- Comment item START -->
-                                <li class="comment-item">
-                                    <div class="d-flex">
-                                        <!-- Avatar -->
-                                        <div class="avatar  avatar-xs">
-                                            <a href="#!"><img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/07.jpg" alt=""></a>
-                                        </div>
-                                        <!-- Comment by -->
-                                        <div class="ms-2">
-                                            <div class="bg-light p-3 rounded">
-                                                <div class="d-flex justify-content-between">
-                                                    <h6 class="mb-1"> <a href="#!"> Billy Vasquez </a> </h6>
-                                                    <small class="ms-2">15min</small>
-                                                </div>
-                                                <p class="small mb-0">Hahahaha.</p>
-                                            </div>
-                                            <!-- Comment react -->
-                                            <ul class="nav nav-divider py-2 small">
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#!"> Curitr</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#!"> Responder</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                <!-- Comment item END -->
-                            </ul>
-                            <!-- Load more replies -->
-                            <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center mb-3 ms-5" data-bs-toggle="button" aria-pressed="true">
-                                <div class="spinner-dots me-2">
-                                    <span class="spinner-dot"></span>
-                                    <span class="spinner-dot"></span>
-                                    <span class="spinner-dot"></span>
-                                </div>
-                                Carregar mais comentários
-                            </a>
-                            <!-- Comment item nested END -->
-                        </li>
-                        <!-- Comment item END -->
-                        <!-- Comment item START -->
-                        <li class="comment-item">
-                            <div class="d-flex">
-                                <!-- Avatar -->
-                                <div class="avatar avatar-xs">
-                                    <a href="#!"><img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/05.jpg" alt=""></a>
-                                </div>
-                                <!-- Comment by -->
-                                <div class="ms-2">
-                                    <div class="bg-light p-3 rounded">
-                                        <div class="d-flex justify-content-between">
-                                            <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a> </h6>
-                                            <small class="ms-2">4min</small>
-                                        </div>
-                                        <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
-                                    </div>
-                                    <!-- Comment react -->
-                                    <ul class="nav nav-divider pt-2 small">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#!"> Curtidas (1)</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#!"> Respostas</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#!"> Ver 6 Respostas</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- Comment item END -->
+                                </ul>
+                            </li>
+                        }
                     </ul>
                     <!-- Comment wrap END -->
                 </div>
-                <!-- Card body END -->
-                <!-- Card footer START -->
-                <div class="card-footer border-0 pt-0">
-                    <!-- Load more comments -->
-                    <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
-                        <div class="spinner-dots me-2">
-                            <span class="spinner-dot"></span>
-                            <span class="spinner-dot"></span>
-                            <span class="spinner-dot"></span>
-                        </div>
-                        Carregar mais comentários
-                    </a>
-                </div>
-                <!-- Card footer END -->
+                <!-- Card body END -->       
             </div>
-
 		}
 	</div>
 </div>

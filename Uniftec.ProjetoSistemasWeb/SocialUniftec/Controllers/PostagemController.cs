@@ -70,7 +70,7 @@ namespace SocialUniftec.Controllers
 
                 Models.UsuarioModel usuarioDono = buscarUsuarioModelPorIdUsuario(item.Usuario);
 
-                List<ComentarioModel> comentarios = [];//buscarListaComentariosPorPostId(item.Id);
+                List<ComentarioModel> comentarios = buscarListaComentariosPorPostId(item.Id);
 
                 FeedModel feedModel = new FeedModel()
                 {
