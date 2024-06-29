@@ -8,11 +8,15 @@ namespace SocialUniftec.Website.Backend.Adapter
 
         public static PostagemModel ToPostagemModel(PostagemCadastroModel postagemCadastro)
         {
+
+
+            List<IFormFile> midias = [];
+            midias.Add(postagemCadastro.MidiaPostagem);
+
             return new()
             {
                 Descricao = postagemCadastro.Descricao,
-                Midias = postagemCadastro.Midias,
-
+                Midias = midias,
             };
         }
 
