@@ -2,6 +2,7 @@
 {
     public class ComentarioModel
     {
+        public Guid Id;
 
         public UsuarioModel Usuario { get; set; } = new UsuarioModel();
 

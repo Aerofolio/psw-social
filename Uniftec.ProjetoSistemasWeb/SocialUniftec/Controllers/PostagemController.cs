@@ -106,6 +106,7 @@ namespace SocialUniftec.Controllers
 
                 comentarios.Add(new ComentarioModel()
                 {
+                    Id = item.Id,
                     Comentario = item.Conteudo,
                     Curtidas = item.QuantidadeLikes,
                     DataComentario = item.DataCriacao,
@@ -128,11 +129,17 @@ namespace SocialUniftec.Controllers
             {
 
                 var usuarioComentario = buscarUsuarioModelPorIdUsuario(item.IdUsuario);
+                
+                List<ComentarioModel> respostas = [];
 
-                List<ComentarioModel> respostas = buscarRespostasRecursivamentePorComentarioId(item.Id);
+                if (item.Id != id)
+                {
+                    respostas = buscarRespostasRecursivamentePorComentarioId(item.Id);
+                }
 
                 comentarios.Add(new ComentarioModel()
                 {
+                    Id = item.Id,
                     Comentario = item.Conteudo,
                     Curtidas = item.QuantidadeLikes,
                     DataComentario = item.DataCriacao,

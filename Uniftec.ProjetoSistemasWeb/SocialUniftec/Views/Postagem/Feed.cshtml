@@ -14,7 +14,7 @@
             foreach(var comentario in comentarios)
             {
 
-                content.AppendHtml("<li class='comment-item'>teste");
+                content.AppendHtml("<li class='comment-item' id='" + comentario.Id.ToString() + "'>");
 
                 content.AppendHtml("    <div class='d-flex'>");
                 content.AppendHtml("        <div class='avatar avatar-xs'>");
@@ -32,11 +32,35 @@
                 content.AppendHtml("            </a>");
                 content.AppendHtml("        </div>");
                 content.AppendHtml("        <div class='ms-2'>");
+                content.AppendHtml("            <div class='bg-light p-3 rounded'>");
+                content.AppendHtml("                <div class='d-flex justify-content-between'>");
+                content.AppendHtml("                    <h6 class='mb-1'>");
+                content.AppendHtml("                        <a href='#!'>");
+                content.AppendHtml(                             comentario.Usuario.Nome);
+                content.AppendHtml(" ");
+                content.AppendHtml(                             comentario.Usuario.Sobrenome);
+                content.AppendHtml("                        </a>");
+                content.AppendHtml("                    </h6>");
+                content.AppendHtml("                    <small class='small mb-0'>");
+                content.AppendHtml(                         comentario.DataComentario.ToString("dd/MM/yyyy HH:mm"));
+                content.AppendHtml("                    </small>");
+                content.AppendHtml("                </div>");
+                content.AppendHtml("                <p class='small mb-0'>");
+                content.AppendHtml(                     comentario.Comentario);
+                content.AppendHtml("                </p>");
+                content.AppendHtml("            </div>");
+                content.AppendHtml("            <ul class='nav nav-divider py-2 small'>");
+                content.AppendHtml("                <li class='nav-item'>");
+                content.AppendHtml("                    <a class='nav-link' href='#!'>Curtidas (" + comentario.Curtidas + ")</a>");
+                content.AppendHtml("                </li>");
+                content.AppendHtml("                <li class='nav-item'>");
+                content.AppendHtml("                    <a class='nav-link' href='#!'>Responder</a>");
+                content.AppendHtml("                </li>");
+                content.AppendHtml("            </ul>");
+                content.AppendHtml(             RespostaRenderRecursivamente(comentario.ListaComentarios));
                 content.AppendHtml("        </div>");
                 content.AppendHtml("    </div>");
 
-
-                content.AppendHtml(RespostaRenderRecursivamente(comentario.ListaComentarios));
 
                 content.AppendHtml("</li>");
 
@@ -48,7 +72,6 @@
         return content;
 /*
  
-                <div class="ms-2">
                     <div class="bg-light p-3 rounded">
                         <div class="d-flex justify-content-between">
                             <h6 class="mb-1"> <a href="#!"> Lori Stevens </a> </h6>
@@ -65,7 +88,6 @@
                             <a class="nav-link" href="#!"> Responder</a>
                         </li>
                     </ul>
-                </div>
 */
     }
 }
