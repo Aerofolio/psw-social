@@ -1,4 +1,76 @@
-﻿
+﻿@using Microsoft.AspNetCore.Html
+@functions {
+
+    public IHtmlContent RespostaRenderRecursivamente(List<ComentarioModel> comentarios)
+    {   
+
+        var content = new HtmlContentBuilder();
+
+        if (comentarios != null && comentarios.Any())
+        {
+
+            content.AppendHtml("<ul class='comment-item-nested list-unstyled'>");
+
+            foreach(var comentario in comentarios)
+            {
+
+                content.AppendHtml("<li class='comment-item'>teste");
+
+                content.AppendHtml("    <div class='d-flex'>");
+                content.AppendHtml("        <div class='avatar avatar-xs'>");
+                content.AppendHtml("            <a  href='#!'>");
+
+                if (!string.IsNullOrEmpty(comentario.Usuario.FotoPerfil))
+                {
+                    content.AppendHtml("<img class='avatar-img rounded-circle' src='data:image/png;base64," + comentario.Usuario.FotoPerfil + "' alt='Feed Image' />");
+                }
+                else
+                {
+                    content.AppendHtml("<img class='avatar-img rounded-circle' src='https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=' alt='Feed Image' />");
+                }
+
+                content.AppendHtml("            </a>");
+                content.AppendHtml("        </div>");
+                content.AppendHtml("        <div class='ms-2'>");
+                content.AppendHtml("        </div>");
+                content.AppendHtml("    </div>");
+
+
+                content.AppendHtml(RespostaRenderRecursivamente(comentario.ListaComentarios));
+
+                content.AppendHtml("</li>");
+
+            }
+
+            content.AppendHtml("</ul>");
+        }
+
+        return content;
+/*
+ 
+                <div class="ms-2">
+                    <div class="bg-light p-3 rounded">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-1"> <a href="#!"> Lori Stevens </a> </h6>
+                            <small class="ms-2">2hr</small>
+                        </div>
+                        <p class="small mb-0">Show.</p>
+                    </div>
+                    <!-- Comment react -->
+                    <ul class="nav nav-divider py-2 small">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#!"> Curtidas (5)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#!"> Responder</a>
+                        </li>
+                    </ul>
+                </div>
+*/
+    }
+}
+
+
 <div id="stories" class="d-flex gap-2 mb-n3">
 	
 	<div class="position-relative">
@@ -164,7 +236,7 @@
                     <ul class="comment-wrap list-unstyled">
                         <!-- Comment item START -->
                         @foreach (var comentario in feedPost.ListaComentarios)
-                        {
+                        {                           
                             <li class="comment-item">
                                 <div class="d-flex position-relative">
                                     <!-- Avatar -->
@@ -202,36 +274,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <!-- Comment item nested START -->
-                                <ul class="comment-item-nested list-unstyled">
-                                    <li class="comment-item">
-                                    <div class="d-flex">
-                                        <!-- Avatar -->
-                                        <div class="avatar avatar-xs">
-                                            <a href="#!"><img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/06.jpg" alt=""></a>
-                                        </div>
-                                        <!-- Comment by -->
-                                        <div class="ms-2">
-                                            <div class="bg-light p-3 rounded">
-                                                <div class="d-flex justify-content-between">
-                                                    <h6 class="mb-1"> <a href="#!"> Lori Stevens </a> </h6>
-                                                    <small class="ms-2">2hr</small>
-                                                </div>
-                                                <p class="small mb-0">Show.</p>
-                                            </div>
-                                            <!-- Comment react -->
-                                            <ul class="nav nav-divider py-2 small">
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#!"> Curtidas (5)</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="#!"> Responder</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
-                                </ul>
+                                @RespostaRenderRecursivamente(comentario.ListaComentarios)
                             </li>
                         }
                     </ul>

@@ -19,11 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialUniftec.Repository.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialUniftec.Domain", "SocialUniftec.Domain\SocialUniftec.Domain.csproj", "{654B1ED2-512E-45F8-8FE1-F24C0BB93785}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialUniftec.Application", "SocialUniftec.Application\SocialUniftec.Application.csproj", "{1BE4A5C7-386C-4837-A1FF-7E8E243BB660}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialUniftec.Application", "SocialUniftec.Application\SocialUniftec.Application.csproj", "{1BE4A5C7-386C-4837-A1FF-7E8E243BB660}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Website", "Website", "{4038D40B-CB1B-4601-842A-74008A1FB50F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialUniftec.API", "SocialUniftec.API\SocialUniftec.API.csproj", "{664C8854-BFA5-4943-A26E-37C478DB9FDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialUniftec.API", "SocialUniftec.API\SocialUniftec.API.csproj", "{664C8854-BFA5-4943-A26E-37C478DB9FDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
