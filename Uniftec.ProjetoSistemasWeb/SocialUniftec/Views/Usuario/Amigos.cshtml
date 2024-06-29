@@ -1,18 +1,4 @@
-﻿        <!-- Share feed START -->
-<div class="card card-body">
-    <div class="d-flex mb-3">
-       
-        <!-- Post input -->
-        <form class="w-100">
-            <input class="form-control pe-4" placeholder="Pesquise pelo nome de alguém..." data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
-        </form>
-    </div>
-  
-    
-    <!-- Share feed toolbar END -->
-</div>
-
-<div class="row g-3 mt-4">
+﻿<div class="row g-3 mt-4">
     @foreach(var amigo in ViewBag.UsuarioSendoVisto?.Amigos){
         <div class="col-4">
             <div class="card shadow-none text-center h-100">
@@ -40,5 +26,4 @@
             </div>
         </div>
     }
-
 </div>
