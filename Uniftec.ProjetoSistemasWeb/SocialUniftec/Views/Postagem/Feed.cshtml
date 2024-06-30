@@ -18,7 +18,7 @@
 
                 content.AppendHtml("    <div class='d-flex'>");
                 content.AppendHtml("        <div class='avatar avatar-xs'>");
-                content.AppendHtml("            <a  href='#!'>");
+                content.AppendHtml("            <a asp-controller='Usuario' asp-action='Perfil' asp-route-id='" + comentario.Usuario.Id + "'>");
 
                 if (!string.IsNullOrEmpty(comentario.Usuario.FotoPerfil))
                 {
@@ -174,7 +174,7 @@
                         <div class="d-flex align-items-center">
                             <!-- Avatar -->
                             <div class="avatar  me-2">
-                                <a href="#!">
+                                <a asp-controller='Usuario' asp-action='Perfil' asp-route-id='@feedPost.Usuario.Id'>
                                     @if (!string.IsNullOrEmpty(feedPost.Usuario.FotoPerfil))
                                     {
                                         <img class ="avatar-img rounded-circle" src="data:image/png;base64,@feedPost.Usuario.FotoPerfil" alt="Feed Image" />
@@ -270,10 +270,10 @@
                                 <div class="d-flex position-relative">
                                     <!-- Avatar -->
                                     <div class="avatar avatar-xs">
-                                        <a href="#!">
+                                        <a asp-controller='Usuario' asp-action='Perfil' asp-route-id='@comentario.Usuario.Id'>
                                             @if (!string.IsNullOrEmpty(comentario.Usuario.FotoPerfil))
                                             {
-                                                <img class="avatar-img rounded-circle" src="data:image/png;base64,@feedPost.Usuario.FotoPerfil" alt="Feed Image" />
+                                                <img class="avatar-img rounded-circle" src="data:image/png;base64,@comentario.Usuario.FotoPerfil" alt="Feed Image" />
                                             }
                                             else
                                             {

@@ -156,7 +156,6 @@ namespace SocialUniftec.Controllers
             {
 
                 //buscar curtidas
-                //buscar curtidas dos comentarios
 
                 List<String> midias = new List<String>();
 
