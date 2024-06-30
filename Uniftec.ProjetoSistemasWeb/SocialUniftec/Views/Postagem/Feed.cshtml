@@ -223,7 +223,14 @@
                     <!-- Feed react START -->
                     <ul class="nav nav-stack py-3 small">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#!"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Curtiu (@feedPost.Curtidas)</a>
+                            @if (feedPost.IsUsuarioAutenticadoCurtiu)
+                            {
+                                <a class="nav-link active" onclick="curtirDescurtirPublicacao(this)" data-id="@feedPost.Id" href="#!"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Curtiu (@feedPost.Curtidas)</a>
+                            } else
+                            {
+                                <a class="nav-link" onclick="curtirDescurtirPublicacao(this)" data-id="@feedPost.Id" href="#!"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Curtir (@feedPost.Curtidas)</a>
+                            }
+                            
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comentários (@feedPost.ListaComentarios.Count)</a>
@@ -349,6 +356,50 @@
         } else {
             $(element).parents("ul").next().hide();
         }
+    }
+
+    function curtirDescurtirPublicacao(element) {
+
+        let idPublicacao = $(element).attr("data-id");
+
+        if (!$(element).hasClass("active")) {
+            $.ajax({
+                url: 'Curtir/' + idPublicacao,
+                type: 'POST',
+                contentType: 'application/json',
+                success: function (response) {
+
+                    let nrLikes = parseInt($(element).text().split("(")[1].split(")")[0].trim())
+                    nrLikes++;
+
+                    $(element).addClass("active");
+
+                    $(element).text("Curtiu (" + nrLikes + ")");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        } else {
+            $.ajax({
+                url: 'Descurtir/' + idPublicacao,
+                type: 'DELETE',
+                contentType: 'application/json',
+                success: function (response) {
+
+                    let nrLikes = parseInt($(element).text().split("(")[1].split(")")[0].trim())
+                    nrLikes--;
+
+                    $(element).removeClass("active");
+
+                    $(element).text("Curtir (" + nrLikes + ")");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
     }
 
     function curtirDescurtirComentario(element) {

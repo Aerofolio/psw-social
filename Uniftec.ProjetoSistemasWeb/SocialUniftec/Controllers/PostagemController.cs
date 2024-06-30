@@ -37,6 +37,20 @@ namespace SocialUniftec.Controllers
         }
 
         [HttpPost]
+        public void Curtir(Guid id)
+        {
+            var usuarioLogado = ObterUsuarioLogado();
+            new APIHttpClient(URLBaseLikeEComentario).Post("likes/post/" + id + "/" + usuarioLogado.Id);
+        }
+
+        [HttpDelete]
+        public void Descurtir(Guid id)
+        {
+            var usuarioLogado = ObterUsuarioLogado();
+            new APIHttpClient(URLBaseLikeEComentario).Delete("likes/post/" + id + "/" + usuarioLogado.Id);
+        }
+
+        [HttpPost]
         public void CurtirComentario(Guid id)
         {
             var usuarioLogado = ObterUsuarioLogado();
