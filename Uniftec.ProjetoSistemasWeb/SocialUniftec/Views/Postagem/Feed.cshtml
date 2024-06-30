@@ -167,7 +167,7 @@
 	<div style="margin-top:20px">
 		@foreach (var feedPost in ViewBag.Posts)
 		{
-            <div class="card mt-3">
+            <div class="card mt-3 card-postagem">
                 <!-- Card header START -->
                 <div class="card-header border-0 pb-0">
                     <div class="d-flex align-items-center justify-content-between">
@@ -202,7 +202,7 @@
                                 </a>
                                 <!-- Card feed action dropdown menu -->
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction1">
-                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Excluir post</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="excluirPost('@feedPost.Id', this)"> <i class="bi bi-x-circle fa-fw pe-2"></i>Excluir post</a></li>
 
                                 </ul>
                             </div>
@@ -349,6 +349,22 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
+    function excluirPost(idPublicacao, element) {
+
+        $.ajax({
+            url: 'Excluir/' + idPublicacao,
+            type: 'DELETE',
+            contentType: 'application/json',
+            success: function (response) {
+                $(element).parents(".card-postagem").remove();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+       
+    }
 
     function showHideResponderComentario(element) { 
         if (!$(element).parents("ul").next().is(":visible")) {

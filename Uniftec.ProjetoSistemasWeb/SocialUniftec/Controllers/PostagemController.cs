@@ -44,6 +44,13 @@ namespace SocialUniftec.Controllers
         }
 
         [HttpDelete]
+        public void Excluir(Guid id)
+        {
+            var usuarioLogado = ObterUsuarioLogado();
+            new APIHttpClient(URLBasePublicacao).Delete("Publicacao?id=" + id);
+        }
+
+        [HttpDelete]
         public void Descurtir(Guid id)
         {
             var usuarioLogado = ObterUsuarioLogado();
