@@ -51,12 +51,25 @@
                 content.AppendHtml("            </div>");
                 content.AppendHtml("            <ul class='nav nav-divider py-2 small'>");
                 content.AppendHtml("                <li class='nav-item'>");
-                content.AppendHtml("                    <a class='nav-link' href='#!'>Curtidas (" + comentario.Curtidas + ")</a>");
+                if (comentario.IsUsuarioAutenticadoCurtiu)
+                {
+                    content.AppendHtml("                    <a class='nav-link active' href='#!' onclick='curtirDescurtirComentario(this)' data-id='" + comentario.Id + "'>Curtiu (" + comentario.Curtidas + ")</a>");
+                } else
+                {
+                    content.AppendHtml("                    <a class='nav-link' href='#!' onclick='curtirDescurtirComentario(this)' data-id='" + comentario.Id + "'>Curtidas (" + comentario.Curtidas + ")</a>");
+                }
                 content.AppendHtml("                </li>");
                 content.AppendHtml("                <li class='nav-item'>");
-                content.AppendHtml("                    <a class='nav-link' href='#!'>Responder</a>");
+                content.AppendHtml("                    <a class='nav-link' href='#!' onclick='showHideResponderComentario(this)'>Responder</a>");
                 content.AppendHtml("                </li>");
                 content.AppendHtml("            </ul>");
+                content.AppendHtml("            <form asp-action='Responder' asp-controller='Postagem' method='POST' style='display:none;' class='mb-3'>");
+                content.AppendHtml("                <input type='hidden' value='" + comentario.Id + "' name='Id'/>");
+                content.AppendHtml("                <div class='input-group'>");
+                content.AppendHtml("                    <textarea class='form-control pe-4 bg-light' name='Comentario' rows='1' placeholder='Escreva um Comentário...'></textarea>");
+                content.AppendHtml("                    <button class='nav-link bg-light py-1 px-2 mb-0' href='#' type='submit'><i class='bi bi-send'></i></button>");
+                content.AppendHtml("                </div>");
+                content.AppendHtml("            </form>");
                 content.AppendHtml(             RespostaRenderRecursivamente(comentario.ListaComentarios));
                 content.AppendHtml("        </div>");
                 content.AppendHtml("    </div>");
@@ -70,25 +83,6 @@
         }
 
         return content;
-/*
- 
-                    <div class="bg-light p-3 rounded">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="mb-1"> <a href="#!"> Lori Stevens </a> </h6>
-                            <small class="ms-2">2hr</small>
-                        </div>
-                        <p class="small mb-0">Show.</p>
-                    </div>
-                    <!-- Comment react -->
-                    <ul class="nav nav-divider py-2 small">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#!"> Curtidas (5)</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#!"> Responder</a>
-                        </li>
-                    </ul>
-*/
     }
 }
 
@@ -252,10 +246,12 @@
                         <!-- Comment box  -->
                         <form class="position-relative w-100" asp-action="Comentar" asp-controller="Postagem" method="POST">
                             <input type="hidden" value="@feedPost.Id" name="IdPublicacao" id="IdPublicacao" />
-                            <textarea class="form-control pe-4 bg-light" name="Comentario" id="Comentario" rows="1" placeholder="Escreva um Comentário..."></textarea>
-                            <button class="nav-link bg-light py-1 px-2 mb-0" href="#" type="submit">
-                                <i class="bi bi-send"></i>
-                            </button>
+                            <div class="input-group">
+                                <textarea class="form-control pe-4 bg-light" name="Comentario" id="Comentario" rows="1" placeholder="Escreva um Comentário..."></textarea>
+                                <button class="nav-link bg-light py-1 px-2 mb-0" href="#" type="submit">
+                                    <i class="bi bi-send"></i>
+                                </button>
+                            </div>
                         </form>
                     </div>
                     <!-- Comment wrap START -->
@@ -290,14 +286,28 @@
                                         <!-- Comment react -->
                                         <ul class="nav nav-divider py-2 small">
                                             <li class="nav-item">
-                                                <a class="nav-link" href="#!">Curtidas (@comentario.Curtidas)</a>
+                                                @if (comentario.IsUsuarioAutenticadoCurtiu)
+                                                {
+                                                    <a class="nav-link active" href="#!" onclick="curtirDescurtirComentario(this)" data-id="@comentario.Id">Curtiu (@comentario.Curtidas)</a>
+                                                } else
+                                                {
+                                                    <a class="nav-link" href="#!" onclick="curtirDescurtirComentario(this)" data-id="@comentario.Id">Curtir (@comentario.Curtidas)</a>
+                                                }
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="#!">
+                                                <a class="nav-link" href="#!" onclick="showHideResponderComentario(this)">
                                                     Responder
                                                 </a>
                                             </li>
                                         </ul>
+                                        <form asp-action='Responder' asp-controller='Postagem' method='POST' style='display:none;' class='mb-3'>
+                                            <input type='hidden' value='@comentario.Id' name='Id' />
+                                            <div class='input-group'>
+                                                <textarea class='form-control pe-4 bg-light' name='Comentario' rows='1' placeholder='Escreva um Comentário...'></textarea>
+                                                <button class='nav-link bg-light py-1 px-2 mb-0' href='#' type='submit'><i class='bi bi-send'></i></button>
+                                                
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                                 @RespostaRenderRecursivamente(comentario.ListaComentarios)
@@ -332,6 +342,58 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
+    function showHideResponderComentario(element) { 
+        if (!$(element).parents("ul").next().is(":visible")) {
+            $(element).parents("ul").next().show();
+        } else {
+            $(element).parents("ul").next().hide();
+        }
+    }
+
+    function curtirDescurtirComentario(element) {
+
+        let idComentario = $(element).attr("data-id");
+        
+        if (!$(element).hasClass("active")) {
+            $.ajax({
+                url: 'CurtirComentario/' + idComentario,
+                type: 'POST',
+                contentType: 'application/json',
+                success: function (response) {
+
+                    let nrLikes = parseInt($(element).text().split("(")[1].split(")")[0].trim())
+                    nrLikes++;
+
+                    $(element).addClass("active");
+
+                    $(element).text("Curtiu (" + nrLikes + ")");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        } else {
+            $.ajax({
+                url: 'DescurtirComentario/' + idComentario,
+                type: 'DELETE',
+                contentType: 'application/json',
+                success: function (response) {
+                    
+                    let nrLikes = parseInt($(element).text().split("(")[1].split(")")[0].trim())
+                    nrLikes--;
+
+                    $(element).removeClass("active");
+
+                    $(element).text("Curtir (" + nrLikes + ")");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+    }  
 
     $('#postFile').on('change', function () {
        

@@ -8,6 +8,7 @@ using SocialUniftec.Website.Backend;
 using SocialUniftec.Website.Models;
 using SocialUniftec.Website.Backend.Adapter;
 using System.Collections.Generic;
+using System;
 
 namespace SocialUniftec.Controllers
 {
@@ -33,6 +34,47 @@ namespace SocialUniftec.Controllers
             ViewBag.UsuarioLogado = usuarioLogado;
 
             return View();
+        }
+
+        [HttpPost]
+        public void CurtirComentario(Guid id)
+        {
+            var usuarioLogado = ObterUsuarioLogado();
+            new APIHttpClient(URLBaseLikeEComentario).Post("likes/comentario/" + id + "/" + usuarioLogado.Id);
+        }
+
+        [HttpDelete]
+        public void DescurtirComentario(Guid id)
+        {
+            var usuarioLogado = ObterUsuarioLogado();
+            new APIHttpClient(URLBaseLikeEComentario).Delete("likes/comentario/" + id + "/" + usuarioLogado.Id);
+        }
+
+        [HttpPost]
+        public IActionResult Responder(ComentarioCadastroModel comentarioCadastro) 
+        {
+            if (ModelState.IsValid)
+            {
+                var usuarioLogado = ObterUsuarioLogado();
+
+                var comentarioModel = PostagemAdapter.ToComentarioIntegracaoModel(comentarioCadastro);
+                comentarioModel.DataCriacao = DateTime.Now;
+                comentarioModel.QuantidadeLikes = 0;
+                comentarioModel.IdUsuario = usuarioLogado.Id;
+
+                var id = new APIHttpClient(URLBaseLikeEComentario).Post("comentarios/resposta/" + comentarioCadastro.Id, comentarioModel);
+
+                ViewBag.Posts = buscarListaPost(usuarioLogado);
+                ViewBag.StoriesAgrupados = new List<Story>();
+                ViewBag.UsuarioLogado = usuarioLogado;
+
+                return View("feed");
+
+            }
+            else
+            {
+                return View("erro");
+            }
         }
 
         [HttpPost]

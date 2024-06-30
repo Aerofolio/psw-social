@@ -24,6 +24,7 @@ namespace SocialUniftec.Website.Backend.Adapter
         {
             return new()
             {
+                Id = comentarioCadastro.Id,
                 Conteudo = comentarioCadastro.Comentario,
             };
         }
