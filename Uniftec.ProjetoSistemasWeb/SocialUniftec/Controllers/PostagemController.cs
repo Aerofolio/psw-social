@@ -141,11 +141,18 @@ namespace SocialUniftec.Controllers
 
         private List<FeedModel> buscarListaPost(Website.Backend.UsuarioModel usuarioLogado) {
 
-            var publicacoes = new APIHttpClient(URLBasePublicacao).Get<List<PublicacaoIntegracaoModel>>("Publicacao?idUsuario=" + usuarioLogado.Id);
+            List<PublicacaoIntegracaoModel> listaTodasPublicacoesMinhasEDeamigosMeus = new APIHttpClient(URLBasePublicacao).Get<List<PublicacaoIntegracaoModel>>("Publicacao?idUsuario=" + usuarioLogado.Id);
+
+            foreach(var usuarioAmigo in usuarioLogado.Amigos)
+            {
+                listaTodasPublicacoesMinhasEDeamigosMeus.AddRange(new APIHttpClient(URLBasePublicacao).Get<List<PublicacaoIntegracaoModel>>("Publicacao?idUsuario=" + usuarioAmigo.Id));
+            }
+
+            listaTodasPublicacoesMinhasEDeamigosMeus = listaTodasPublicacoesMinhasEDeamigosMeus.OrderByDescending(p => p.DataPublicacao).ToList();
 
             List<FeedModel> feeds = new List<FeedModel>();
 
-            foreach (var item in publicacoes)
+            foreach (var item in listaTodasPublicacoesMinhasEDeamigosMeus)
             {
 
                 //buscar curtidas
