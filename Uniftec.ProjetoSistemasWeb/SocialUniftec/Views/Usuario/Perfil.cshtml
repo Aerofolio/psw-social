@@ -1,4 +1,94 @@
-﻿<div class="card">
+﻿@using Microsoft.AspNetCore.Html
+@functions {
+
+    public IHtmlContent RespostaRenderRecursivamente(List<ComentarioModel> comentarios)
+    {
+
+        var content = new HtmlContentBuilder();
+
+        if (comentarios != null && comentarios.Any())
+        {
+
+            content.AppendHtml("<ul class='comment-item-nested list-unstyled'>");
+
+            foreach (var comentario in comentarios)
+            {
+
+                content.AppendHtml("<li class='comment-item' id='" + comentario.Id.ToString() + "'>");
+
+                content.AppendHtml("    <div class='d-flex'>");
+                content.AppendHtml("        <div class='avatar avatar-xs'>");
+                content.AppendHtml("            <a asp-controller='Usuario' asp-action='Perfil' asp-route-id='" + comentario.Usuario.Id + "'>");
+
+                if (!string.IsNullOrEmpty(comentario.Usuario.FotoPerfil))
+                {
+                    content.AppendHtml("<img class='avatar-img rounded-circle' src='data:image/png;base64," + comentario.Usuario.FotoPerfil + "' alt='Feed Image' />");
+                }
+                else
+                {
+                    content.AppendHtml("<img class='avatar-img rounded-circle' src='https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=' alt='Feed Image' />");
+                }
+
+                content.AppendHtml("            </a>");
+                content.AppendHtml("        </div>");
+                content.AppendHtml("        <div class='ms-2'>");
+                content.AppendHtml("            <div class='bg-light p-3 rounded'>");
+                content.AppendHtml("                <div class='d-flex justify-content-between'>");
+                content.AppendHtml("                    <h6 class='mb-1'>");
+                content.AppendHtml("                        <a href='#!'>");
+                content.AppendHtml(comentario.Usuario.Nome);
+                content.AppendHtml(" ");
+                content.AppendHtml(comentario.Usuario.Sobrenome);
+                content.AppendHtml("                        </a>");
+                content.AppendHtml("                    </h6>");
+                content.AppendHtml("                    <small class='small mb-0'>");
+                content.AppendHtml(comentario.DataComentario.ToString("dd/MM/yyyy HH:mm"));
+                content.AppendHtml("                    </small>");
+                content.AppendHtml("                </div>");
+                content.AppendHtml("                <p class='small mb-0'>");
+                content.AppendHtml(comentario.Comentario);
+                content.AppendHtml("                </p>");
+                content.AppendHtml("            </div>");
+                content.AppendHtml("            <ul class='nav nav-divider py-2 small'>");
+                content.AppendHtml("                <li class='nav-item'>");
+                if (comentario.IsUsuarioAutenticadoCurtiu)
+                {
+                    content.AppendHtml("                    <a class='nav-link active' href='#!' onclick='curtirDescurtirComentario(this)' data-id='" + comentario.Id + "'>Curtiu (" + comentario.Curtidas + ")</a>");
+                }
+                else
+                {
+                    content.AppendHtml("                    <a class='nav-link' href='#!' onclick='curtirDescurtirComentario(this)' data-id='" + comentario.Id + "'>Curtidas (" + comentario.Curtidas + ")</a>");
+                }
+                content.AppendHtml("                </li>");
+                content.AppendHtml("                <li class='nav-item'>");
+                content.AppendHtml("                    <a class='nav-link' href='#!' onclick='showHideResponderComentario(this)'>Responder</a>");
+                content.AppendHtml("                </li>");
+                content.AppendHtml("            </ul>");
+                content.AppendHtml("            <form asp-action='Responder' asp-controller='Postagem' method='POST' style='display:none;' class='mb-3'>");
+                content.AppendHtml("                <input type='hidden' value='" + comentario.Id + "' name='Id'/>");
+                content.AppendHtml("                <input type='hidden' value='" + ViewBag.UsuarioSendoVisto.Id + "' name='IdUsuario'/>");
+                content.AppendHtml("                <div class='input-group'>");
+                content.AppendHtml("                    <textarea class='form-control pe-4 bg-light' name='Comentario' rows='1' placeholder='Escreva um Comentário...'></textarea>");
+                content.AppendHtml("                    <button class='nav-link bg-light py-1 px-2 mb-0' href='#' type='submit'><i class='bi bi-send'></i></button>");
+                content.AppendHtml("                </div>");
+                content.AppendHtml("            </form>");
+                content.AppendHtml(RespostaRenderRecursivamente(comentario.ListaComentarios));
+                content.AppendHtml("        </div>");
+                content.AppendHtml("    </div>");
+
+
+                content.AppendHtml("</li>");
+
+            }
+
+            content.AppendHtml("</ul>");
+        }
+
+        return content;
+    }
+}
+
+<div class="card">
 	<!-- Cover image -->
 	<div class="h-200px rounded-top" style="background-image:url('https://social.webestica.com/assets/images/bg/05.jpg'); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
 	<!-- Card body START -->
@@ -80,253 +170,411 @@
 	</div>
     <div class="col-lg-8 vstack gap-4">
 
-        <!-- Share feed START -->
-        <div class="card card-body">
-            <div class="d-flex mb-3">
-                <!-- Avatar -->
-                <div class="avatar avatar-xs me-2">
-                    <a href="#"> <img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/07.jpg" alt=""> </a>
-                </div>
-                <!-- Post input -->
-                <form class="w-100">
-                    <input class="form-control pe-4 border-0" placeholder="No que você está pensando?" data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
-                </form>
-            </div>
-            <!-- Share feed toolbar START -->
-            <ul class="nav nav-pills nav-stack small fw-normal">
-                <li class="nav-item">
-                    <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPhoto"> <i class="bi bi-image-fill text-success pe-2"></i>Foto</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionVideo"> <i class="bi bi-camera-reels-fill text-info pe-2"></i>Vídeo</a>
-                </li>
-                <li class="nav-item dropdown ms-sm-auto">
-                    <a class="nav-link bg-light py-1 px-2 mb-0" href="#" id="feedActionShare" >
-                        <i class="bi bi-send"></i>
-                    </a>
-                   
-                </li>
-            </ul>
-            <!-- Share feed toolbar END -->
-        </div>
-        <!-- Share feed END -->
-        <!-- Card feed item START -->
-        <div class="card">
-            <!-- Card header START -->
-            <div class="card-header border-0 pb-0">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center">
-                        <!-- Avatar -->
-                        <div class="avatar  me-2">
-                            <a href="#!"> <img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/04.jpg" alt=""> </a>
-                        </div>
-                        <!-- Info -->
-                        <div>
-                            <div class="nav nav-divider">
-                                <h6 class="nav-item card-title mb-0"> <a href="#!"> Lori Ferguson </a></h6>
-                                <span class="nav-item small">2hr</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card feed action dropdown START -->
-                    <div class="dropdown">
-                        <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-three-dots"></i>
-                        </a>
-                        <!-- Card feed action dropdown menu -->
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction1">
-                            <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Excluir post</a></li>
 
-                        </ul>
-                    </div>
-                    <!-- Card feed action dropdown END -->
-                </div>
-            </div>
-            <!-- Card header END -->
-            <!-- Card body START -->
-            <div class="card-body">
-                <p>Decrição do post.</p>
-                <!-- Card img -->
-                <img class="card-img" src="	https://social.webestica.com/assets/images/post/3by2/01.jpg" alt="Post">
-                <!-- Feed react START -->
-                <ul class="nav nav-stack py-3 small">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#!"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Curtiu (56)</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comentários (12)</a>
-                    </li>
-                </ul>
-                <!-- Feed react END -->
-                <!-- Add comment -->
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="card card-body">
+            <form class="w-100" asp-controller="Usuario" asp-action="CadastrarPostagem" method="post" enctype="multipart/form-data">
+
+                <input type="file" name="postagemCadastro.MidiaPostagem" id="midiaPostagem" style="display: none;">
+                <input type="hidden" name="postagemCadastro.IdUsuario" value="@ViewBag.UsuarioSendoVisto.Id" />
+
                 <div class="d-flex mb-3">
                     <!-- Avatar -->
                     <div class="avatar avatar-xs me-2">
-                        <a href="#!"> <img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/12.jpg" alt=""> </a>
-                    </div>
-                    <!-- Comment box  -->
-                    <form class="position-relative w-100">
-                        <textarea class="form-control pe-4 bg-light" rows="1" placeholder="Escreva um Comentário..."></textarea>
-                    </form>
-                </div>
-                <!-- Comment wrap START -->
-                <ul class="comment-wrap list-unstyled">
-                    <!-- Comment item START -->
-                    <li class="comment-item">
-                        <div class="d-flex position-relative">
-                            <!-- Avatar -->
-                            <div class="avatar avatar-xs">
-                                <a href="#!"><img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/05.jpg" alt=""></a>
-                            </div>
-                            <div class="ms-2">
-                                <!-- Comment by -->
-                                <div class="bg-light rounded-start-top-0 p-3 rounded">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a></h6>
-                                        <small class="ms-2">5hr</small>
-                                    </div>
-                                    <p class="small mb-0">Legal!.</p>
-                                </div>
-                                <!-- Comment react -->
-                                <ul class="nav nav-divider py-2 small">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#!">Curtidas (3)</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#!"> 
-                                            Responder
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#!">Ver 5 Respostas</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Comment item nested START -->
-                        <ul class="comment-item-nested list-unstyled">
-                            <!-- Comment item START -->
-                            <li class="comment-item">
-                                <div class="d-flex">
-                                    <!-- Avatar -->
-                                    <div class="avatar avatar-xs">
-                                        <a href="#!"><img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/06.jpg" alt=""></a>
-                                    </div>
-                                    <!-- Comment by -->
-                                    <div class="ms-2">
-                                        <div class="bg-light p-3 rounded">
-                                            <div class="d-flex justify-content-between">
-                                                <h6 class="mb-1"> <a href="#!"> Lori Stevens </a> </h6>
-                                                <small class="ms-2">2hr</small>
-                                            </div>
-                                            <p class="small mb-0">Show.</p>
-                                        </div>
-                                        <!-- Comment react -->
-                                        <ul class="nav nav-divider py-2 small">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#!"> Curtidas (5)</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#!"> Responder</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- Comment item END -->
-                            <!-- Comment item START -->
-                            <li class="comment-item">
-                                <div class="d-flex">
-                                    <!-- Avatar -->
-                                    <div class="avatar  avatar-xs">
-                                        <a href="#!"><img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/07.jpg" alt=""></a>
-                                    </div>
-                                    <!-- Comment by -->
-                                    <div class="ms-2">
-                                        <div class="bg-light p-3 rounded">
-                                            <div class="d-flex justify-content-between">
-                                                <h6 class="mb-1"> <a href="#!"> Billy Vasquez </a> </h6>
-                                                <small class="ms-2">15min</small>
-                                            </div>
-                                            <p class="small mb-0">Hahahaha.</p>
-                                        </div>
-                                        <!-- Comment react -->
-                                        <ul class="nav nav-divider py-2 small">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#!"> Curitr</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#!"> Responder</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- Comment item END -->
-                        </ul>
-                        <!-- Load more replies -->
-                        <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center mb-3 ms-5" data-bs-toggle="button" aria-pressed="true">
-                            <div class="spinner-dots me-2">
-                                <span class="spinner-dot"></span>
-                                <span class="spinner-dot"></span>
-                                <span class="spinner-dot"></span>
-                            </div>
-                            Carregar mais comentários
+                        <a href="#">
+                            @if (!string.IsNullOrEmpty(ViewBag.UsuarioLogado.FotoPerfil))
+                            {
+                                <img class="avatar-img rounded-circle" src="data:image/png;base64,ViewBag.UsuarioLogado.FotoPerfil" alt="Feed Image" />
+                            }
+                            else
+                            {
+                                <img class="avatar-img rounded-circle" src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="Feed Image" />
+                            }
+
                         </a>
-                        <!-- Comment item nested END -->
-                    </li>
-                    <!-- Comment item END -->
-                    <!-- Comment item START -->
-                    <li class="comment-item">
-                        <div class="d-flex">
-                            <!-- Avatar -->
-                            <div class="avatar avatar-xs">
-                                <a href="#!"><img class="avatar-img rounded-circle" src="https://social.webestica.com/assets/images/avatar/05.jpg" alt=""></a>
-                            </div>
-                            <!-- Comment by -->
-                            <div class="ms-2">
-                                <div class="bg-light p-3 rounded">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="mb-1"> <a href="#!"> Frances Guerrero </a> </h6>
-                                        <small class="ms-2">4min</small>
-                                    </div>
-                                    <p class="small mb-0">Removed demands expense account in outward tedious do. Particular way thoroughly unaffected projection.</p>
-                                </div>
-                                <!-- Comment react -->
-                                <ul class="nav nav-divider pt-2 small">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#!"> Curtidas (1)</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#!"> Respostas</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#!"> Ver 6 Respostas</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <!-- Comment item END -->
-                </ul>
-                <!-- Comment wrap END -->
-            </div>
-            <!-- Card body END -->
-            <!-- Card footer START -->
-            <div class="card-footer border-0 pt-0">
-                <!-- Load more comments -->
-                <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
-                    <div class="spinner-dots me-2">
-                        <span class="spinner-dot"></span>
-                        <span class="spinner-dot"></span>
-                        <span class="spinner-dot"></span>
                     </div>
-                    Carregar mais comentários
-                </a>
-            </div>
-            <!-- Card footer END -->
+                    <!-- Post input -->
+                    <input class="form-control pe-4 border-0" placeholder="No que você está pensando?" id="postText" name="postagemCadastro.Descricao" data-bs-toggle="modal" data-bs-target="#modalCreateFeed">
+                </div>
+
+                <div id="imagePreview" class="mb-3" style="display: none;">
+                    <img id="thumbnail" src="#" width="150" alt="Image Preview" class="img-thumbnail">
+                </div>
+
+                <!-- Share feed toolbar START -->
+                <ul class="nav nav-pills nav-stack small fw-normal">
+                    <li class="nav-item">
+                        <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPhoto"> <i class="bi bi-image-fill text-success pe-2"></i>Foto</a>
+                    </li>
+                    <li class="nav-item dropdown ms-sm-auto">
+                        <button class="nav-link bg-light py-1 px-2 mb-0" href="#" id="feedActionShare" type="submit">
+                            <i class="bi bi-send"></i>
+                        </button>
+
+                    </li>
+                </ul>
+                <!-- Share feed toolbar END -->
+            </form>
         </div>
-        <!-- Card feed item END -->
+
+        <div>
+            @foreach (var feedPost in ViewBag.Posts)
+            {
+                <div class="card mt-3 card-postagem">
+                    <!-- Card header START -->
+                    <div class="card-header border-0 pb-0">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <!-- Avatar -->
+                                <div class="avatar  me-2">
+                                    <a asp-controller='Usuario' asp-action='Perfil' asp-route-id='@feedPost.Usuario.Id'>
+                                        @if (!string.IsNullOrEmpty(feedPost.Usuario.FotoPerfil))
+                                        {
+                                            <img class="avatar-img rounded-circle" src="data:image/png;base64,@feedPost.Usuario.FotoPerfil" alt="Feed Image" />
+                                        }
+                                        else
+                                        {
+                                            <img class="avatar-img rounded-circle" src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="Feed Image" />
+                                        }
+
+                                    </a>
+                                </div>
+                                <!-- Info -->
+                                <div>
+                                    <div class="nav nav-divider">
+                                        <h6 class="nav-item card-title mb-0"> <a href="#!"> @feedPost.Usuario.Nome @feedPost.Usuario.Sobrenome</a></h6>
+                                        <span class="nav-item small">@feedPost.DataPublicacao</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card feed action dropdown START -->
+                            @if (feedPost.Usuario.Id == ViewBag.UsuarioLogado?.Id)
+                            {
+                                <div class="dropdown">
+                                    <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-three-dots"></i>
+                                    </a>
+                                    <!-- Card feed action dropdown menu -->
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction1">
+                                        <li><a class="dropdown-item" href="#" onclick="excluirPost('@feedPost.Id', this)"> <i class="bi bi-x-circle fa-fw pe-2"></i>Excluir post</a></li>
+
+                                    </ul>
+                                </div>
+                            }
+                            <!-- Card feed action dropdown END -->
+                        </div>
+                    </div>
+                    <!-- Card header END -->
+                    <!-- Card body START -->
+                    <div class="card-body">
+                        <p>@feedPost.Descricao</p>
+                        <!-- Card img -->
+                        @if (feedPost.ListaMidia.Count > 0)
+                        {
+                            <img class="card-img" src="data:image/png;base64,@feedPost.ListaMidia[0]" alt="Post">
+
+                        }
+                        <!-- Feed react START -->
+                        <ul class="nav nav-stack py-3 small">
+                            <li class="nav-item">
+                                @if (feedPost.IsUsuarioAutenticadoCurtiu)
+                                {
+                                    <a class="nav-link active" onclick="curtirDescurtirPublicacao(this)" data-id="@feedPost.Id" href="#!"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Curtiu (@feedPost.Curtidas)</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" onclick="curtirDescurtirPublicacao(this)" data-id="@feedPost.Id" href="#!"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Curtir (@feedPost.Curtidas)</a>
+                                }
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#!"> <i class="bi bi-chat-fill pe-1"></i>Comentários (@feedPost.ListaComentarios.Count)</a>
+                            </li>
+                        </ul>
+                        <!-- Feed react END -->
+                        <!-- Add comment -->
+                        <div class="d-flex mb-3">
+                            <!-- Avatar -->
+                            <div class="avatar avatar-xs me-2">
+                                @if (!string.IsNullOrEmpty(ViewBag.UsuarioLogado.FotoPerfil))
+                                {
+                                    <img class="avatar-img rounded-circle" src="data:image/png;base64,@feedPost.Usuario.FotoPerfil" alt="Feed Image" />
+                                }
+                                else
+                                {
+                                    <img class="avatar-img rounded-circle" src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="Feed Image" />
+                                }
+                            </div>
+                            <!-- Comment box  -->
+                            <form class="position-relative w-100" asp-action="Comentar" asp-controller="Usuario" method="POST">
+                                <input type="hidden" value="@feedPost.Id" name="IdPublicacao"/>
+                                <input type="hidden" value="@ViewBag.UsuarioSendoVisto.Id" name="IdUsuario" />
+                                <div class="input-group">
+                                    <textarea class="form-control pe-4 bg-light" name="Comentario" id="Comentario" rows="1" placeholder="Escreva um Comentário..."></textarea>
+                                    <button class="nav-link bg-light py-1 px-2 mb-0" href="#" type="submit">
+                                        <i class="bi bi-send"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Comment wrap START -->
+                        <ul class="comment-wrap list-unstyled">
+                            <!-- Comment item START -->
+                            @foreach (var comentario in feedPost.ListaComentarios)
+                            {
+                                <li class="comment-item">
+                                    <div class="d-flex position-relative">
+                                        <!-- Avatar -->
+                                        <div class="avatar avatar-xs">
+                                            <a asp-controller='Usuario' asp-action='Perfil' asp-route-id='@comentario.Usuario.Id'>
+                                                @if (!string.IsNullOrEmpty(comentario.Usuario.FotoPerfil))
+                                                {
+                                                    <img class="avatar-img rounded-circle" src="data:image/png;base64,@comentario.Usuario.FotoPerfil" alt="Feed Image" />
+                                                }
+                                                else
+                                                {
+                                                    <img class="avatar-img rounded-circle" src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="Feed Image" />
+                                                }
+                                            </a>
+                                        </div>
+                                        <div class="ms-2">
+                                            <!-- Comment by -->
+                                            <div class="bg-light rounded-start-top-0 p-3 rounded">
+                                                <div class="d-flex justify-content-between">
+                                                    <h6 class="mb-1"> <a href="#!"> @comentario.Usuario.Nome @comentario.Usuario.Sobrenome </a></h6>
+                                                    <small class="ms-2">@comentario.DataComentario</small>
+                                                </div>
+                                                <p class="small mb-0">@comentario.Comentario</p>
+                                            </div>
+                                            <!-- Comment react -->
+                                            <ul class="nav nav-divider py-2 small">
+                                                <li class="nav-item">
+                                                    @if (comentario.IsUsuarioAutenticadoCurtiu)
+                                                    {
+                                                        <a class="nav-link active" href="#!" onclick="curtirDescurtirComentario(this)" data-id="@comentario.Id">Curtiu (@comentario.Curtidas)</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a class="nav-link" href="#!" onclick="curtirDescurtirComentario(this)" data-id="@comentario.Id">Curtir (@comentario.Curtidas)</a>
+                                                    }
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="#!" onclick="showHideResponderComentario(this)">
+                                                        Responder
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <form asp-action='Responder' asp-controller='Usuario' method='POST' style='display:none;' class='mb-3'>
+                                                <input type='hidden' value='@comentario.Id' name='Id' />
+                                                <input type="hidden" value="@ViewBag.UsuarioSendoVisto.Id" name="IdUsuario" />
+                                                <div class='input-group'>
+                                                    <textarea class='form-control pe-4 bg-light' name='Comentario' rows='1' placeholder='Escreva um Comentário...'></textarea>
+                                                    <button class='nav-link bg-light py-1 px-2 mb-0' href='#' type='submit'><i class='bi bi-send'></i></button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    @RespostaRenderRecursivamente(comentario.ListaComentarios)
+                                </li>
+                            }
+                        </ul>
+                        <!-- Comment wrap END -->
+                    </div>
+                    <!-- Card body END -->
+                </div>
+            }
+        </div>
 
     </div>
 </div>
+
+
+<!-- Modal for selecting photo -->
+<div class="modal fade" id="feedActionPhoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adicionar Foto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="file" id="postFile" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+    function excluirPost(idPublicacao, element) {
+
+        $.ajax({
+            url: '@Url.Action("ExcluirPostagem", "Usuario", new { id = "ID_PLACEHOLDER" })'.replace("ID_PLACEHOLDER", idPublicacao),
+            type: 'DELETE',
+            contentType: 'application/json',
+            success: function (response) {
+                $(element).parents(".card-postagem").remove();
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+    }
+
+    function showHideResponderComentario(element) {
+        if (!$(element).parents("ul").next().is(":visible")) {
+            $(element).parents("ul").next().show();
+        } else {
+            $(element).parents("ul").next().hide();
+        }
+    }
+
+    function curtirDescurtirPublicacao(element) {
+
+        let idPublicacao = $(element).attr("data-id");
+
+        if (!$(element).hasClass("active")) {
+            $.ajax({
+                url: '@Url.Action("CurtirPostagem", "Usuario", new { id = "ID_PLACEHOLDER" })'.replace("ID_PLACEHOLDER", idPublicacao),
+                type: 'POST',
+                contentType: 'application/json',
+                success: function (response) {
+
+                    let nrLikes = parseInt($(element).text().split("(")[1].split(")")[0].trim())
+                    nrLikes++;
+
+                    $(element).addClass("active");
+
+                    $(element).text("Curtiu (" + nrLikes + ")");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        } else {
+            $.ajax({
+                url: '@Url.Action("DescurtirPostagem", "Usuario", new { id = "ID_PLACEHOLDER" })'.replace("ID_PLACEHOLDER", idPublicacao),
+                type: 'DELETE',
+                contentType: 'application/json',
+                success: function (response) {
+
+                    let nrLikes = parseInt($(element).text().split("(")[1].split(")")[0].trim())
+                    nrLikes--;
+
+                    $(element).removeClass("active");
+
+                    $(element).text("Curtir (" + nrLikes + ")");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+    }
+
+    function curtirDescurtirComentario(element) {
+
+        let idComentario = $(element).attr("data-id");
+
+        if (!$(element).hasClass("active")) {
+            $.ajax({
+                url: '@Url.Action("CurtirComentario", "Usuario", new { id = "ID_PLACEHOLDER" })'.replace("ID_PLACEHOLDER", idComentario),
+                type: 'POST',
+                contentType: 'application/json',
+                success: function (response) {
+
+                    let nrLikes = parseInt($(element).text().split("(")[1].split(")")[0].trim())
+                    nrLikes++;
+
+                    $(element).addClass("active");
+
+                    $(element).text("Curtiu (" + nrLikes + ")");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        } else {
+            $.ajax({
+                url: '@Url.Action("DescurtirComentario", "Usuario", new { id = "ID_PLACEHOLDER" })'.replace("ID_PLACEHOLDER", idComentario),
+                type: 'DELETE',
+                contentType: 'application/json',
+                success: function (response) {
+
+                    let nrLikes = parseInt($(element).text().split("(")[1].split(")")[0].trim())
+                    nrLikes--;
+
+                    $(element).removeClass("active");
+
+                    $(element).text("Curtir (" + nrLikes + ")");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+    }
+
+    $('#postFile').on('change', function () {
+
+        var fileInput = this;
+
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#thumbnail').attr('src', e.target.result);
+                $('#imagePreview').show();
+            }
+
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+
+        // Get the file input elements
+        var modalFileInput = document.getElementById('postFile');
+        var hiddenFileInput = document.getElementById('midiaPostagem');
+
+        // Check if a file is selected in the modal file input
+        if (modalFileInput.files.length > 0) {
+            // Get the file from the modal file input
+            var file = modalFileInput.files[0];
+
+            // Create a new DataTransfer object
+            var dataTransfer = new DataTransfer();
+
+            // Append the file to the DataTransfer object
+            dataTransfer.items.add(file);
+
+            // Set the files property of the hidden file input to the files from DataTransfer object
+            hiddenFileInput.files = dataTransfer.files;
+
+            // Clear the modal file input
+            modalFileInput.value = '';
+
+            console.log("File moved successfully!");
+        } else {
+            console.log("No file selected in the modal.");
+        }
+
+    });
+
+</script>

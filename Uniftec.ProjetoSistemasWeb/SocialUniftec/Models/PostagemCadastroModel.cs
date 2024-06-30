@@ -6,6 +6,8 @@ namespace SocialUniftec.Website.Models
     {
         public string Descricao { get; set; }
 
+        public Guid IdUsuario { get; set; }
+
         [BindProperty]
         public IFormFile MidiaPostagem { get; set; }
     }
