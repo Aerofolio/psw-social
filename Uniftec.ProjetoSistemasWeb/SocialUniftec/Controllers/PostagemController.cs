@@ -135,7 +135,7 @@ namespace SocialUniftec.Controllers
 
             var id = new APIHttpClient(URLBasePublicacao).Post("Publicacao?Usuario=" + postagemModel.Usuario + "&Descricao=" + postagemModel.Descricao + "&DataPublicacao=" + postagemModel.DataPublicacao.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"), postagemModel);
 
-            return View("feed");
+            return RedirectToAction("Feed");
  
         }
 
