@@ -1,0 +1,16 @@
+﻿<div class="row g-3 mt-4">
+    @foreach(var pessoa in ViewBag.ListaUsuariosBuscar){
+        <div class="col-4">
+            <div class="card shadow-none text-center h-100">
+                <div class="card-body p-2 pb-0 pt-3">
+                    <div class="avatar  avatar-xl">
+                        <a asp-controller="Usuario" asp-action="Perfil" asp-route-id="@pessoa?.Id"><img class="avatar-img rounded-circle" src="data:image/png;base64,@pessoa?.FotoDePerfilTratada" alt=""></a>
+                    </div>
+                    <h6 class="card-title mb-1 mt-3"> <a asp-controller="Usuario" asp-action="Perfil" asp-route-id="@pessoa?.Id"> @pessoa?.Nome @pessoa?.Sobrenome </a></h6>
+                    <a asp-controller="Usuario" asp-action="Perfil" asp-route-id="@pessoa?.Id"><p class="mb-0 small lh-sm mb-3">Clique para ver</p></a>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

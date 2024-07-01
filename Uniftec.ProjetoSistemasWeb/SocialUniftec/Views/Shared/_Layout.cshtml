@@ -61,8 +61,8 @@
                         <!-- Profile info -->
                         <div class="nav flex-nowrap align-items-center">
                             <div class="nav-item w-100">
-                                <form class="rounded position-relative">
-                                    <input class="form-control ps-5 bg-light" type="search" placeholder="Buscar..." aria-label="Search">
+                                <form class="rounded position-relative" asp-controller="Usuario" asp-action="Buscar" method="get">
+                                    <input class="form-control ps-5 bg-light" type="search" placeholder="Buscar..." aria-label="Search" id="palavraBusca" name="palavraBusca">
                                     <button class="btn bg-transparent px-2 py-0 position-absolute top-50 start-0 translate-middle-y" type="submit"><i class="bi bi-search fs-5"> </i></button>
                                 </form>
                             </div>

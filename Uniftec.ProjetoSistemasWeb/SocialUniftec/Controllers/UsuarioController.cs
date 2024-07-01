@@ -204,6 +204,23 @@ namespace SocialUniftec.Controllers
 
             return View();
         }
+        
+        [HttpGet]
+        public IActionResult Buscar(string palavraBusca)
+        {
+            var palavrasBuscar = string.IsNullOrEmpty(palavraBusca) ? [] : palavraBusca.Split(" ", 2);
+            var queryBuscar = "Usuario/ProcurarPorParametros?";
+            
+            if (palavrasBuscar.Length > 0 && !string.IsNullOrEmpty(palavrasBuscar[0]))
+                queryBuscar += $"nome={palavrasBuscar[0]}";
+                
+            if (palavrasBuscar.Length > 1 && !string.IsNullOrEmpty(palavrasBuscar[1]))
+                queryBuscar += $"sobrenome={palavrasBuscar[1]}";
+            
+            ViewBag.ListaUsuariosBuscar = new APIHttpClient(URLBase).Get<List<Website.Backend.UsuarioModel>>(queryBuscar);
+            
+            return View();
+        }
 
         private List<FeedModel> buscarListaPost(Guid idUsuarioPerfil, Website.Backend.UsuarioModel usuarioLogado)
         {
